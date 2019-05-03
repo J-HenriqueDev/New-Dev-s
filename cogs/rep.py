@@ -112,8 +112,7 @@ class rep(commands.Cog):
                    await ctx.send(embed=embed)
                    return
              mongo = MongoClient(config.database.database)
-             bard = mongo['bard']
-             users = bard['users']
+             bard = mongo.bard.users
              usuario = bard.users.find_one({'_id': str(usuario.id)})
              tempo = random.randint(14400,21600)
              if usuario is None:
