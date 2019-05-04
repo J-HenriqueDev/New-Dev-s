@@ -281,7 +281,7 @@ class helper(commands.Cog):
                                    recused = await self.bard.wait_for('message') 
                                    if recused.content.lower().startswith("motivo:"):
                                       await msg.delete()
-                                      embed = discord.Embed(color=0x7BCDE8)
+                                      embed = discord.Embed(color=0x00d200)
                                       embed.set_author(name="</HELPER> RECUSADO", icon_url=ctx.author.avatar_url_as())
                                       embed.add_field(name="<:nome:565969826611462174> Helper", value ="``"+str(ctx.author)+"`` (<@"+str(ctx.author.id)+">)", inline=True)
                                       embed.add_field(name="<:ip:565968375772217354> ID", value ="``"+str(ctx.author.id)+"``", inline=True)
@@ -297,7 +297,7 @@ class helper(commands.Cog):
                                       await channel.send(embed=embed)
          except asyncio.TimeoutError:             
              await msg.delete()
-             embed = discord.Embed(colour=0x7BCDE8)
+             embed = discord.Embed(colour=0x00d200)
              embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
              msg = await ctx.author.send(embed=embed)
              await asyncio.sleep(30)
@@ -306,7 +306,7 @@ class helper(commands.Cog):
 
         except discord.errors.Forbidden:
              await msg.delete()
-             embed = discord.Embed(colour=0x7BCDE8)
+             embed = discord.Embed(colour=0x00d200)
              embed=discord.Embed(description=f":envelope_with_arrow:**|** Olá **{ctx.author.name}**, para iniciar o processo precisamos que você libere suas mensagens privadas.", color=0x7BCDE8)
              msg = await ctx.send(embed=embed)
              await asyncio.sleep(30)
