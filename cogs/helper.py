@@ -39,7 +39,7 @@ class helper(commands.Cog):
         server = self.bard.get_guild(570906068277002271)
         newhelper = discord.utils.get(server.roles, name="</New Helper>")
         if newhelper in ctx.author.roles:
-            return await ctx.send('seu baka')
+            return await ctx.send(f'{ctx.author.mention} você já têm o cargo **</New Helper>**.')
         try:
          try:
            embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x00d200)
