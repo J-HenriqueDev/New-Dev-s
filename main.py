@@ -16,7 +16,7 @@ def diff_list(li1, li2):
 
 class main(commands.AutoShardedBot):
     def __init__(self):
-        super().__init__(command_prefix='cu.',
+        super().__init__(command_prefix='nd.',
                          case_insensitive=True,
                          pm_help=None,
                          description="crypto bot")
