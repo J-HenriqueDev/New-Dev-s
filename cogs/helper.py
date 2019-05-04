@@ -148,6 +148,7 @@ class helper(commands.Cog):
                            await msg.delete()
                            embed=discord.Embed(color=0x00d200)
                            embed.set_author(name="SOLICITAÇÂO DE </HELPER>", icon_url=ctx.author.avatar_url_as())
+                           embed.add_field(name="Membro", value="``"+str(ctx.author)+"``", inline=True)
                            embed.add_field(name="<:nome:565969826611462174> Nome", value = "``"+str(nome.content)+"``", inline=True)
                            embed.add_field(name="<:ip:565968375772217354> Idade", value = "``"+str(idade.content)+"``", inline=True)
                            embed.add_field(name="<:api:565975875804463114> Linguagem (Prímaria)", value = "``"+str(lang1.content)+"``", inline=True)
