@@ -36,6 +36,10 @@ class helper(commands.Cog):
         if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
+        server = self.bard.get_guild(570906068277002271)
+        newhelper = discord.utils.get(server.roles, name="</New Helper>")
+        if newhelper in ctx.author.roles:
+            return await ctx.send('seu baka')
         try:
          try:
            embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x00d200)
