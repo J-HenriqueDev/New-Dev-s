@@ -127,7 +127,7 @@ class helper(commands.Cog):
                        embed.add_field(name="<:ip:565968375772217354> Idade", value = "``"+str(idade.content)+"``", inline=True)
                        embed.add_field(name="<:api:565975875804463114> Linguagem (Prímaria)", value = "``"+str(lang1.content)+"``", inline=True)
                        embed.add_field(name="<:api:565975875804463114> Linguagem (Secundária)", value = "``"+str(lang2.content)+"``", inline=True)
-                       embed.add_field(name="<:estrela:519465388669403136> Motivo", value = "``"+str(motivo.content)+"``", inline=True)
+                       embed.add_field(name=":bell: Motivo", value = "``"+str(motivo.content)+"``", inline=True)
                        msg = await ctx.author.send(embed=embed)
                        reactions = [":incorreto:571040727643979782", ':correto:571040855918379008']
                        user = ctx.message.author
@@ -153,7 +153,7 @@ class helper(commands.Cog):
                            embed.add_field(name="<:ip:565968375772217354> Idade", value = "``"+str(idade.content)+"``", inline=True)
                            embed.add_field(name="<:api:565975875804463114> Linguagem (Prímaria)", value = "``"+str(lang1.content)+"``", inline=True)
                            embed.add_field(name="<:api:565975875804463114> Linguagem (Secundária)", value = "``"+str(lang2.content)+"``", inline=True)
-                           embed.add_field(name="<:estrela:519465388669403136> Motivo", value = "``"+str(motivo.content)+"``", inline=True)
+                           embed.add_field(name=":bell: Motivo", value = "``"+str(motivo.content)+"``", inline=True)
                            #servidor
                            server = self.bard.get_guild(570906068277002271)
                            #canal solicitação
