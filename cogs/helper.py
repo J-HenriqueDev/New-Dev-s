@@ -41,7 +41,7 @@ class helper(commands.Cog):
            embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x00d200)
            msg = await ctx.send(embed=embed)
            txs = f"<:newDevs:573629564627058709> **|** Então você quer ser um **</Helper>** em nosso servidor?\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu dados em nosso sistema.\n\n<:nome:565969826611462174> **|** Diga-nos seu **Nome completo**: \n<:timer:565975875988750336> **|** **2 minutos**"
-           embed=discord.Embed(description=txs, color=0x7BCDE8)
+           embed=discord.Embed(description=txs, color=0x00d200)
            msg = await ctx.author.send(embed=embed)
  
            def pred(m):
