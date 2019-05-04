@@ -4,7 +4,7 @@
 	"database":"mongodb+srv://The_Wasd:99182548@tbl-agwuh.mongodb.net/TBL?retryWrites=true",
 	"database_c":"mongodb+srv://The_Wasd:99182548@tbl-agwuh.mongodb.net/TBL?retryWrites=true",
 	"admin":["558396463873392640","499321522578522112","247727808166494211"],
-	"canais":["570908357032935425","524241703742210058"],
+	"canais":["570908357032935425","571014988622331905"],
 	"shard_count":"2",
 	"shard_ids":["1","2"],
 	"status":["Precisa de ajuda? rd.help","Need help? type rd.help"]
