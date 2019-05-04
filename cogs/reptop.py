@@ -59,10 +59,10 @@ class reptop(commands.Cog):
            
 
         url = "\n".join(rank)
-        embed=discord.Embed(description=url, color=0x7BCDE8)
-        embed.set_author(name="Top rank dos </New H'elper's>", icon_url=ctx.author.avatar_url_as())
+        embed=discord.Embed(description=url, color=0x00d200)
+        embed.set_author(name="Top rank dos </New Helper's>", icon_url=ctx.author.avatar_url_as())
         embed.set_thumbnail(url="https://media.discordapp.net/attachments/519287277499973632/522607596851691524/icons8-leaderboard-100.png")
-        embed.set_footer(text=self.bard.user.name+" © 2018", icon_url=self.bard.user.avatar_url_as())
+        embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
         await ctx.send(embed=embed)
 
 
