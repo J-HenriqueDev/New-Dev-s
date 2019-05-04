@@ -16,69 +16,22 @@ import requests
 aviso1 = []
 aviso2 = []
 aviso3 = []
-class suggestion():
+class suggestion(commands.Cog):
     def __init__(self, bard):
         self.bard = bard
-        
-
-    async def on_message_edit(self, before, after):
-       if before.author.bot == False:
-        if before.content != after.content:
-          embed=discord.Embed(color=0x7BCDE8)
-          embed.set_author(name="Logs (Message editada)", icon_url=before.author.avatar_url)
-          if len(before.attachments) >=1:
-             link = before.attachments[0].url
-             url = str(link).replace("https://cdn.discordapp.com/","https://media.discordapp.net/")
-             embed.set_image(url=url)
-          else:
-            pass
-          if len(before.content) >=1:
-             embed.add_field(name="<:messagem:518615610721173505> Messagem (Antes)", value=f"``{before.content[:900]}``", inline=True)
-             embed.add_field(name="<:messagem:518615610721173505> Messagem (Depois)", value=f"``{after.content[:900]}``", inline=True)
-
-          else:
-            pass          
-          embed.add_field(name="<:usuario:519194953042100262> Usuário", value=f"``{before.author}`` - (<@{before.author.id}>)", inline=True)
-          embed.add_field(name="<:batepapo:519463996017868801> Canal", value=f"``{before.channel.name}`` - (<#{before.channel.id}>)", inline=True)
-          tz = pytz.timezone('America/Sao_Paulo')
-          hora = datetime.now(tz)
-          time = str(hora.strftime("%H:%M:%S - %d/%m/20%y"))          
-          embed.add_field(name="<:tempo:518615474120949789> Horario", value=f"``{time}``", inline=True)
-          canal = discord.utils.get(before.guild.channels, id=520747443906936848)
-          await canal.send(embed=embed)
     
-    async def on_message_delete(self, message):
-       if message.author.bot == False:
-          embed=discord.Embed(color=0x7BCDE8)
-          embed.set_author(name="Logs (Message apagada)", icon_url=message.author.avatar_url)
-          if len(message.attachments) >=1:
-             link = message.attachments[0].url
-             url = str(link).replace("https://cdn.discordapp.com/","https://media.discordapp.net/")
-             embed.set_image(url=url)
-          else:
-            pass
-          if len(message.content) >=1:
-             embed.add_field(name="<:messagem:518615610721173505> Messagem", value=f"``{message.content[:900]}``", inline=True)
-          else:
-            pass          
-          embed.add_field(name="<:usuario:519194953042100262> Usuário", value=f"``{message.author}`` - (<@{message.author.id}>)", inline=True)
-          embed.add_field(name="<:batepapo:519463996017868801> Canal", value=f"``{message.channel.name}`` - (<#{message.channel.id}>)", inline=True)
-          tz = pytz.timezone('America/Sao_Paulo')
-          berlin_now = datetime.now(tz)
-          time = str(berlin_now.strftime("%H:%M:%S - %d/%m/20%y"))          
-          embed.add_field(name="<:tempo:518615474120949789> Horario", value=f"``{time}``", inline=True)
-          canal = discord.utils.get(message.guild.channels, id=520747443906936848)
-          await canal.send(embed=embed)
-
+      " " " 
+    @commands.Cog.listener()
     async def on_member_remove(self, member):
-       if member.guild.id == 498011182620475412:
-        canal = discord.utils.get(member.guild.channels, id=507307468016058369)
+       if member.guild.id == 570906068277002271:
+        canal = discord.utils.get(member.guild.channels, id=570908352000032798)
         membros = len(member.guild.members)
-        texto = "<a:link_emoji:516076366328889358> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
+        texto = "<:bunny:573267867651407913> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
-    
+	
+	commands.Cog.listener()
     async def on_member_join(self, member):
-       if member.guild.id == 498011182620475412:
+       if member.guild.id == 570906068277002271:
         url = requests.get(member.avatar_url)
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((245, 245));
@@ -104,12 +57,12 @@ class suggestion():
 
         fundo.paste(avatar, (52, 133), avatar)
         fundo.save("cogs/event/img/welcome.png")   
-        canal = discord.utils.get(member.guild.channels, id=521139968320602112)
+        canal = discord.utils.get(member.guild.channels, id=568035481221333013)
         await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#523490486401499157> para pegar, e leia as <#507395636883357697> para ficar por dentro do servidor.", file=discord.File('cogs/event/img/welcome.png'))
         
-        canal = discord.utils.get(member.guild.channels, id=507307468016058369)
+        canal = discord.utils.get(member.guild.channels, id=570908352000032798)
         membros = len(member.guild.members)
-        texto = "<a:link_emoji:516076366328889358> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
+        texto = "<:bunny:573267867651407913> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
         if member.bot == True:
            mongo = MongoClient(config.database.database)
@@ -138,27 +91,28 @@ class suggestion():
                   cargo = discord.utils.get(member.guild.roles, name="</Bot.rb>")
                   await member.add_roles(cargo)
              else:
-                cargo = discord.utils.get(member.guild.roles, name="</Muted>")
+                cargo = discord.utils.get(member.guild.roles, name="</Mutado>")
                 await member.add_roles(cargo)
-
+      " " "
+	@commands.Cog.listener()
     async def on_message(self, message):
         if message.guild is None:
           return
-        if "discord.gg" in message.content.lower() or "discord.me" in message.content.lower() or "discordapp.com/invite" in message.content.lower():
+        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower():
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
          else:
            if not message.author.id in aviso1:
              aviso1.append(message.author.id)
              await message.delete()
-             embed=discord.Embed(description=f"<:incorreto:518624535742906371> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7BCDE8)
+             embed=discord.Embed(description=f"<:incorreto:571040727643979782>  **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7BCDE8)
              msg = await message.channel.send(embed=embed)
              await asyncio.sleep(60)
              await msg.delete()
            elif not message.author.id in aviso2:
              aviso2.append(message.author.id)
              await message.delete()
-             embed=discord.Embed(description=f"<:incorreto:518624535742906371> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7BCDE8)
+             embed=discord.Embed(description=f"<:incorreto:571040727643979782>  **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7BCDE8)
              msg = await message.channel.send(embed=embed)
              await asyncio.sleep(60)
              await msg.delete()
