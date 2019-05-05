@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 
 class errors(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bard):
+        self.bard = bard
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -24,5 +24,5 @@ class errors(commands.Cog):
         else:
             print(error)
 
-def setup(bot):
-  bot.add_cog(errors(bot))
+def setup(bard):
+  bard.add_cog(errors(bard))
