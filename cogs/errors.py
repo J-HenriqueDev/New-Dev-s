@@ -21,7 +21,7 @@ class errors(commands.Cog):
             print(f"cooldown em ({ctx.command})")
         elif isinstance(error, (commands.BadArgument, commands.BadUnionArgument, commands.MissingRequiredArgument)):
             uso = ctx.command.usage if ctx.command.usage else "Não especificado."
-            await ctx.send(f"**{ctx.author.name}**,parece que você usou o comando **`{ctx.command.name}`** de forma errada!\nUso correto: **`{uso}`**", delete_after=45)
+            await ctx.send(f"**{ctx.author.name}**, você usou o comando **`{ctx.command.name}`** de forma incorreta!\nUse seguinte o modelo: **`{uso}`**", delete_after=45)
         else:
             print(error)
 
