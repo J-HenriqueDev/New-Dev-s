@@ -176,7 +176,9 @@ class dono(commands.Cog):
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
-            return       
+            return
+        if nome is None:
+            return await ctx.send('n inserido')       
         comando = self.bot.get_command(nome)
         if not comando:
             return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
