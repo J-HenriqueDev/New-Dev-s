@@ -26,7 +26,7 @@ class errors(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
-        if ctx.author.id in self.lab.config['OWNER_ID'] and ctx.command.is_on_cooldown(ctx):
+        if ctx.author.id in config.database.admin and ctx.command.is_on_cooldown(ctx):
             ctx.command.reset_cooldown(ctx)
 
 def setup(bard):
