@@ -23,7 +23,7 @@ class rep(commands.Cog):
     
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
-    @commands.command()
+    @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep </New Helper>')
     async def cooldown(self, ctx):
              if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
                await ctx.message.add_reaction(":incorreto:571040727643979782")
