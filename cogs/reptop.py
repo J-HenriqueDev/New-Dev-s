@@ -34,7 +34,7 @@ class reptop(commands.Cog):
    
 
     @commands.cooldown(1,10,commands.BucketType.user)
-    @commands.guild_only()
+    @commands.guild_only(description='Mostra o top de reps',usage='c.tophelper',aliases=['top'])
     @commands.command()
     async def tophelper(self, ctx):
         if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
