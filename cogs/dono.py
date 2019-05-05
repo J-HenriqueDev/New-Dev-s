@@ -30,8 +30,8 @@ class dono(commands.Cog):
             await ctx.send(f"{ctx.author.mention} **Módulo  invalido. Módulos disponiveis abaixo**\n```python\n{cog_list}\n```", delete_after=15)
             return
         try:
-            self.bot.unload_extension(f"modules.{cog}")
-            self.bot.load_extension(f"modules.{cog}")
+            self.bot.unload_extension(f"cogs.{cog}")
+            self.bot.load_extension(f"cogs.{cog}")
             embed = discord.Embed(
                 colour=0x00d200,
                 description=(f"**[Sucesso] O Modulo `{cog}` foi recarregado corretamente!**"))
@@ -163,6 +163,26 @@ class dono(commands.Cog):
            os.execl(python, python, * sys.argv)
         reiniciar_code()
         print('\033[31;1m Reiniciando...')
+
+
+    @commands.command(
+        name='desativarcomando',
+        aliases=['dcmd','acmd','ativarcomando'],
+        description='desativa um comando do bot',
+        usage='c.desativarcomando <Nome do Comando>'
+    )
+    async def _desativarcomando(self, ctx, *, nome):
+        comando = self.bot.get_command(nome)
+        if not comando:
+            return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
+
+        if comando.enabled:
+            comando.enabled = False
+            await ctx.send(f"<:desligado:571038275314122754> **{ctx.author.name}**, você desativou o comando **`{comando.name}`**.")
+        else:
+            comando.enabled = True
+            await ctx.send(f"<:ligado:571038226861522957> **{ctx.author.name}**, você ativou o comando **`{comando.name}`**.")
+
 
 def setup(bot):
     bot.add_cog(dono(bot))
