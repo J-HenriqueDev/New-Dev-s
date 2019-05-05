@@ -171,14 +171,14 @@ class dono(commands.Cog):
         description='desativa um comando do bot',
         usage='c.desativarcomando <Nome do Comando>'
     )
-    async def _desativarcomando(self, ctx, *, nome):
+    async def _desativarcomando(self, ctx, *, nome=None):
         if not ctx.author.id in self.bot.staff:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
             return
         if nome is None:
-            return await ctx.send(f"{ctx.author.mention} Não foi inserido ", delete_after=20)
+            return await ctx.send(f"{ctx.author.mention} você não inseriu um comando pra desativar.", delete_after=20)
        
         comando = self.bot.get_command(nome)
         if not comando:

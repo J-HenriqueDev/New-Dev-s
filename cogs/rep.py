@@ -48,10 +48,10 @@ class rep(commands.Cog):
                    if len(string) > 0 or minutes > 0:
                       string += str(minutes) + " " + (minutes == 1 and "minuto" or "minutos" ) + ", "
                    string += str(seconds) + " " + (seconds == 1 and "segundo" or "segundos" )
-                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x7BCDE8)
+                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x00d200)
                    await ctx.send(embed=embed)
                    return
-             embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, seu tempo está zerado.", color=0x7BCDE8)
+             embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, seu tempo está zerado.", color=0x00d200)
              await ctx.send(embed=embed)
 
 
@@ -63,7 +63,7 @@ class rep(commands.Cog):
                await ctx.message.add_reaction(":incorreto:571040727643979782")
                return
            if user is None:
-              embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, mencione o usuário que você gostaria de dá a reputação.", color=0x7BCDE8)
+              embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, mencione o usuário que você gostaria de dá a reputação.", color=0x00d200)
               msg = await ctx.send(embed=embed)
               await asyncio.sleep(20)
               await msg.delete()              
@@ -71,19 +71,19 @@ class rep(commands.Cog):
            else:
              usuario = user
              if usuario.bot is True:
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação ao um **BOT**.", color=0x7BCDE8)
+                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação ao um **BOT**.", color=0x00d200)
                 msg = await ctx.send(embed=embed)
                 await asyncio.sleep(20)
                 await msg.delete()              
                 return
              if not str("</New Helper>") in [r.name for r in user.roles if r.name != "@everyone"]:
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o usuário {user.mention} não é um **</NewHelper>** registrado.", color=0x7BCDE8)
+                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o usuário {user.mention} não é um **</NewHelper>** registrado.", color=0x00d200)
                 msg = await ctx.send(embed=embed)
                 await asyncio.sleep(20)
                 await msg.delete()              
                 return
              if ctx.author.id == user.id:
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação a si mesmo.", color=0x7BCDE8)
+                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação a si mesmo.", color=0x00d200)
                 msg = await ctx.send(embed=embed)
                 await asyncio.sleep(20)
                 await msg.delete()              
@@ -108,7 +108,7 @@ class rep(commands.Cog):
                    if len(string) > 0 or minutes > 0:
                       string += str(minutes) + " " + (minutes == 1 and "minuto" or "minutos" ) + ", "
                    string += str(seconds) + " " + (seconds == 1 and "segundo" or "segundos" )
-                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x7BCDE8)
+                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x00d200)
                    await ctx.send(embed=embed)
                    return
              mongo = MongoClient(config.database.database)
@@ -118,18 +118,34 @@ class rep(commands.Cog):
              tempo = random.randint(14400,21600)
              if usuario is None:
                 timetime[ctx.author.id] = json.dumps(time.time()+int(tempo))
-                embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7BCDE8)
+                embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x00d200)
                 await ctx.send(embed=embed)
                 rep = int(usuario["reputação"])+int(1)
                 bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
              else:
                timetime[ctx.author.id] = json.dumps(time.time()+int(tempo))
-               embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7BCDE8)
+               embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x00d200)
                await ctx.send(embed=embed)
                rep = int(usuario["reputação"])+int(1)
                bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
 
+    @commands.command(
+      name='delrep',
+      description='Reseta os pontos mensais de reputação de todos os helpers',
+      usage='c.delrep'
+    )
+    async def _resetarreps(self, ctx):
+       if not ctx.author.id in self.bard.staff:
+            await ctx.send(
+                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
+                delete_after=15)
+            return
+       mongo = MongoClient(config.database.database)
+       bard = mongo['bard']
+       users = bard['users']
+       bard.users.update_many({}, {"$set": {"reputação": 0}})
+       await ctx.send(f"<:correto:571040855918379008> | **{ctx.author.name}**, você resetou os reps de todo mundo.")
+
 
 def setup(bard):
-    print("[Server] : Cmd (rep) ")
     bard.add_cog(rep(bard))

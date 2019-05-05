@@ -10,6 +10,12 @@ import json
 import config.database
 import config.db
 prefixos = ["rd.","!","@","/"]
+python = ['python', 'py']
+javascript = ['javascript','js']
+kotlin = ['kotlin','kt']
+java = ['java']
+ruby = ['ruby','rb']
+go = ['golang', 'go']
 linguagem = ["python","javascript","java","kotlin","golang","ruby","nenhuma"]
 blocklist = []
 
@@ -19,6 +25,8 @@ blocklist = []
 class helper(commands.Cog):
     def __init__(self, bard):
         self.bard = bard
+        self.forms = []
+
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
     @commands.command()
@@ -40,6 +48,10 @@ class helper(commands.Cog):
         newhelper = discord.utils.get(server.roles, name="</New Helper>")
         if newhelper in ctx.author.roles:
             return await ctx.send(f'{ctx.author.mention} você já têm o cargo **</New Helper>**.',delete_after=30)
+
+        if ctx.author.id in self.forms:
+            return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, perna de pau.", delete_after=30)
+
         try:
          try:
            embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x00d200)
@@ -47,6 +59,8 @@ class helper(commands.Cog):
            txs = f"<:newDevs:573629564627058709> **|** Então você quer ser um **</Helper>** em nosso servidor?\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu dados em nosso sistema.\n\n<:nome:565969826611462174> **|** Diga-nos seu **Nome completo**: \n<:timer:565975875988750336> **|** **2 minutos**"
            embed=discord.Embed(description=txs, color=0x00d200)
            msg = await ctx.author.send(embed=embed)
+
+           self.forms.append(ctx.author.id)
  
            def pred(m):
                return m.author == ctx.author and m.guild is None
@@ -55,6 +69,7 @@ class helper(commands.Cog):
            if len(nome.content) >=40:              
               await msg.delete()
               embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o **Nome** que você inseriu passou do limite de 40 caracteres.", color=0x00d200)
+              self.forms.remove(ctx.author.id)
               msg = await ctx.author.send(embed=embed)
               await asyncio.sleep(30)
               await msg.delete()
@@ -67,6 +82,7 @@ class helper(commands.Cog):
              if idade.content.isnumeric() == False:
                 await msg.delete()
                 embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida.", color=0x00d200)
+                self.forms.remove(ctx.author.id)
                 msg = await ctx.author.send(embed=embed)
                 await asyncio.sleep(30)
                 await msg.delete()
@@ -74,6 +90,7 @@ class helper(commands.Cog):
                if len(idade.content) >=3:              
                   await msg.delete()
                   embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida. (10 anos a 99 anos.)", color=0x00d200)
+                  self.forms.remove(ctx.author.id)
                   msg = await ctx.author.send(embed=embed)
                   await asyncio.sleep(30)
                   await msg.delete()
@@ -88,6 +105,7 @@ class helper(commands.Cog):
                  if not str(lang1.content.lower()) in linguagem:                      
                     await msg.delete()
                     embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x00d200)
+                    self.forms.remove(ctx.author.id)
                     msg = await ctx.author.send(embed=embed)
                     await asyncio.sleep(30)
                     await msg.delete()
@@ -101,6 +119,7 @@ class helper(commands.Cog):
                    if not str(lang2.content.lower()) in linguagem:                      
                       await msg.delete()
                       embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x00d200)
+                      self.forms.remove(ctx.author.id)
                       msg = await ctx.author.send(embed=embed)
                       await asyncio.sleep(30)
                       await msg.delete()
@@ -108,6 +127,7 @@ class helper(commands.Cog):
                     if str(lang2.content.lower()) == str(lang1.content.lower()): 
                       await msg.delete()
                       embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem (**Secundária**) que você forneceu é igual a (**Primária**) e por isso a ação foi cancelada.", color=0x00d200)
+                      self.forms.remove(ctx.author.id)
                       msg = await ctx.author.send(embed=embed)
                       await asyncio.sleep(30)
                       await msg.delete()
@@ -120,6 +140,7 @@ class helper(commands.Cog):
                      if len(motivo.content) <= 20:
                         await msg.delete()
                         embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o motivo é muito pequeno. (20 caracteres no mínimo)", color=0x00d200)
+                        self.forms.remove(ctx.author.id)
                         msg = await ctx.author.send(embed=embed)
                         await asyncio.sleep(30)
                         await msg.delete()
@@ -145,10 +166,12 @@ class helper(commands.Cog):
                        if reaction.emoji.name == 'incorreto':
                           await msg.delete()
                           embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** A solicitação de cadastramento foi cancelada.", color=0x00d200)
+                          self.forms.remove(ctx.author.id)
                           msg = await ctx.author.send(embed=embed)
                           await asyncio.sleep(30)
                           await msg.delete()
                        if reaction.emoji.name == 'correto':
+                           self.forms.remove(ctx.author.id)
                            await msg.delete()
                            embed=discord.Embed(color=0x00d200)
                            embed.set_author(name="SOLICITAÇÂO DE </HELPER>", icon_url=ctx.author.avatar_url_as())
@@ -198,84 +221,84 @@ class helper(commands.Cog):
                                  server = self.bard.get_guild(570906068277002271)
                                  cargo = discord.utils.get(server.roles, name="</New Helper>")
                                  await ctx.author.add_roles(cargo)
-                                 if str(lang1.content) == "python":
+                                 if lang1.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")
                                    await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "javascript":
+                                 elif lang1.content.lower() in javascript:
                                     cargo = discord.utils.get(server.roles, name="</NewHelper Javascript>")
                                     await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "kotlin":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Kotlin/Discord.kt")
+                                 elif lang1.content.lower() in kotlin:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Kotlin>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "java":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Java/Discord.jda")
+                                 elif lang1.content.lower() in java:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Java>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "ruby":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Ruby/Discord.rb")
+                                 elif lang1.content.lower() in ruby:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Ruby>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "golang":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Golang/Discord.go")
+                                 elif lang1.content.lower() in go:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
                                      await ctx.author.add_roles(cargo)
-                                 if str(lang2.content) == "python":
+                                 if lang2.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")
                                    await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "javascript":
+                                 elif lang2.content.lower() in javascript:
                                     cargo = discord.utils.get(server.roles, name="</NewHelper Javascript>")
                                     await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "kotlin":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Kotlin/Discord.kt")
+                                 elif lang2.content.lower() in kotlin:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Kotlin>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "java":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Java/Discord.jda")
+                                 elif lang2.content.lower() in java:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Java>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "ruby":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Ruby/Discord.rb")
+                                 elif lang2.content.lower() in ruby:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Ruby>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "golang":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Golang/Discord.go")
-                                     await ctx.author.add_roles(cargo)
+                                 elif lang2.content.lower() in go:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
                               else:
                                  print("[Helper] : updatado")
                                  bard.users.update_many({"_id": str(ctx.author.id)}, {'$set': {"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","foi_devhelper":"Não","vezes_reportado":"0","reputação":int(0),"level":"0","exp":"0","aceito_por":str(author.id),"historico":"Sem punições","bots":["Nenhum bot"]}})
                                  server = self.bard.get_guild(570906068277002271)
                                  cargo = discord.utils.get(server.roles, name="</New Helper>")
                                  await ctx.author.add_roles(cargo)
-                                 if str(lang1.content) == "python":
+                                 cargo = discord.utils.get(server.roles, name="</New Helper>")
+                                 await ctx.author.add_roles(cargo)
+                                 if lang1.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")
                                    await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "javascript":
+                                 elif lang1.content.lower() in javascript:
                                     cargo = discord.utils.get(server.roles, name="</NewHelper Javascript>")
                                     await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "kotlin":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Kotlin/Discord.kt")
+                                 elif lang1.content.lower() in kotlin:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Kotlin>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "java":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Java/Discord.jda")
+                                 elif lang1.content.lower() in java:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Java>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "ruby":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Ruby/Discord.rb")
+                                 elif lang1.content.lower() in ruby:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Ruby>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang1.content) == "golang":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Golang/Discord.go")
+                                 elif lang1.content.lower() in go:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
                                      await ctx.author.add_roles(cargo)
-                                 if str(lang2.content) == "python":
+                                 if lang2.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")
                                    await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "javascript":
+                                 elif lang2.content.lower() in javascript:
                                     cargo = discord.utils.get(server.roles, name="</NewHelper Javascript>")
                                     await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "kotlin":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Kotlin/Discord.kt")
+                                 elif lang2.content.lower() in kotlin:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Kotlin>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "java":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Java/Discord.jda")
+                                 elif lang2.content.lower() in java:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Java>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "ruby":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Ruby/Discord.rb")
+                                 elif lang2.content.lower() in ruby:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Ruby>")
                                      await ctx.author.add_roles(cargo)
-                                 elif str(lang2.content) == "golang":
-                                     cargo = discord.utils.get(server.roles, name="</NewHelper>Golang/Discord.go")
-                                     await ctx.author.add_roles(cargo)
+                                 elif lang2.content.lower() in go:
+                                     cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
 
                            elif reaction.emoji.name == 'incorreto':
                                    await msg.delete()
@@ -283,7 +306,7 @@ class helper(commands.Cog):
                                    server = self.bard.get_guild(570906068277002271)
                                    channel = discord.utils.get(server.channels, id=571087828482523146)
                                    await channel.send(embed=embed)                                   
-                                   recused = await self.bard.wait_for('message') 
+                                   recused = await self.bard.wait_for('message', check=pred, timeout=120.0)
                                    if recused.content.lower().startswith("motivo:"):
                                       await msg.delete()
                                       embed = discord.Embed(color=0x00d200)
@@ -293,7 +316,7 @@ class helper(commands.Cog):
                                       embed.add_field(name="<:api:565975875804463114> Linguagem (Prímaria)", value = "``"+str(lang1.content)+"``", inline=True)
                                       embed.add_field(name="<:api:565975875804463114> Linguagem (Secundária)", value = "``"+str(lang2.content)+"``", inline=True)
                                       embed.add_field(name="<:mention:573230888029126657> Aceito por", value = f"<@{author.id}>", inline=True)
-                                      embed.add_field(name="<:tipo:565986477708935168> Motivo", value = f"``{recused.content}``", inline=True)
+                                      embed.add_field(name=":bell: Motivo", value = "``"+str(recused.content)+"``", inline=True)
                                       embed.set_thumbnail(url=ctx.author.avatar_url_as())
                                       embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
                                       server = self.bard.get_guild(570906068277002271)
@@ -320,5 +343,4 @@ class helper(commands.Cog):
 
 
 def setup(bard):
-    print("[Bot] : Cmd (helper) ")
     bard.add_cog(helper(bard))

@@ -67,5 +67,4 @@ class reptop(commands.Cog):
 
 
 def setup(bard):
-    print("[Server] : Cmd (reptop) ")
     bard.add_cog(reptop(bard))
