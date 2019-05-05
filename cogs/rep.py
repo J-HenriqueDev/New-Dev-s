@@ -51,7 +51,7 @@ class rep(commands.Cog):
                    embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x7BCDE8)
                    await ctx.send(embed=embed)
                    return
-             embed=discord.Embed(description=f"<:tempo:518615474120949789> **|** Olá **{ctx.author.name}**, seu tempo está zerado.", color=0x7BCDE8)
+             embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, seu tempo está zerado.", color=0x7BCDE8)
              await ctx.send(embed=embed)
 
 
