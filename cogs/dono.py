@@ -178,7 +178,8 @@ class dono(commands.Cog):
                 delete_after=15)
             return
         if nome is None:
-            return await ctx.send('n inserido')       
+            return await ctx.send(f"{ctx.author.mention} Não foi inserido ", delete_after=20)
+       
         comando = self.bot.get_command(nome)
         if not comando:
             return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
