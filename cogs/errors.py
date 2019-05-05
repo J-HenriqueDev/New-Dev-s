@@ -1,4 +1,5 @@
 import discord
+import config.database
 from discord.ext import commands
 
 class errors(commands.Cog):
