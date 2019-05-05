@@ -24,5 +24,10 @@ class errors(commands.Cog):
         else:
             print(error)
 
+    @commands.Cog.listener()
+    async def on_command(self, ctx):
+        if ctx.author.id in self.lab.config['OWNER_ID'] and ctx.command.is_on_cooldown(ctx):
+            ctx.command.reset_cooldown(ctx)
+
 def setup(bard):
   bard.add_cog(errors(bard))
