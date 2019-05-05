@@ -172,6 +172,11 @@ class dono(commands.Cog):
         usage='c.desativarcomando <Nome do Comando>'
     )
     async def _desativarcomando(self, ctx, *, nome):
+        if not ctx.author.id in self.bot.staff:
+            await ctx.send(
+                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
+                delete_after=15)
+            return       
         comando = self.bot.get_command(nome)
         if not comando:
             return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
