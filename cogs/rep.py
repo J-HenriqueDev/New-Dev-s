@@ -147,5 +147,25 @@ class rep(commands.Cog):
        await ctx.send(f"<:correto:571040855918379008> | **{ctx.author.name}**, você resetou os reps de todo mundo.")
 
 
+    @commands.command()
+    async def reps(self, ctx, membro: discord.Member = None):
+         if membro is None:
+            usuario = ctx.author
+            titulo = f"Olá {usuario.name}, veja a sua quantidade de rep's a baixo."
+         else:
+              usuario = membro
+              titulo = f"Olá {ctx.author.name}, veja a quantidade de rep's de `{usuario.name}` abaixo."
+         embed = discord.Embed(description=titulo,colour=0x00d200)
+         mongo = MongoClient(config.database.database)
+         bard = mongo['bard']
+         users = bard['users']
+         users = bard.users.find_one({"_id": str(usuario.id)})
+         if not users is None:
+            embed.add_field(name=f"Reputação:", value =  "``"+str(users["reputação"])+"``", inline=True)
+         if users is None:
+            return await ctx.send(f'**{ctx.author.name}** o usuário `{membro.name}` não está registrado.')
+        
+         await ctx.send(embed=embed)
+
 def setup(bard):
     bard.add_cog(rep(bard))

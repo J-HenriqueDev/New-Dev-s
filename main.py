@@ -46,7 +46,7 @@ class main(commands.AutoShardedBot):
         print(f"[OK] - {self.user.name} ({self.user.id}) - (Status - Online)")
         
     async def on_message(self, message):
-        canal = [568035468751667239,568933678282047490,570908350481432587]
+        canal = [568035468751667239,568933678282047490,570908350481432587,575079555308584960]
         """ Evento de message. Bloquear message de bots e messagens no dm e adicionar messagem ao mencionar o bot"""
         if message.author.bot:
             return
@@ -59,9 +59,9 @@ class main(commands.AutoShardedBot):
             await message.add_reaction(":correto:571040855918379008")
             await message.add_reaction(":incorreto:571040727643979782")
 
-        if message.content.lower().startswith(f"<@!{self.user.id}>") or message.content.lower().startswith(f"<@{self.user.id}>") :
+        #if message.content.lower().startswith(f"<@!{self.user.id}>") or message.content.lower().startswith(f"<@{self.user.id}>") :
            
-            await message.channel.send(f"<:329325674827612162:556216891484536833> **|** {message.author.mention} **Digite `c.help` para ver meus comandos.**",delete_after=60)
+            #await message.channel.send(f"<:329325674827612162:556216891484536833> **|** {message.author.mention} **Digite `c.help` para ver meus comandos.**",delete_after=60)
 
         else:
             await bot.process_commands(message)
