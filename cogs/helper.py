@@ -50,7 +50,7 @@ class helper(commands.Cog):
             return await ctx.send(f'{ctx.author.mention} você já têm o cargo **</New Helper>**.',delete_after=30)
 
         if ctx.author.id in self.forms:
-            return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, perna de pau.", delete_after=30)
+            return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, já tem um formulário em aberto no seu DM.", delete_after=30)
 
         try:
          try:
