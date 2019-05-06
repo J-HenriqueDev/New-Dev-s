@@ -323,7 +323,8 @@ class helper(commands.Cog):
                                       #canal solicitação
                                       channel = discord.utils.get(server.channels, id=571087828482523146)
                                       await channel.send(embed=embed)
-         except asyncio.TimeoutError:             
+         except asyncio.TimeoutError:
+             self.forms.remove(ctx.author.id)             
              await msg.delete()
              embed = discord.Embed(colour=0x00d200)
              embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
@@ -333,6 +334,7 @@ class helper(commands.Cog):
 
 
         except discord.errors.Forbidden:
+             self.forms.remove(ctx.author.id)
              await msg.delete()
              embed = discord.Embed(colour=0x00d200)
              embed=discord.Embed(description=f":envelope_with_arrow:**|** Olá **{ctx.author.name}**, para iniciar o processo precisamos que você libere suas mensagens privadas.", color=0x7BCDE8)
