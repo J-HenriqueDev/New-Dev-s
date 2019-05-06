@@ -42,7 +42,7 @@ class main(commands.AutoShardedBot):
         
         canale = self.get_channel(568233418299801615)
         log_ready = self.get_channel(568040355933716500)
-        await log_ready.send(f"**Cripton On | Modulos: ok ** `{self.carregados}` **erros** `{self.falhas}`")
+        await log_ready.send(f"**{self.user.name}** online | `{self.carregados}`Modulos Funcionando corretamente** e `{self.falhas}` detectadas.")
         print(f"[OK] - {self.user.name} ({self.user.id}) - (Status - Online)")
         
     async def on_message(self, message):
