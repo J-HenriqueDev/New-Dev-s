@@ -306,7 +306,7 @@ class helper(commands.Cog):
                                    server = self.bard.get_guild(570906068277002271)
                                    channel = discord.utils.get(server.channels, id=571087828482523146)
                                    await channel.send(embed=embed)                                   
-                                   recused = await self.bard.wait_for('message', check=pred, timeout=120.0)
+                                   recused = await self.bard.wait_for('message', check=None)
                                       await msg.delete()
                                       embed = discord.Embed(color=0x00d200)
                                       embed.set_author(name="</HELPER> RECUSADO", icon_url=ctx.author.avatar_url_as())
