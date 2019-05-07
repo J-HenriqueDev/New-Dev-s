@@ -319,14 +319,14 @@ class helper(commands.Cog):
                                channel = discord.utils.get(server.channels, id=571087828482523146)
                                await channel.send(embed=embed)
 
-         except asyncio.TimeoutError:
-             self.forms.remove(ctx.author.id)             
-             await msg.delete()
-             embed = discord.Embed(colour=0x00d200)
-             embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
-             msg = await ctx.author.send(embed=embed)
-             await asyncio.sleep(30)
-             await msg.delete()
+                               except asyncio.TimeoutError:
+                                   self.forms.remove(ctx.author.id)             
+                                   await msg.delete()
+                                   embed = discord.Embed(colour=0x00d200)
+                                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
+                                   msg = await ctx.author.send(embed=embed)
+                                   await asyncio.sleep(30)
+                                   await msg.delete()
 
 
         except discord.errors.Forbidden:
