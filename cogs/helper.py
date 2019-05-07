@@ -316,7 +316,7 @@ class helper(commands.Cog):
                                    server = self.bard.get_guild(570906068277002271)
                                       #canal solicitação
                                    channel = discord.utils.get(server.channels, id=571087828482523146)
-                                   await channel.send(embed=embed)
+                                   await channel.send(recused.content)
          except asyncio.TimeoutError:
              self.forms.remove(ctx.author.id)             
              await msg.delete()
