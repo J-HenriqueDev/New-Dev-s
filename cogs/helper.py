@@ -309,12 +309,7 @@ class helper(commands.Cog):
                                    recused = await self.bard.wait_for('message')
                                    await msg.delete()
                                    embed = discord.Embed(color=0x00d200)
-                                   embed.set_author(name="</HELPER> RECUSADO", icon_url=ctx.author.avatar_url_as())
-                                   embed.add_field(name="<:nome:565969826611462174> Helper", value ="``"+str(ctx.author)+"`` (<@"+str(ctx.author.id)+">)", inline=True)
-                                   embed.add_field(name="<:ip:565968375772217354> ID", value ="``"+str(ctx.author.id)+"``", inline=True)
-                                   embed.add_field(name="<:api:565975875804463114> Linguagem (Prímaria)", value = "``"+str(lang1.content)+"``", inline=True)
-                                   embed.add_field(name="<:api:565975875804463114> Linguagem (Secundária)", value = "``"+str(lang2.content)+"``", inline=True)
-                                   embed.add_field(name="<:mention:573230888029126657> Aceito por", value = f"<@{author.id}>", inline=True)
+                                   
                                    embed.add_field(name=":bell: Motivo", value = "``"+str(recused.content)+"``", inline=True)
                                    embed.set_thumbnail(url=ctx.author.avatar_url_as())
                                    embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
