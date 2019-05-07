@@ -45,7 +45,8 @@ class errors(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
           return
-        if re.search(regex, message.content)
+        # Check if message content contains an invite url
+        invite = self.inviteregex.search(msg.content)
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
          else:
