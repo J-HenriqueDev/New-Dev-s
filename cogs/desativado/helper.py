@@ -308,9 +308,9 @@ class helper(commands.Cog):
                                try:                                    
                                    q = await author.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
                                def check(m):
-                                   return m.channel.id == q.channel.id and m.author.id == user_id
-                               try:
-                                   motivo = await self.bard.wait_for("message", check=check, timeout=300)
+                                   return m.author == ctx.author and m.guild is None
+                              
+                               motivo = await self.bard.wait_for("message", check=check, timeout=300)
                                embed.add_field(name=":bell: Motivo", value = "``"+str(motivo.content)+"``", inline=True)
                                embed.set_thumbnail(url=ctx.author.avatar_url_as())
                                embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
