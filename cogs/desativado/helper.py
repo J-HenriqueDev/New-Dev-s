@@ -305,7 +305,6 @@ class helper(commands.Cog):
                                    q = await user.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
                                def check(m):
                                    return m.channel.id == q.channel.id and m.author.id == user_id
-
                                try:
                                    motivo = await self.lab.wait_for("message", check=check, timeout=300)
                                embed.add_field(name=":bell: Motivo", value = "``"+str(message.content)+"``", inline=True)
