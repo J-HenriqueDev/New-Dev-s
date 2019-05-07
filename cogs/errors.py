@@ -1,11 +1,12 @@
 import discord
+import re
 import asyncio
 import config.database
 from discord.ext import commands
 aviso1 = []
 aviso2 = []
 aviso3 = []
-regex = 'discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]'
+regex = r'discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]'
 
 class errors(commands.Cog):
     def __init__(self, bot):
@@ -43,7 +44,7 @@ class errors(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
           return
-        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower():
+        if re.search(regex, message.content)
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
          else:
