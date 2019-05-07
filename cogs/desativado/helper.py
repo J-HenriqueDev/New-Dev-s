@@ -300,13 +300,12 @@ class helper(commands.Cog):
                                      cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
 
                            def check(reaction, user):
-                              return user.id != 572097258380853249 and reaction.message.id == msg.id
+                               return user.id != 572097258380853249 and reaction.message.id == msg.id
 
 
                            reaction, author = await self.bard.wait_for('reaction_add', check=check)
-                           if reaction.emoji.name == 'incorreto':                                                       
-                               try:                                    
-                                   q = await author.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
+                           if reaction.emoji.name == 'incorreto':                                                                     
+                               q = await author.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
                                def check(m):
                                    return m.author == ctx.author and m.guild is None
                               
