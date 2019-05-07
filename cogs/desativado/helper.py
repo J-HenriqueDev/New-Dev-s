@@ -301,20 +301,21 @@ class helper(commands.Cog):
                                      cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
 
                            elif reaction.emoji.name == 'incorreto':                                                       
-                                try:                                    
-                                    q = await user.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
-                                def check(m):
-                                    return m.channel.id == q.channel.id and m.author.id == user_id
+                               try:                                    
+                                   q = await user.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
+                               def check(m):
+                                   return m.channel.id == q.channel.id and m.author.id == user_id
 
-                                try:
-                                    motivo = await self.lab.wait_for("message", check=check, timeout=300)
-                                embed.add_field(name=":bell: Motivo", value = "``"+str(message.content)+"``", inline=True)
-                                embed.set_thumbnail(url=ctx.author.avatar_url_as())
-                                embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
-                                server = self.bard.get_guild(570906068277002271)
+                               try:
+                                   motivo = await self.lab.wait_for("message", check=check, timeout=300)
+                               embed.add_field(name=":bell: Motivo", value = "``"+str(message.content)+"``", inline=True)
+                               embed.set_thumbnail(url=ctx.author.avatar_url_as())
+                               embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
+                               server = self.bard.get_guild(570906068277002271)
                                       #canal solicitação
-                                channel = discord.utils.get(server.channels, id=571087828482523146)
-                                await channel.send(embed=embed)
+                                
+                               channel = discord.utils.get(server.channels, id=571087828482523146)
+                               await channel.send(embed=embed)
          except asyncio.TimeoutError:
              self.forms.remove(ctx.author.id)             
              await msg.delete()
