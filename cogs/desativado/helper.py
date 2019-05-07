@@ -299,7 +299,12 @@ class helper(commands.Cog):
                                  elif lang2.content.lower() in go:
                                      cargo = discord.utils.get(server.roles, name="</NewHelper Golang>")
 
-                           elif reaction.emoji.name == 'incorreto':                                                       
+                           def check(reaction, user):
+                              return user.id != 572097258380853249 and reaction.message.id == msg.id
+
+
+                           reaction, author = await self.bard.wait_for('reaction_add', check=check)
+                           elif reaction.emoji.name == 'correto':                                                       
                                try:                                    
                                    q = await user.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
                                def check(m):
