@@ -11,51 +11,6 @@ import requests
 class info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.cooldown = []
-
-    @commands.Cog.listener()
-    async def on_raw_reaction_add(self, payload):
-        guild = self.bot.get_guild(payload.guild_id)
-        channel = discord.utils.get(guild.channels, id=571029261448773688)
-
-        if not payload.channel_id == 571029261448773688:
-            return
-        if payload.channel_id == None:
-            return
-        
-        if payload.user_id in self.cooldown:
-            return
-
-        for cargo in cargos:
-            if cargo['emoji'] == str(payload.emoji):
-                guild = self.bot.get_guild(payload.guild_id)
-                cargo = guild.get_role(cargo['id'])
-                membro = guild.get_member(payload.user_id)
-                if cargo not in membro.roles:
-                    await membro.add_roles(cargo)
-                    self.cooldown.append(payload.user_id)
-                    self.cooldown.remove(payload.user_id)
-                break
-                
-    @commands.Cog.listener()
-    async def on_raw_reaction_remove(self, payload):
-        guild = self.bot.get_guild(payload.guild_id)
-        channel = discord.utils.get(guild.channels, id=571029261448773688)
-        if not payload.channel_id == 571029261448773688:
-            return
-        if payload.user_id in self.cooldown:
-            return
-
-        for cargo in cargos:
-            if cargo['emoji'] == str(payload.emoji):
-                guild = self.bot.get_guild(payload.guild_id)
-                cargo = guild.get_role(cargo['id'])
-                membro = guild.get_member(payload.user_id)
-                if cargo in membro.roles:
-                    await membro.remove_roles(cargo)
-                    self.cooldown.append(payload.user_id)
-                    self.cooldown.remove(payload.user_id)
-                break
 
     @commands.Cog.listener()  
     async def on_member_remove(self, member):
