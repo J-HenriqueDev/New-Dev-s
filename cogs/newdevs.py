@@ -1,11 +1,7 @@
 import discord
-from datetime import datetime
-import pytz
-from utils.role import cargos
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from discord.ext import commands
-from asyncio import sleep
 import requests
 
 class info(commands.Cog):
