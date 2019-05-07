@@ -6,11 +6,12 @@ from discord.ext import commands
 aviso1 = []
 aviso2 = []
 aviso3 = []
-regex = r'discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]'
+regex = "discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]"
 
 class errors(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.inviteregex = re.compile(INVITE_REGEX)
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
