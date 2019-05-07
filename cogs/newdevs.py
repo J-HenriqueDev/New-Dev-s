@@ -11,7 +11,7 @@ import requests
 class info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.cooldown[]
+        self.cooldown = []
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
