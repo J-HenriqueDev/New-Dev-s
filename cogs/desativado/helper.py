@@ -306,7 +306,7 @@ class helper(commands.Cog):
                            reaction, author = await self.bard.wait_for('reaction_add', check=check)
                            if reaction.emoji.name == 'incorreto':                                                       
                                try:                                    
-                                   q = await user.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
+                                   q = await author.send(f" | **Digite o motivo pelo qual você está recusando o Helper `{ctx.author}`**. **`(5 minutos)`**")                                    
                                def check(m):
                                    return m.channel.id == q.channel.id and m.author.id == user_id
                                try:
