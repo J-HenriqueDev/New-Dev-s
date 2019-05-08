@@ -1,4 +1,4 @@
-discord.py==1.0.1
+discord.py
 pytz
 lavalink
 requests
