@@ -57,6 +57,7 @@ class main(commands.AutoShardedBot):
         log_ready = self.get_channel(568040355933716500)
         await log_ready.send(f"**{self.user.name}** online | `{self.carregados}` Modulos Funcionando corretamente e `{self.falhas}` falhas detectadas.")
         print(f"[OK] - {self.user.name} ({self.user.id}) - (Status - Online)")
+        print(f"{len(bot.cogs)} Modulos Ativos.")
         
     async def on_message(self, message):
         canal = [568035468751667239,568933678282047490,570908350481432587,575079555308584960]

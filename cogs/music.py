@@ -24,7 +24,7 @@ class music(commands.Cog):
         self.votes = []
         
         if not hasattr(bot, 'lavalink'):
-            lavalink.Client(ws_port=2333, host="10.142.0.5", bot=bot, password='youshallnotpass', loop=self.bot.loop, log_level=logging.ERROR)
+            lavalink.Client(ws_port=2333, host="localhost", bot=bot, password='youshallnotpass', loop=self.bot.loop, log_level=logging.ERROR)
             self.bot.lavalink.register_hook(self._events)
 
     async def _events(self, event):
