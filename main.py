@@ -30,15 +30,6 @@ class main(commands.AutoShardedBot):
         self.dbl_key = secrets.DBL_TOKEN
         self.carregados = 0
         self.falhas = 0
-        print("( * ) | Tentando se conectar ao banco de dados...")
-        try:
-            mongo = MongoClient(config.database.database)
-        except Exception as e:
-            print(f"\n<---------------->\n( ! ) | Erro na tentativa de conexão com o banco de dados!\n<----------->\n{e}\n<---------------->\n")
-            exit()
-        self.db = mongo['bard']
-        print(f"( > ) | Conectado ao banco de dados!")
-
         for file in os.listdir("cogs"):
             if file.endswith(".py"):
                 name = file[:-3]
