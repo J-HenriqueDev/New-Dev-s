@@ -55,10 +55,10 @@ class helper(commands.Cog):
         try:
          try:
            self.forms.append(ctx.author.id)
-           embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x00d200)
+           embed=discord.Embed(description=f":envelope_with_arrow: **|** Olá **{ctx.author.name}**, verifique sua mensagens diretas (DM).", color=0x7289DA)
            msg = await ctx.send(embed=embed)
            txs = f"<:newDevs:573629564627058709> **|** Então você quer ser um **</Helper>** em nosso servidor?\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu dados em nosso sistema.\n\n<:nome:565969826611462174> **|** Diga-nos seu **Nome completo**: \n<:timer:565975875988750336> **|** **2 minutos**"
-           embed=discord.Embed(description=txs, color=0x00d200)
+           embed=discord.Embed(description=txs, color=0x7289DA)
            msg = await ctx.author.send(embed=embed)
 
  
@@ -68,7 +68,7 @@ class helper(commands.Cog):
            nome = await self.bard.wait_for('message', check=pred, timeout=120.0) 
            if len(nome.content) >=40:              
               await msg.delete()
-              embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o **Nome** que você inseriu passou do limite de 40 caracteres.", color=0x00d200)
+              embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o **Nome** que você inseriu passou do limite de 40 caracteres.", color=0x7289DA)
               self.forms.remove(ctx.author.id)
               msg = await ctx.author.send(embed=embed)
               await asyncio.sleep(30)
@@ -76,12 +76,12 @@ class helper(commands.Cog):
            else:
              await msg.delete()
              texto = f"<:newDevs:573629564627058709> **|** Agora diga-me sua idade (10 anos a 99 anos)\n<:timer:565975875988750336> **|** **2 minutos**"
-             embed=discord.Embed(description=texto, color=0x00d200)
+             embed=discord.Embed(description=texto, color=0x7289DA)
              msg = await ctx.author.send(embed=embed)
              idade = await self.bard.wait_for('message', check=pred, timeout=120.0) 
              if idade.content.isnumeric() == False:
                 await msg.delete()
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida.", color=0x00d200)
+                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida.", color=0x7289DA)
                 self.forms.remove(ctx.author.id)
                 msg = await ctx.author.send(embed=embed)
                 await asyncio.sleep(30)
@@ -89,7 +89,7 @@ class helper(commands.Cog):
              else:
                if len(idade.content) >=3:              
                   await msg.delete()
-                  embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida. (10 anos a 99 anos.)", color=0x00d200)
+                  embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a idade que você inseriu não é válida. (10 anos a 99 anos.)", color=0x7289DA)
                   self.forms.remove(ctx.author.id)
                   msg = await ctx.author.send(embed=embed)
                   await asyncio.sleep(30)
@@ -99,12 +99,12 @@ class helper(commands.Cog):
                  lang = ", ".join(linguagem)
                  langg = str(lang).replace("nenhuma","")
                  texto = f"<:newDevs:573629564627058709> **|** Diga-nos a linguagem que você programa. (**Primária**)\nLinguagens : {langg}\n<:timer:565975875988750336> **|** **2 minutos**"
-                 embed=discord.Embed(description=texto, color=0x00d200)
+                 embed=discord.Embed(description=texto, color=0x7289DA)
                  msg = await ctx.author.send(embed=embed)
                  lang1 = await self.bard.wait_for('message', check=pred, timeout=120.0) 
                  if not str(lang1.content.lower()) in linguagem:                      
                     await msg.delete()
-                    embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x00d200)
+                    embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x7289DA)
                     self.forms.remove(ctx.author.id)
                     msg = await ctx.author.send(embed=embed)
                     await asyncio.sleep(30)
@@ -113,12 +113,12 @@ class helper(commands.Cog):
                    lang = ", ".join(linguagem)
                    await msg.delete()
                    texto = f"<:newDevs:573629564627058709> **|** Diga-nos a linguagem que você programa. (**Secundária**)\n(Caso não tenha nenhuma digite **nenhuma**)\nLinguagens : {langg}\n<:timer:565975875988750336> **|** **2 minutos**"
-                   embed=discord.Embed(description=texto, color=0x00d200)
+                   embed=discord.Embed(description=texto, color=0x7289DA)
                    msg = await ctx.author.send(embed=embed)
                    lang2 = await self.bard.wait_for('message', check=pred, timeout=120.0) 
                    if not str(lang2.content.lower()) in linguagem:                      
                       await msg.delete()
-                      embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x00d200)
+                      embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem que você forneceu é invalida e por isso ação foi cancelada.", color=0x7289DA)
                       self.forms.remove(ctx.author.id)
                       msg = await ctx.author.send(embed=embed)
                       await asyncio.sleep(30)
@@ -126,7 +126,7 @@ class helper(commands.Cog):
                    elif str(lang2.content.lower()) in linguagem:
                     if str(lang2.content.lower()) == str(lang1.content.lower()): 
                       await msg.delete()
-                      embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem (**Secundária**) que você forneceu é igual a (**Primária**) e por isso a ação foi cancelada.", color=0x00d200)
+                      embed = discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, a linguagem (**Secundária**) que você forneceu é igual a (**Primária**) e por isso a ação foi cancelada.", color=0x7289DA)
                       self.forms.remove(ctx.author.id)
                       msg = await ctx.author.send(embed=embed)
                       await asyncio.sleep(30)
@@ -134,19 +134,19 @@ class helper(commands.Cog):
                     else:
                      await msg.delete()
                      texto = f"<:newDevs:573629564627058709> **|** Diga-nos por qual motivo quer se tornar um **</Helper>**? (**Motivo** : 20 caracteres no mínimo)\n<:timer:565975875988750336> **|** **2 minutos**"
-                     embed=discord.Embed(description=texto, color=0x00d200)
+                     embed=discord.Embed(description=texto, color=0x7289DA)
                      msg = await ctx.author.send(embed=embed)
                      motivo = await self.bard.wait_for('message', check=pred, timeout=120.0)
                      if len(motivo.content) <= 20:
                         await msg.delete()
-                        embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o motivo é muito pequeno. (20 caracteres no mínimo)", color=0x00d200)
+                        embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o motivo é muito pequeno. (20 caracteres no mínimo)", color=0x7289DA)
                         self.forms.remove(ctx.author.id)
                         msg = await ctx.author.send(embed=embed)
                         await asyncio.sleep(30)
                         await msg.delete()
                      else:
                        await msg.delete()
-                       embed=discord.Embed(description=f"<:newDevs:573629564627058709> **|** Olá **{ctx.author.name}**, abaixo está localizado as informações do seu cadastro caso tenha alguma coisa errada clique na reação (<:incorreto:571040727643979782>) para recusar e deletar, caso esteja certo clique na reação (<:correto:571040855918379008>).", color=0x00d200)
+                       embed=discord.Embed(description=f"<:newDevs:573629564627058709> **|** Olá **{ctx.author.name}**, abaixo está localizado as informações do seu cadastro caso tenha alguma coisa errada clique na reação (<:incorreto:571040727643979782>) para recusar e deletar, caso esteja certo clique na reação (<:correto:571040855918379008>).", color=0x7289DA)
                        embed.set_author(name="SOLICITAÇÂO DE </HELPER>", icon_url=ctx.author.avatar_url_as())
                        embed.add_field(name="<:nome:565969826611462174> Nome", value = "``"+str(nome.content)+"``", inline=True)
                        embed.add_field(name="<:ip:565968375772217354> Idade", value = "``"+str(idade.content)+"``", inline=True)
@@ -165,7 +165,7 @@ class helper(commands.Cog):
                        reaction, user = await self.bard.wait_for('reaction_add', check=check, timeout=120.0)
                        if reaction.emoji.name == 'incorreto':
                           await msg.delete()
-                          embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** A solicitação de cadastramento foi cancelada.", color=0x00d200)
+                          embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** A solicitação de cadastramento foi cancelada.", color=0x7289DA)
                           self.forms.remove(ctx.author.id)
                           msg = await ctx.author.send(embed=embed)
                           await asyncio.sleep(30)
@@ -173,7 +173,7 @@ class helper(commands.Cog):
                        if reaction.emoji.name == 'correto':
                            self.forms.remove(ctx.author.id)
                            await msg.delete()
-                           embed=discord.Embed(color=0x00d200)
+                           embed=discord.Embed(color=0x7289DA)
                            embed.set_author(name="SOLICITAÇÂO DE </HELPER>", icon_url=ctx.author.avatar_url_as())
                            embed.add_field(name="Membro", value="``"+str(ctx.author)+"``", inline=True)
                            embed.add_field(name="<:nome:565969826611462174> Nome", value = "``"+str(nome.content)+"``", inline=True)
@@ -198,7 +198,7 @@ class helper(commands.Cog):
                            reaction, author = await self.bard.wait_for('reaction_add', check=check)
                            if reaction.emoji.name == 'correto':
                               await msg.delete()
-                              embed = discord.Embed(color=0x00d200)
+                              embed = discord.Embed(color=0x7289DA)
                               embed.set_author(name="</HELPER> ACEITO", icon_url=ctx.author.avatar_url_as())
                               embed.add_field(name="<:nome:565969826611462174> Helper", value ="``"+str(ctx.author)+"`` (<@"+str(ctx.author.id)+">)", inline=True)
                               embed.add_field(name="<:ip:565968375772217354> ID", value ="``"+str(ctx.author.id)+"``", inline=True)
@@ -308,7 +308,7 @@ class helper(commands.Cog):
                                    await channel.send(embed=embed)                                   
                                    recused = await self.bard.wait_for('message')
                                    await msg.delete()
-                                   embed = discord.Embed(color=0x00d200)
+                                   embed = discord.Embed(color=0x7289DA)
                                    
                                    embed.add_field(name=":bell: Motivo", value = "``"+str(recused.content)+"``", inline=True)
                                    embed.set_thumbnail(url=ctx.author.avatar_url_as())
@@ -320,7 +320,7 @@ class helper(commands.Cog):
          except asyncio.TimeoutError:
              self.forms.remove(ctx.author.id)             
              await msg.delete()
-             embed = discord.Embed(colour=0x00d200)
+             embed = discord.Embed(colour=0x7289DA)
              embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
              msg = await ctx.author.send(embed=embed)
              await asyncio.sleep(30)
@@ -330,7 +330,7 @@ class helper(commands.Cog):
         except discord.errors.Forbidden:
              self.forms.remove(ctx.author.id)
              await msg.delete()
-             embed = discord.Embed(colour=0x00d200)
+             embed = discord.Embed(colour=0x7289DA)
              embed=discord.Embed(description=f":envelope_with_arrow:**|** Olá **{ctx.author.name}**, para iniciar o processo precisamos que você libere suas mensagens privadas.", color=0x7BCDE8)
              msg = await ctx.send(embed=embed)
              await asyncio.sleep(30)

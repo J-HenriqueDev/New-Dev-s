@@ -68,7 +68,7 @@ class info(commands.Cog):
     @commands.Cog.listener()  
     async def on_member_join(self, member):
        if member.guild.id == 570906068277002271:
-        url = requests.get(member.avatar_url)
+        url = requests.get(member.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((245, 245));
         bigsize = (avatar.size[0] * 2,  avatar.size[1] * 2)

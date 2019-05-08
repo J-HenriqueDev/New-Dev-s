@@ -33,13 +33,13 @@ class dono(commands.Cog):
             self.bot.unload_extension(f"cogs.{cog}")
             self.bot.load_extension(f"cogs.{cog}")
             embed = discord.Embed(
-                colour=0x00d200,
+                colour=0x7289DA,
                 description=(f"**[Sucesso] O Modulo `{cog}` foi recarregado corretamente!**"))
 
             await ctx.send(embed=embed, delete_after=20)
         except Exception as e:
             embed = discord.Embed(
-                colour=0x00d200,
+                colour=0x7289DA,
                 description=(f"**[ERRO] O Modulo `{cog}` não foi recarregado corretamente**\n\n``{e}``"))
 
             await ctx.send(embed=embed, delete_after=20)
@@ -156,7 +156,7 @@ class dono(commands.Cog):
         import os
         import sys
         await ctx.message.delete()
-        embed = discord.Embed(description=f"<:correto:567782857678913547> O **Cripton** está sendo reiniciado!", color=0x00d200)
+        embed = discord.Embed(description=f"<:correto:567782857678913547> O **Cripton** está sendo reiniciado!", color=0x7289DA)
         await ctx.send(embed=embed)
         def reiniciar_code():
            python = sys.executable
