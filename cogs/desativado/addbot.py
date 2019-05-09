@@ -67,7 +67,7 @@ class addbot(commands.Cog):
                    texto = f"<:incorreto:571040727643979782>  **|** o **ID** que você forneceu corresponde a de um **BOT** chamado `{usuario}`, é o bot já está no servidor e por isso a cadastramento foi cancelado."
                 else:
                   gg = 2
-                  texto = f"<:newDevs:573629564627058709> **|** o **ID** que você forneceu corresponde a de um **BOT** chamado `{usuario}`.\n\n<:incorreto:571040727643979782>  : Não é meu **BOT**\n<:correto:571040855918379008> : É meu **BOT**\n\n<:timer:565975875988750336> **|** **2 minutos**"
+                  texto = f"<:newDevs:573629564627058709> **|** o **ID** que você forneceu corresponde a de um **BOT** chamado `{usuario}`.\n\n<:incorreto:571040727643979782>  : Não é meu **BOT**\n<:correto:571040855918379008> : É meu **BOT**\n\n{self.bot._emojis['timer']} **|** **2 minutos**"
                else:
                  gg = 1
                  texto = f"<:incorreto:571040727643979782>  **|** o **ID** que você forneceu corresponde a de um usuário chamado `{usuario}` não é possível adiciona-lo ao servidor por que ele não e um usuário **BOT** e por isso a cadastramento foi cancelado."
