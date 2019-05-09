@@ -1,4 +1,5 @@
 ﻿from datetime import datetime
+from utils.role import emojis
 import discord
 from config import database,secrets
 import time
@@ -26,7 +27,7 @@ class main(commands.AutoShardedBot):
                          description="crypto bot")
         self.remove_command('help')
         self.staff = secrets.STAFF
-        self.token = secrets.TOKEN
+        self.emojis = emojis
         self.dbl_key = secrets.DBL_TOKEN
         self.carregados = 0
         self.falhas = 0
