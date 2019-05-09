@@ -304,7 +304,8 @@ class helper(commands.Cog):
                                    server = self.bard.get_guild(570906068277002271)
                                    channel = discord.utils.get(server.channels, id=571087828482523146)
                                    await channel.send(embed=embed)                                   
-                                   recused = await self.bard.wait_for('message')
+                                   recused = await self.bard.wait_for('message') 
+                                   if recused.content.lower().startswith("motivo :"):
                                    await msg.delete()
                                    embed = discord.Embed(color=0x7289DA)
                                    
