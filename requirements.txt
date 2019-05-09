@@ -4,3 +4,5 @@ lavalink
 requests
 pymongo
 dnspython
+Pillow
+requests
