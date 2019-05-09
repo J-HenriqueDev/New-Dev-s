@@ -9,6 +9,9 @@ import pymongo
 import json
 import config.database
 import config.db
+from datetime import datetime, timedelta
+
+
 prefixos = ["rd.","!","@","/"]
 python = ['python', 'py']
 javascript = ['javascript','js']
@@ -30,20 +33,15 @@ class helper(commands.Cog):
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
     @commands.command()
-    async def gg(self,ctx):   
-       if ('manage_roles', True) in list(ctx.author.guild_permissions):
-          print("Ok")
-       else:
-         print("Not")
-
-
-    @commands.cooldown(1,10,commands.BucketType.user)
-    @commands.guild_only()
-    @commands.command()
     async def helper(self,ctx):   
         if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
+        dias_servidor = (datetime.utcnow() - ctx.author.joined_at).days
+        if dias_servidor < 5:
+            embed = discord.Embed(colour=0x7289DA)
+            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, para você se tornar um `</New Helper>` você precisa ter mais de 5 dias no servidor.", color=0x7289DA)
+            return await ctx.send(embed=embed)
         server = self.bard.get_guild(570906068277002271)
         newhelper = discord.utils.get(server.roles, name="</New Helper>")
         if newhelper in ctx.author.roles:
@@ -320,7 +318,6 @@ class helper(commands.Cog):
          except asyncio.TimeoutError:
              self.forms.remove(ctx.author.id)             
              await msg.delete()
-             embed = discord.Embed(colour=0x7289DA)
              embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, passou do tempo limite e por isso a cadastramento foi cancelado.", color=0x7BCDE8)
              msg = await ctx.author.send(embed=embed)
              await asyncio.sleep(30)
@@ -330,7 +327,6 @@ class helper(commands.Cog):
         except discord.errors.Forbidden:
              self.forms.remove(ctx.author.id)
              await msg.delete()
-             embed = discord.Embed(colour=0x7289DA)
              embed=discord.Embed(description=f":envelope_with_arrow:**|** Olá **{ctx.author.name}**, para iniciar o processo precisamos que você libere suas mensagens privadas.", color=0x7BCDE8)
              msg = await ctx.send(embed=embed)
              await asyncio.sleep(30)
