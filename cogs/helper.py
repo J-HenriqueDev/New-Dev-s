@@ -306,16 +306,16 @@ class helper(commands.Cog):
                                    await channel.send(embed=embed)                                   
                                    recused = await self.bard.wait_for('message') 
                                    if recused.content.lower().startswith("motivo :"):
-                                   await msg.delete()
-                                   embed = discord.Embed(color=0x7289DA)
+                                       await msg.delete()
+                                       embed = discord.Embed(color=0x7289DA)
                                    
-                                   embed.add_field(name=":bell: Motivo", value = "``"+str(recused.content)+"``", inline=True)
-                                   embed.set_thumbnail(url=ctx.author.avatar_url_as())
-                                   embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
-                                   server = self.bard.get_guild(570906068277002271)
+                                       embed.add_field(name=":bell: Motivo", value = "``"+str(recused.content)+"``", inline=True)
+                                       embed.set_thumbnail(url=ctx.author.avatar_url_as())
+                                       embed.set_footer(text=self.bard.user.name+" © 2019", icon_url=self.bard.user.avatar_url_as())
+                                       server = self.bard.get_guild(570906068277002271)
                                       #canal solicitação
-                                   channel = discord.utils.get(server.channels, id=571087828482523146)
-                                   await channel.send(recused.content)
+                                       channel = discord.utils.get(server.channels, id=571087828482523146)
+                                       await channel.send(recused.content)
          except asyncio.TimeoutError:
              self.forms.remove(ctx.author.id)             
              await msg.delete()
