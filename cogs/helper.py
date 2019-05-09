@@ -12,7 +12,7 @@ import config.db
 from datetime import datetime, timedelta
 
 
-prefixos = ["rd.","!","@","/"]
+prefixos = ["c.","!","@","/"]
 python = ['python', 'py']
 javascript = ['javascript','js']
 kotlin = ['kotlin','kt']

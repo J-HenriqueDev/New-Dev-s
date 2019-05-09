@@ -7,6 +7,8 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 from discord.ext import commands
 from asyncio import sleep
 import requests
+from pymongo import MongoClient
+import pymongo
 
 class info(commands.Cog):
     def __init__(self, bot):
@@ -15,9 +17,11 @@ class info(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        guild = self.bot.get_guild(payload.guild_id)
+        guild = self.bot.get_guild(570906068277002271)
         channel = discord.utils.get(guild.channels, id=571029261448773688)
 
+        if channel is None:
+            return
         if not payload.channel_id == 571029261448773688:
             return
         if payload.channel_id == None:
@@ -100,6 +104,35 @@ class info(commands.Cog):
         membros = len(member.guild.members)
         texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
+        if member.bot == True:
+           mongo = MongoClient(config.database.database)
+           bard = mongo['bard']
+           bot = bard['bot']
+           bot = bard.bot.find_one({"_id": str(member.id)})
+           if bot is None:
+              print(f"[Evento] Bot {member} entrou!")
+           else:
+             if bot["linguagem"] == "python":
+                cargo = discord.utils.get(member.guild.roles, name="</Bot.py>")
+                await member.add_roles(cargo)
+             elif bot["linguagem"] == "javascript":
+                  cargo = discord.utils.get(member.guild.roles, name="</Bot.js>")
+                  await member.add_roles(cargo)
+             elif bot["linguagem"] == "java":
+                  cargo = discord.utils.get(member.guild.roles, name="</Bot.jda>")
+                  await member.add_roles(cargo)
+             elif bot["linguagem"] == "kotlin":
+                  cargo = discord.utils.get(member.guild.roles, name="</Bot.kt>")
+                  await member.add_roles(cargo)
+             elif bot["linguagem"] == "golang":
+                  cargo = discord.utils.get(member.guild.roles, name="</Bot.go>")
+                  await member.add_roles(cargo)
+             elif bot["linguagem"] == "ruby":
+                  cargo = discord.utils.get(member.guild.roles, name="</Bot.rb>")
+                  await member.add_roles(cargo)
+             else:
+                cargo = discord.utils.get(member.guild.roles, name="</Muted>")
+                await member.add_roles(cargo)
   
 def setup(bot):
     bot.add_cog(info(bot))
