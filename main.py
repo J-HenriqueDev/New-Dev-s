@@ -27,7 +27,7 @@ class main(commands.AutoShardedBot):
                          description="crypto bot")
         self.remove_command('help')
         self.staff = secrets.STAFF
-        self.emojis = emojis
+        self._emojis = emojis
         self.dbl_key = secrets.DBL_TOKEN
         self.carregados = 0
         self.falhas = 0
