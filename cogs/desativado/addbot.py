@@ -60,7 +60,7 @@ class addbot(commands.Cog):
               await msg.delete()
            else:           
              try:
-               usuario = await self.bard.fetch_user(id_bot.content)
+               usuario = await self.bard.get_user(id_bot.content)
                if usuario.bot == True:
                 if usuario in ctx.guild.members: 
                    gg = 1
