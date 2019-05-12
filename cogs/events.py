@@ -88,7 +88,7 @@ class errors(commands.Cog):
           avatar = avatar.resize((183, 183));
           avtrafter = avtrafter.resize((183, 183));
           bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
-          afterbigsize = (avtrafter.size[0] * 3, after.size[1] * 3)
+          afterbigsize = (avtrafter.size[0] * 3, avtrafter.size[1] * 3)
           mask = Image.new('L', bigsize, 0)
           draw = ImageDraw.Draw(mask)
           draw.ellipse((0, 0) + bigsize, fill=255)
