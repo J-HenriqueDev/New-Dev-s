@@ -47,7 +47,7 @@ class errors(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
           return
-        if regex.search(message.content) is not None:
+        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower():
         #if regex.search(ctx.message.content) in message.content.lower():
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
