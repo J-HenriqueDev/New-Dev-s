@@ -1,11 +1,15 @@
 import discord
+import re
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+from io import BytesIO
+import requests
 import asyncio
 import config.database
 from discord.ext import commands
 aviso1 = []
 aviso2 = []
 aviso3 = []
-regex = 'discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]'
+regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]', re.IGNORECASE)
 
 class errors(commands.Cog):
     def __init__(self, bot):
@@ -43,7 +47,8 @@ class errors(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
           return
-        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower():
+        if regex.search(message.content) is not None:
+        #if regex.search(ctx.message.content) in message.content.lower():
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
          else:
@@ -72,6 +77,46 @@ class errors(commands.Cog):
            await message.add_reaction(emoji1)
            await message.add_reaction(emoji2)
            return
+
+    @commands.Cog.listener()
+    async def on_user_update(self,before,after):
+      if before.avatar != after.avatar:
+          url = requests.get(before.avatar_url_as(format="png"))
+          after = requests.get(after.avatar_url_as(format="png"))
+          avatar = Image.open(BytesIO(url.content))
+          avtrafter = Image.open(BytesIO(after.content))
+          avatar = avatar.resize((183, 183));
+          avtrafter = avtrafter.resize((183, 183));
+          bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+          afterbigsize = (avtrafter.size[0] * 3, after.size[1] * 3)
+          mask = Image.new('L', bigsize, 0)
+          draw = ImageDraw.Draw(mask)
+          draw.ellipse((0, 0) + bigsize, fill=255)
+          aftermask = Image.new('L', afterbigsize, 0)
+          afterdrawe = ImageDraw.Draw(aftermask)
+          afterdrawe.ellipse((0, 0) + afterbigsize, fill=255)
+          mask = mask.resize(avatar.size, Image.ANTIALIAS)
+          avatar.putalpha(mask)
+          afteraftermask = mask.resize(after.size, Image.ANTIALIAS)
+          after.putalpha(afteraftermask)
+
+          output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+          output.putalpha(mask)
+          outpute = ImageOps.fit(after, aftermask.size, centering=(0.5, 0.5))
+          output.putalpha(aftermask)
+          fundo = Image.open('cogs/img/update.png')
+          fonte = ImageFont.truetype('cogs/img/arial.ttf', 35)
+          escrever = ImageDraw.Draw(fundo)
+          escrever.text(xy=(365, 135), text=f'{before.name}', fill=(245, 255, 250), font=fonte)
+          escrever.text(xy=(398, 215), text=f'#{before.discriminator}', fill=(245, 255, 250), font=fonte)
+          fundo.paste(avatar, (45, 113), avatar)
+          fundo.paste(after, (45, 113), avatar)
+          fundo.save('updates.png')
+          canal = self.bot.get_channel(571016071209811972)
+          if canal is None:
+              return
+          else:
+              await canal.send(file=discord.File('updates.png'))
      
 def setup(bot):
   bot.add_cog(errors(bot))
