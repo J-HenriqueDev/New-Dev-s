@@ -131,7 +131,6 @@ class dono(commands.Cog):
 
     @commands.command()
     async def leaveserver(self, ctx, guildid: str):
-      print(f"LEAVESERVER USADO POR : {ctx.author}")
       if not ctx.author.id in self.bot.staff:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
@@ -144,10 +143,10 @@ class dono(commands.Cog):
       else:
         msg = f'hey **{ctx.author.name}** não encontrei nenhuma guild com esse ID!'
       await ctx.send(msg)
+      
 
     @commands.command()
     async def reiniciar(self,ctx):
-        print(f"REINICIAR USADO POR : {ctx.author}")
         if not ctx.author.id in self.bot.staff:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
@@ -156,13 +155,14 @@ class dono(commands.Cog):
         import os
         import sys
         await ctx.message.delete()
-        embed = discord.Embed(description=f"<:correto:567782857678913547> O **Cripton** está sendo reiniciado!", color=0x7289DA)
+        embed = discord.Embed(description=f"<:correto:567782857678913547> O **{self.bot.name}** está sendo reiniciado!", color=0x7289DA)
         await ctx.send(embed=embed)
+        print(f"REINICIAR USADO POR : {ctx.author}")
         def reiniciar_code():
            python = sys.executable
            os.execl(python, python, * sys.argv)
-        reiniciar_code()
         print('\033[31;1m Reiniciando...')
+        reiniciar_code()
 
 
     @commands.command(

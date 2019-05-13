@@ -1,6 +1,6 @@
 import discord
 import re
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageColor
 from io import BytesIO
 import requests
 import asyncio
@@ -82,12 +82,14 @@ class eventos(commands.Cog):
     async def on_user_update(self,before,after):
       if before.avatar_url != after.avatar_url:
         url = requests.get(before.avatar_url_as(format="png"))
-        avatar = Image.open(BytesIO(url.content), convert("RGB"))
+        avatar = Image.open(BytesIO(url.content))
+        avatar = avatar.convert('RGBA')
         avatar = avatar.resize((245, 245),Image.NEAREST);
         avatar.save('cogs/img/before.png')
         
         aurl = requests.get(after.avatar_url_as(format="png"))
-        after = Image.open(BytesIO(aurl.content), convert("RGB"))
+        after = Image.open(BytesIO(aurl.content))
+        after = after.convert('RGBA')
         after = after.resize((245, 245),Image.NEAREST);
         after.save('cogs/img/after.png')
 
@@ -95,11 +97,11 @@ class eventos(commands.Cog):
         fonte = ImageFont.truetype('cogs/img/arial.ttf',42)
 
         escrever = ImageDraw.Draw(fundo)
-        escrever.text(xy=(365, 135), text=f'{before.name}#{before.discriminator}', fill=(245, 255, 250), font=fonte)
+        escrever.text(xy=(400, 135), text=f'{before.name}#{before.discriminator}', fill=(245, 255, 250), font=fonte)
         
 
         fundo.paste(avatar, (45, 100), avatar)
-        fundo.paste(after, (700, 100), after)
+        fundo.paste(after, (950, 100), after)
         fundo.save('cogs/img/updates.png')
         canal = self.bot.get_channel(571016071209811972)
         if canal is None:
