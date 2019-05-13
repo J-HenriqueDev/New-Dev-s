@@ -155,7 +155,7 @@ class dono(commands.Cog):
         import os
         import sys
         await ctx.message.delete()
-        embed = discord.Embed(description=f"<:correto:567782857678913547> O **{self.bot.name}** está sendo reiniciado!", color=0x7289DA)
+        embed = discord.Embed(description=f"<:correto:567782857678913547> O **{ctx.me.name}** está sendo reiniciado!", color=0x7289DA)
         await ctx.send(embed=embed)
         print(f"REINICIAR USADO POR : {ctx.author}")
         def reiniciar_code():
