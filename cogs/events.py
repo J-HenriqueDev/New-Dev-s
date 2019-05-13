@@ -91,8 +91,8 @@ class errors(commands.Cog):
         mask = mask.resize(avatar.size, Image.ANTIALIAS)
         avatar.putalpha(mask)
         
-        url = requests.get(after.avatar_url_as(format="png"))
-        after = Image.open(BytesIO(url.content))
+        aurl = requests.get(after.avatar_url_as(format="png"))
+        after = Image.open(BytesIO(aurl.content))
         after = avatar.resize((183, 183));
         bigsize = (after.size[0] * 2,  after.size[1] * 2)
         mask = Image.new('L', bigsize, 0)
