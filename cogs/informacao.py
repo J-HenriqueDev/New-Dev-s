@@ -175,7 +175,7 @@ class informacao(commands.Cog):
            embed.add_field(name="<:bots:565972012325928980> Bot", value = "``"+str(bot)+"``", inline=True)
            embed.add_field(name="<:status:565979407567552517> Status", value = "``"+str(stat)+"``", inline=True)
            embed.add_field(name="<:jogando:565979683829710848> Jogando", value = "``"+str(jogo)"``", inline=True)
-           embed.add_field(name="<:jogando:565979683829710848> servidores", value = "``"+str(svs)"``")
+           embed.add_field(name="<:jogando:565979683829710848> servidores",value=f"```{svs}```")
            embed.set_thumbnail(url=img)
            embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
            await ctx.send(embed = embed)
