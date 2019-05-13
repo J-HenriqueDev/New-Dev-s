@@ -82,8 +82,8 @@ class eventos(commands.Cog):
     async def on_user_update(self,before,after):
       if before.avatar_url != after.avatar_url:
         url = requests.get(before.avatar_url_as(format="png"))
-        avatar = Image.open(BytesIO(url.content))
-        avatar = avatar.resize((245, 245));
+        avatar = Image.open(BytesIO(url.content),'RGB')
+        avatar = avatar.resize((245, 245), Image.NEAREST);
         avatar.save('cogs/img/before.png')
         
         aurl = requests.get(after.avatar_url_as(format="png"))
