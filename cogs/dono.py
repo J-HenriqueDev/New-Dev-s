@@ -161,7 +161,7 @@ class dono(commands.Cog):
         def reiniciar_code():
            python = sys.executable
            os.execl(python, python, * sys.argv)
-        print('\033[31;1m Reiniciando...')
+        print('Reiniciando...')
         reiniciar_code()
 
 
