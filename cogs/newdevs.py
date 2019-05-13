@@ -10,7 +10,7 @@ import requests
 from pymongo import MongoClient
 import pymongo
 
-class info(commands.Cog):
+class newDevs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.cooldown = []
@@ -135,4 +135,4 @@ class info(commands.Cog):
                 await member.add_roles(cargo)
   
 def setup(bot):
-    bot.add_cog(info(bot))
+    bot.add_cog(newDevs(bot))

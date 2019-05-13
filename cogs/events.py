@@ -11,7 +11,7 @@ aviso2 = []
 aviso3 = []
 regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]', re.IGNORECASE)
 
-class errors(commands.Cog):
+class eventos(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -84,33 +84,13 @@ class errors(commands.Cog):
         url = requests.get(before.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((245, 245));
-        #bigsize = (avatar.size[0] * 2,  avatar.size[1] * 2)
-        #mask = Image.new('L', bigsize, 0)
-        #draw = ImageDraw.Draw(mask)
-        #draw.ellipse((0, 0) + bigsize, fill=255)
-        #mask = mask.resize(avatar.size, Image.ANTIALIAS)
-        #avatar.putalpha(mask)
         avatar.save('cogs/img/before.png')
         
         aurl = requests.get(after.avatar_url_as(format="png"))
         after = Image.open(BytesIO(aurl.content))
         after = after.resize((245, 245));
-        #bigsize = (after.size[0] * 2,  after.size[1] * 2)
-        #mask1 = Image.new('L', bigsize, 0)
-        #draw1 = ImageDraw.Draw(mask1)
-        #draw1.ellipse((0, 0) + bigsize, fill=255)
-        #mask1 = mask1.resize(after.size, Image.ANTIALIAS)
-        #after.putalpha(mask1)
         after.save('cogs/img/after.png')
 
-        #saida = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
-        #saida.putalpha(mask)
-        #saida.save('cogs/img/before.png')
-
-        #saida1 = ImageOps.fit(after, mask1.size, centering=(0.5, 0.5))
-        #saida1.putalpha(mask1)
-        #saida1.save('cogs/img/after.png')
-        
         fundo = Image.open('cogs/img/update.png')
         fonte = ImageFont.truetype('cogs/img/arial.ttf',42)
 
@@ -128,4 +108,4 @@ class errors(commands.Cog):
             await canal.send(file=discord.File('cogs/img/updates.png'))
      
 def setup(bot):
-  bot.add_cog(errors(bot))
+  bot.add_cog(eventos(bot))
