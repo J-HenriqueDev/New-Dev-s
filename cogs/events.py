@@ -5,6 +5,7 @@ from io import BytesIO
 import requests
 import asyncio
 import config.database
+from pymongo import MongoClient
 from discord.ext import commands
 aviso1 = []
 aviso2 = []
@@ -14,6 +15,8 @@ regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[
 class eventos(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.staff = bot.db.staff
+        self.bots = bot.db.bots
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -108,6 +111,100 @@ class eventos(commands.Cog):
             return
         else:
             await canal.send(file=discord.File('cogs/img/updates.png'))
+    
+    @commands.Cog.listener()
+    async def on_member_update(self, before, after):
+      db = self.staff
+      user = db.find_one({"_id": after.id})
+      if after.roles != before.roles and after.guild.id == 570906068277002271:
+        Founder = after.guild.get_role(570908340184416285)
+        administrador = after.guild.get_role(570908340742520832)
+        moderador = after.guild.get_role(570908341287518208)
+        estagiario = after.guild.get_role(571030324872740864)
+
+        if estagiario in after.roles and estagiario not in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[estagiario] : inserido")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"estagiario": True}
+            db.insert_one(serv) #new
+          else:
+              print("[moderador] : updatado")
+              db.update_one({'_id': str(after.id)}, {'$set': {'moderador': True}})
+
+        elif moderador in after.roles and moderador not in before.roles: 
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[moderador] : inserido")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"moderador": True}
+            db.insert_one(serv) #new
+          else:
+              print("[moderador] : updatado")
+              db.update_one({'_id': str(after.id)}, {'$set': {'moderador': True}})
+
+        elif administrador in after.roles and administrador not in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[administrador] : inserido")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"administrador": True}
+            db.insert_one(serv) #new
+          else:
+              print("[administrador] : updatado")
+              db.update_one({'_id': str(after.id)}, {'$set': {'administrador': True}})
+
+        elif Founder in after.roles and Founder not in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[Founder] : inserido")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"Founder": True}
+            db.insert_one(serv) #new
+          else:
+              print("[Founder] : updatado")
+              db.update_one({'_id': str(after.id)}, {'$set': {'Founder': True}})
+
+            
+        elif estagiario not in after.roles and estagiario in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[estagiario] : inserido demote")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"estagiario": False}
+            db.insert_one(serv) #new
+          else:
+              print("[estagiario] : updatado demote ")
+              db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': False}})
+
+        elif moderador not in after.roles and moderador in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[moderador] : inserido demote")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"moderador": False}
+            db.insert_one(serv) #new
+          else:
+              print("[moderador] : updatado demote ")
+              db.update_one({'_id': str(after.id)}, {'$set': {'moderador': False}})
+
+        elif administrador not in after.roles and administrador in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[administrador] : inserido demote")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"administrador": False}
+            db.insert_one(serv) #new
+          else:
+              print("[administrador] : updatado demote")
+              db.update_one({'_id': str(after.id)}, {'$set': {'administrador': False}})
+
+        elif Founder not in after.roles and Founder in before.roles:
+          users = db.find_one({"_id": str(after.id)})
+          if not users:
+            print("[Founder] : inserido demote")
+            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"Founder": False}
+            db.insert_one(serv) #new
+          else:
+              print("[Founder] : updatado demote ")
+              db.update_one({'_id': str(after.id)}, {'$set': {'Founder': False}})
+
+        
+
      
 def setup(bot):
   bot.add_cog(eventos(bot))
