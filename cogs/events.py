@@ -115,6 +115,7 @@ class eventos(commands.Cog):
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
       db = self.staff
+      canal = self.bot.get_channel(570908359864352768)
       user = db.find_one({"_id": after.id})
       if after.roles != before.roles and after.guild.id == 570906068277002271:
         Founder = after.guild.get_role(570908340184416285)
@@ -128,9 +129,11 @@ class eventos(commands.Cog):
             print("[estagiario] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"estagiario": True}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} novo estágiario,inserindo ele na database.')
           else:
               print("[moderador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': True}})
+              await canal.send(f'{after.mention} novo estágiario,inserindo ele na database.')
 
         elif moderador in after.roles and moderador not in before.roles: 
           users = db.find_one({"_id": str(after.id)})
@@ -138,9 +141,11 @@ class eventos(commands.Cog):
             print("[moderador] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"moderador": True}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} novo moderador,inserindo ele na database.')
           else:
               print("[moderador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'moderador': True}})
+              await canal.send(f'{after.mention} novo moderador,inserindo ele na database.')
 
         elif administrador in after.roles and administrador not in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -148,9 +153,11 @@ class eventos(commands.Cog):
             print("[administrador] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"administrador": True}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} novo administrador,inserindo ele na database.')
           else:
               print("[administrador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'administrador': True}})
+              await canal.send(f'{after.mention} novo administrador,inserindo ele na database.')
 
         elif Founder in after.roles and Founder not in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -158,9 +165,11 @@ class eventos(commands.Cog):
             print("[Founder] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"Founder": True}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} novo founder,inserindo ele na database.')
           else:
               print("[Founder] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'Founder': True}})
+              await canal.send(f'{after.mention} novo founder,inserindo ele na database.')
 
             
         elif estagiario not in after.roles and estagiario in before.roles:
