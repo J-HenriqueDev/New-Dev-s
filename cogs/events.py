@@ -163,7 +163,7 @@ class eventos(commands.Cog):
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[Founder] : inserido")
-            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"Founder": True}
+            serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"Founder": True}
             db.insert_one(serv) #new
             await canal.send(f'{after.mention} novo founder,inserindo ele na database.')
           else:
@@ -176,7 +176,7 @@ class eventos(commands.Cog):
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[estagiario] : inserido demote")
-            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"estagiario": False}
+            serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"estagiario": False}
             db.insert_one(serv) #new
           else:
               print("[estagiario] : updatado demote ")
@@ -186,7 +186,7 @@ class eventos(commands.Cog):
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[moderador] : inserido demote")
-            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"moderador": False}
+            serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"moderador": False}
             db.insert_one(serv) #new
           else:
               print("[moderador] : updatado demote ")
@@ -196,7 +196,7 @@ class eventos(commands.Cog):
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[administrador] : inserido demote")
-            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"administrador": False}
+            serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"administrador": False}
             db.insert_one(serv) #new
           else:
               print("[administrador] : updatado demote")
@@ -206,7 +206,7 @@ class eventos(commands.Cog):
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[Founder] : inserido demote")
-            serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"Founder": False}
+            serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"Founder": False}
             db.insert_one(serv) #new
           else:
               print("[Founder] : updatado demote ")
