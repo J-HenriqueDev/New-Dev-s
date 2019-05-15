@@ -115,15 +115,12 @@ class rep(commands.Cog):
              bard = mongo['bard']
              users = bard['users']
              usuario = bard.users.find_one({'_id': str(usuario.id)})
-             tempo = random.randint(14400,21600)
              if usuario is None:
-                timetime[ctx.author.id] = json.dumps(time.time()+int(tempo))
                 embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7289DA)
                 await ctx.send(embed=embed)
                 rep = int(usuario["reputação"])+int(1)
                 bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
              else:
-               timetime[ctx.author.id] = json.dumps(time.time()+int(tempo))
                embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7289DA)
                await ctx.send(embed=embed)
                rep = int(usuario["reputação"])+int(1)
