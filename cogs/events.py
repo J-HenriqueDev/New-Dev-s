@@ -130,7 +130,7 @@ class eventos(commands.Cog):
             db.insert_one(serv) #new
           else:
               print("[moderador] : updatado")
-              db.update_one({'_id': str(after.id)}, {'$set': {'moderador': True}})
+              db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': True}})
 
         elif moderador in after.roles and moderador not in before.roles: 
           users = db.find_one({"_id": str(after.id)})
