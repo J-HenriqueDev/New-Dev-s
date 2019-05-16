@@ -20,9 +20,10 @@ class eventos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-            pass
-
+        if isinstance(error, commands.CommandNotFound):
+          comma = error.args[0].split('"')[1]
+          embed = discord.Embed(title=f"<:incorreto:571040727643979782> | Comando não encontrado", color=0x7289DA, description=f"O comando `{comma}` não existe.")
+          await ctx.send(embed=embed)
         elif isinstance(error, commands.BotMissingPermissions):
             perms = '\n'.join([f"**`{perm.upper()}`**" for perm in error.missing_perms])
             await ctx.send(f"**{ctx.author.name}**, eu preciso das seguintes permissões para poder executar o comando **`{ctx.invoked_with}`** nesse servidor:\n\n{perms}", delete_after=30)
