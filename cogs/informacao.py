@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from utils import botstatus
 import sys
+from datetime import datetime, timedelta
 import discord
 import requests
 
@@ -154,7 +155,7 @@ class informacao(commands.Cog):
            svs = '\n\u200b'.join([f"{s.name} | {s.id}\nDono: {s.owner}" for s in self.bot.guilds if user in s.members])
            entrou_servidor = str(usuario.joined_at.strftime("%H:%M:%S - %d/%m/20%y"))
            conta_criada = str(usuario.created_at.strftime("%H:%M:%S - %d/%m/20%y"))
-           conta_dias = (datetime.utcnow() - user.created_at).days
+           conta_dias = (datetime.utcnow() - usuario.created_at).days
            cargos = len([r.name for r in usuario.roles if r.name != "@everyone"])
            if not svs: svs = 'Nenhum servidor em comum.'
            on = "Disponível"
@@ -168,13 +169,12 @@ class informacao(commands.Cog):
            embed.add_field(name="<:tag:565975875749675039> Tag", value = "``"+str(usuario.name)+"#"+str(usuario.discriminator)+"``", inline=True)
            embed.add_field(name="<:ip:565968375772217354> Id", value = "``"+str(usuario.id)+"``", inline=True)
            embed.add_field(name="<:nome:565969826611462174> Apelido", value = "``"+str(apelido)+"``", inline=True)
-           embed.add_field(name="<:notas:565968375898046464> Criação (conta)", value = "``"+str(conta_criada)+"``"+str(conta_dias), inline=True)
+           embed.add_field(name="<:notas:565968375898046464> Criação (conta)", value =f"``{conta_criada}+``==``{conta_dias}``dias", inline=True)
            embed.add_field(name="<:entrou:565978463882706973> Entrou (servidor)", value = "``"+str(entrou_servidor)+"``", inline=True)
-           embed.add_field(name="<:toprole:565979057490231297> Maior cargo", value = "``"+str(usuario.top_role)+" - ("+str(usuario.top_role.color)+")``", inline=True)
+           embed.add_field(name="<:toprole:565979057490231297> Maior cargo", value = "``"+str(usuario.top_role)+"``", inline=True)
            embed.add_field(name="<:roles:565970506390700077> Cargos", value = "``"+str(cargos)+"/"+str(cargos2)+"``", inline=True)
            embed.add_field(name="<:bots:565972012325928980> Bot", value = "``"+str(bot)+"``", inline=True)
            embed.add_field(name="<:status:565979407567552517> Status", value = "``"+str(stat)+"``", inline=True)
-           embed.add_field(name="<:jogando:565979683829710848> Jogando", value = "``"+str(jogo)"``", inline=True)
            embed.add_field(name="<:jogando:565979683829710848> servidores",value=f"```{svs}```")
            embed.set_thumbnail(url=img)
            embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())

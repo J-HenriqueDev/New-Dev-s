@@ -51,7 +51,7 @@ class eventos(commands.Cog):
     async def on_message(self, message):
         if message.guild is None:
           return
-        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower():
+        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower() or "mybotlist"in message.content.lower():
         #if regex.search(ctx.message.content) in message.content.lower():
          if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
            print("OK")
@@ -179,9 +179,11 @@ class eventos(commands.Cog):
             print("[estagiario] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"estagiario": False}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} foi demotado.')
           else:
               print("[estagiario] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': False}})
+              await canal.send(f'{after.mention} foi demotado.')
 
         elif moderador not in after.roles and moderador in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -189,19 +191,23 @@ class eventos(commands.Cog):
             print("[moderador] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"moderador": False}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} foi demotado.')
           else:
               print("[moderador] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'moderador': False}})
+              await canal.send(f'{after.mention} foi demotado.')
 
         elif administrador not in after.roles and administrador in before.roles:
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[administrador] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"administrador": False}
-            db.insert_one(serv) #new
+            db.insert_one(serv)
+            await canal.send(f'{after.mention} foi demotado.') #new
           else:
               print("[administrador] : updatado demote")
               db.update_one({'_id': str(after.id)}, {'$set': {'administrador': False}})
+              await canal.send(f'{after.mention} foi demotado.')
 
         elif Founder not in after.roles and Founder in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -209,9 +215,11 @@ class eventos(commands.Cog):
             print("[Founder] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"Founder": False}
             db.insert_one(serv) #new
+            await canal.send(f'{after.mention} foi demotado.')
           else:
               print("[Founder] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'Founder': False}})
+              await canal.send(f'{after.mention} foi demotado.')
 
         
 
