@@ -74,7 +74,7 @@ class informacao(commands.Cog):
     @commands.command()
     async def botinfo(self,ctx):
           mem = botstatus.get_memory()
-          embed = discord.Embed(description="Olá {}, este e o perfil do {} e nele contém algumas informações.".format(ctx.author.name, self.bot.user.name),colour=0x00d200)
+          embed = discord.Embed(description="Olá {}, este e o perfil do {} e nele contém algumas informações.".format(ctx.author.name, self.bot.user.name),colour=0x7289DA)
           embed.set_author(name="Informações do {}".format(self.bot.user.name), icon_url=ctx.author.avatar_url_as())
           embed.add_field(name="<:dono:565969060228104194> Criador", value = '``Henrique__#0841``', inline=True)
           embed.add_field(name="<:tag:565975875749675039> Tag", value = '``'+str(self.bot.user)+'``', inline=True)
@@ -109,7 +109,7 @@ class informacao(commands.Cog):
            texto = "<:texto:565968741788155907> : ``"+str(len(servidor.text_channels))+"``<:voz:565968741729435668>  : ``"+str(len(servidor.voice_channels))+"``"
            cargos = len([y.id for y in servidor.roles])
            emojis = len([y.id for y in servidor.emojis])
-           embed = discord.Embed(description="Olá {}, aqui estão todas as informaçôes do servidor `{}`.".format(ctx.author.name, servidor.name),colour=0x00d200)
+           embed = discord.Embed(description="Olá {}, aqui estão todas as informaçôes do servidor `{}`.".format(ctx.author.name, servidor.name),colour=0x7289DA)
            embed.set_author(name="Informação do servidor", icon_url=ctx.author.avatar_url_as())
            embed.add_field(name="<:dono:565969060228104194> Dono", value = "``"+str(servidor.owner)+"``", inline=True)
            embed.add_field(name="<:nome:565969826611462174> Nome", value = "``"+str(servidor.name)+"``", inline=True)
@@ -164,7 +164,7 @@ class informacao(commands.Cog):
            afk = "Ausente"
            stat = str(usuario.status).replace("online",on).replace("offline",off).replace("dnd",dnd).replace("idle",afk)
            cargos2 = len([y.id for y in ctx.guild.roles])
-           embed = discord.Embed(description=titulo,colour=0x00d200)
+           embed = discord.Embed(description=titulo,colour=0x7289DA)
            embed.set_author(name="Informação de perfil", icon_url=ctx.author.avatar_url_as())
            embed.add_field(name="<:tag:565975875749675039> Tag", value = "``"+str(usuario.name)+"#"+str(usuario.discriminator)+"``", inline=True)
            embed.add_field(name="<:ip:565968375772217354> Id", value = "``"+str(usuario.id)+"``", inline=True)
@@ -195,7 +195,7 @@ class informacao(commands.Cog):
              channel = discord.utils.get(ctx.guild.channels, name=num)
 
          if channel is None:
-           embed = discord.Embed(description="<:help:565985431284350985> **|** O canal {} não existe.".format(num), color=0x00d200)
+           embed = discord.Embed(description="<:help:565985431284350985> **|** O canal {} não existe.".format(num), color=0x7289DA)
            await ctx.send(embed=embed)
            return  
 
@@ -204,12 +204,12 @@ class informacao(commands.Cog):
          elif channel in list(ctx.guild.voice_channels):
            channel_type = "Audio"
          else:
-           embed = discord.Embed(description="<:help:565985431284350985> **|** O canal {} não existe.".format(num), color=0x00d200)
+           embed = discord.Embed(description="<:help:565985431284350985> **|** O canal {} não existe.".format(num), color=0x7289DA)
            await ctx.send(embed=embed)
            return  
          
          channel_created = str(channel.created_at.strftime("%H:%M:%S - %d/%m/20%y"))
-         embed = discord.Embed(description="Olá {}, esta são as informações do canal {}.".format(ctx.author.name, channel.mention),colour=0x00d200)
+         embed = discord.Embed(description="Olá {}, esta são as informações do canal {}.".format(ctx.author.name, channel.mention),colour=0x7289DA)
          embed.set_author(name="Informações do canal", icon_url=ctx.author.avatar_url_as())
          embed.add_field(name="<:nome:565969826611462174> Nome", value = "``"+str(channel.name)+"``", inline=True)
          embed.add_field(name="<:ip:565968375772217354> ID", value = "``"+str(channel.id)+"``", inline=True)
@@ -245,7 +245,7 @@ class informacao(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
-        embed = discord.Embed(colour=0x00d200, description="Olá {}, aqui contém todos os comandos do {}.".format(ctx.author.name, self.bot.user.name))
+        embed = discord.Embed(colour=0x7289DA, description="Olá {}, aqui contém todos os comandos do {}.".format(ctx.author.name, self.bot.user.name))
         embed.set_author(name="Ajuda ao usuário", icon_url=ctx.author.avatar_url_as())
         embed.add_field(name="<:discord:565988914138054656> Discord", value ="``channelinfo``, ``serverinfo``, ``userinfo``", inline=True)
         embed.add_field(name="<:musica:565989217486897163> Música", value ="``play``, ``stop``, ``pause``, ``volume`` , ``seek``, ``queue``, ``np``, ``rework``", inline=True)
