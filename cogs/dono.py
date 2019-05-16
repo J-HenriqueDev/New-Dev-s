@@ -6,6 +6,10 @@ import asyncio
 import json
 import sys
 import inspect
+import textwrap
+import traceback
+from io import StringIO
+from contextlib import redirect_stdout
 
 
 class dono(commands.Cog):
@@ -106,6 +110,7 @@ class dono(commands.Cog):
 
 
     @commands.command()
+    @commands.guild_only()
     async def invite(self, ctx, *, id: int):
             print(f"INVITE USADO POR : {ctx.author}")
             if not ctx.author.id in self.bot.staff:
@@ -191,6 +196,60 @@ class dono(commands.Cog):
             comando.enabled = True
             await ctx.send(f"<:ligado:571038226861522957> **{ctx.author.name}**, você ativou o comando **`{comando.name}`**.")
 
+    @commands.command(hidden=True)
+    async def exec(self, ctx, *, body: str):
+        if not ctx.author.id in self.bot.staff:
+            await ctx.send(
+                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
+                delete_after=15)
+            return
+        def clean(content):
+            if content.startswith('```') and content.endswith('```'):
+                return '\n'.join(content.split('\n')[1:-1])
+            return content.strip('` \n')
 
+        env = {
+            'bot': self.bot,
+            'ctx': ctx,
+            'channel': ctx.channel,
+            'author': ctx.author,
+            'guild': ctx.guild,
+            'msg': ctx.message,
+        }
+
+        env.update(globals())
+
+        body = clean(body)
+        stdout = StringIO()
+
+        to_compile = f'async def func():\n{textwrap.indent(body, "    ")}' # 4 espaços = tab, se quiser tab mesmo coloque \t dentro do ""
+
+        try:
+            exec(to_compile, env)
+        except Exception as e:
+            return await ctx.send(f'```py\n{e.__class__.__name__}: {e}\n```')
+
+        func = env['func']
+        try:
+            with redirect_stdout(stdout):
+                ret = await func()
+
+        except:
+            value = stdout.getvalue()
+            await ctx.send(f'```py\n{value}{traceback.format_exc()}\n```')
+        
+        else:
+            value = stdout.getvalue()
+            try:
+                emoji = await self.bot.get_emoji(571375157763899412)
+                await ctx.message.add_reaction(emoji)
+            except:
+                pass
+
+            if ret is None:
+                if value:
+                    await ctx.send(f'```py\n{value}\n```')
+            else:
+                await ctx.send(f'```py\n{value}{ret}\n```')
 def setup(bot):
     bot.add_cog(dono(bot))
