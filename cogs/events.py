@@ -4,7 +4,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageColor
 from io import BytesIO
 import requests
 import asyncio
-import config.database
 from pymongo import MongoClient
 from discord.ext import commands
 aviso1 = []

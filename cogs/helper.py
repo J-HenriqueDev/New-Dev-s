@@ -7,8 +7,6 @@ import asyncio
 from pymongo import MongoClient
 import pymongo
 import json
-import config.database
-import config.db
 from datetime import datetime, timedelta
 
 
@@ -29,12 +27,13 @@ class helper(commands.Cog):
     def __init__(self, bard):
         self.bard = bard
         self.forms = []
+        self.canais = ["570908357032935425","571014988622331905"]
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
     @commands.command()
     async def helper(self,ctx):   
-        if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
+        if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         dias_servidor = (datetime.utcnow() - ctx.author.joined_at).days
@@ -189,11 +188,11 @@ class helper(commands.Cog):
                             for reaction in reactions:
                                 await msg.add_reaction(reaction)
                            
-                           def check(reaction, user):
+                           def check8(reaction, user):
                               return user.id != 572097258380853249 and reaction.message.id == msg.id
 
 
-                           reaction, author = await self.bard.wait_for('reaction_add', check=check)
+                           reaction, author = await self.bard.wait_for('reaction_add', check=check8)
                            if reaction.emoji.name == 'correto':
                               await msg.delete()
                               embed = discord.Embed(color=0x7289DA)
@@ -208,7 +207,7 @@ class helper(commands.Cog):
                               server = self.bard.get_guild(570906068277002271)
                               channel = discord.utils.get(server.channels, id=571046268378546206)
                               await channel.send(embed=embed)
-                              mongo = MongoClient(config.database.database)
+                              mongo = MongoClient(self.bard.database)
                               bard = mongo['bard']
                               users = bard['users']
                               users = bard.users.find_one({"_id": str(ctx.author.id)})

@@ -7,8 +7,6 @@ import asyncio
 from pymongo import MongoClient
 import pymongo
 import json
-import config.database
-import config.db
 
 startTime = time.time()
 def getUptime():
@@ -20,12 +18,13 @@ timetime=dict()
 class rep(commands.Cog):
     def __init__(self, bard):
         self.bard = bard
+        self.canais = ["570908357032935425","571014988622331905"]
     
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
     @commands.command()
     async def cooldown(self, ctx):
-             if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
+             if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
                await ctx.message.add_reaction(":incorreto:571040727643979782")
                return
 
@@ -59,7 +58,7 @@ class rep(commands.Cog):
     @commands.guild_only()
     @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep </New Helper>')
     async def rep(self, ctx, *, user: discord.Member = None):
-           if not str(ctx.channel.id) in config.database.canais and not str(ctx.message.author.id) in config.database.admin:
+           if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
                await ctx.message.add_reaction(":incorreto:571040727643979782")
                return
            if user is None:
@@ -111,7 +110,7 @@ class rep(commands.Cog):
                    embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x7289DA)
                    await ctx.send(embed=embed)
                    return
-             mongo = MongoClient(config.database.database)
+             mongo = MongoClient(self.bard.database)
              bard = mongo['bard']
              users = bard['users']
              usuario = bard.users.find_one({'_id': str(usuario.id)})
@@ -137,7 +136,7 @@ class rep(commands.Cog):
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
             return
-       mongo = MongoClient(config.database.database)
+       mongo = MongoClient(self.bard.database)
        bard = mongo['bard']
        users = bard['users']
        bard.users.update_many({}, {"$set": {"reputação": 0}})
@@ -153,7 +152,7 @@ class rep(commands.Cog):
               usuario = membro
               titulo = f"Olá {ctx.author.name}, veja a quantidade de rep's de `{usuario.name}` abaixo."
          embed = discord.Embed(description=titulo,colour=0x7289DA)
-         mongo = MongoClient(config.database.database)
+         mongo = MongoClient(self.bard.database)
          bard = mongo['bard']
          users = bard['users']
          users = bard.users.find_one({"_id": str(usuario.id)})

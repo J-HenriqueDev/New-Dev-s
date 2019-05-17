@@ -1,23 +1,16 @@
 ﻿from datetime import datetime
 from utils.role import emojis
 import discord
-from config import database,secrets
+from config import secrets
 import time
 import os
 import pytz
 from discord.ext import commands
 import asyncio
 from pymongo import MongoClient
-import config.database
-import config.db
 
 
 
-
-
-
-def diff_list(li1, li2): 
-    return (list(set(li1) - set(li2))) 
 
 class main(commands.AutoShardedBot):
     def __init__(self):
@@ -27,6 +20,8 @@ class main(commands.AutoShardedBot):
                          description="crypto bot")
         self.remove_command('help')
         self.staff = secrets.STAFF
+        self.database = secrets.DATAB
+        self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
         self._emojis = emojis
         self.dbl_key = secrets.DBL_TOKEN
@@ -34,7 +29,7 @@ class main(commands.AutoShardedBot):
         self.falhas = 0
         print("( * ) | Tentando se conectar ao banco de dados...")
         try:
-            mongo = MongoClient(config.database.database)
+            mongo = MongoClient(self.database)
         except Exception as e:
             print(f"\n<---------------->\n( ! ) | Erro na tentativa de conexão com o banco de dados!\n<----------->\n{e}\n<---------------->\n")
             exit()
