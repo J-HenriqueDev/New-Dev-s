@@ -21,7 +21,7 @@ class dono(commands.Cog):
 
     @commands.command()
     async def reload(self, ctx, *, cog: str = None):
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -51,7 +51,7 @@ class dono(commands.Cog):
 
     @commands.command()
     async def game(self, ctx, *, status: str = ''):
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -70,7 +70,7 @@ class dono(commands.Cog):
     @commands.command()
     async def debug(self, ctx, *, args=None):
         
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -113,7 +113,7 @@ class dono(commands.Cog):
     @commands.guild_only()
     async def invite(self, ctx, *, id: int):
             print(f"INVITE USADO POR : {ctx.author}")
-            if not ctx.author.id in self.bot.staff:
+            if not ctx.author.id in self.bot.dono:
                await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -136,7 +136,7 @@ class dono(commands.Cog):
 
     @commands.command()
     async def leaveserver(self, ctx, guildid: str):
-      if not ctx.author.id in self.bot.staff:
+      if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -152,7 +152,7 @@ class dono(commands.Cog):
 
     @commands.command()
     async def reiniciar(self,ctx):
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -177,7 +177,7 @@ class dono(commands.Cog):
         usage='c.desativarcomando <Nome do Comando>'
     )
     async def _desativarcomando(self, ctx, *, nome=None):
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
@@ -198,7 +198,7 @@ class dono(commands.Cog):
 
     @commands.command(hidden=True)
     async def exec(self, ctx, *, body: str):
-        if not ctx.author.id in self.bot.staff:
+        if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
