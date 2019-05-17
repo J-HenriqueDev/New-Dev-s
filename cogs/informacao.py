@@ -35,8 +35,8 @@ class informacao(commands.Cog):
 
 
 
-    @commands.command()
-    async def pic(self, ctx, *, user: discord.Member = None):
+    @commands.command(description='envia a sua foto de perfil ou a de um usuário.',usage='c.avatar',aliases=['pic'])
+    async def avatar(self, ctx, *, user: discord.Member = None):
         if user is None:
             usuario = ctx.author.avatar_url
             texto = f"Olá {ctx.author.name}, está é sua imagem de perfil."
@@ -44,9 +44,9 @@ class informacao(commands.Cog):
             usuario = user.avatar_url
             texto = f"Olá {ctx.author.name}, está é a imagem do usuário {user.name}"
 
-        embed = discord.Embed(title=texto, color=0xF4CBD1)
+        embed = discord.Embed(title=texto, color=0x7289DA)
         embed.set_image(url=usuario)
-        embed.set_footer(text=self.bot.user.name + " direitos resevados.")
+        embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         await ctx.send(embed=embed)
 
 

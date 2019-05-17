@@ -36,7 +36,7 @@ class reptop(commands.Cog):
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
-    @commands.command(description='Mostra o top de reps',usage='c.tophelper',aliases=['top'])
+    @commands.command(description="Mostra o dos melhores NewHelper's do servidor",usage='c.tophelper',aliases=['top'])
     async def tophelper(self, ctx):
         if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")

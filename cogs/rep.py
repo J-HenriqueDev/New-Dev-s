@@ -22,7 +22,7 @@ class rep(commands.Cog):
     
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
-    @commands.command()
+    @commands.command(description='Adiciona um ponto de reputação para um NewHelper',usage='c.rep @newhelper',aliases=['reputacao','reputação'])
     async def cooldown(self, ctx):
              if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
                await ctx.message.add_reaction(":incorreto:571040727643979782")
@@ -56,7 +56,7 @@ class rep(commands.Cog):
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
-    @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep </New Helper>')
+    @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep @</New Helper>')
     async def rep(self, ctx, *, user: discord.Member = None):
            if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
                await ctx.message.add_reaction(":incorreto:571040727643979782")

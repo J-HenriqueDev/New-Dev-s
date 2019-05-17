@@ -31,7 +31,7 @@ class helper(commands.Cog):
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
-    @commands.command()
+    @commands.command(description='envia o formulário de Helper para você',usage='c.helper',aliases=['newhelper'])
     async def helper(self,ctx):   
         if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
