@@ -1,5 +1,4 @@
 aiohttp==3.5.4
-discord-backups==0.1.2
 discord.py==1.1.1
 dnspython==1.16.0
 motor==2.0.0
