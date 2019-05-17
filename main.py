@@ -20,6 +20,7 @@ class main(commands.AutoShardedBot):
                          description="crypto bot")
         self.remove_command('help')
         self.staff = secrets.STAFF
+        self.dono = secrets.DONO
         self.database = secrets.DATAB
         self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
