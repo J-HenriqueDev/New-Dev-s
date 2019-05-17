@@ -152,7 +152,7 @@ class informacao(commands.Cog):
               bot = "Não"
            else:
              bot = "Sim"
-           svs = ([f"{s.name}" for s in self.bot.guilds if usuario in s.members])
+           svs = ', '.join([c.name for c in self.bot.guilds if usuario in c.members])
            entrou_servidor = str(usuario.joined_at.strftime("%H:%M:%S - %d/%m/20%y"))
            conta_criada = str(usuario.created_at.strftime("%H:%M:%S - %d/%m/20%y"))
            conta_dias = (datetime.utcnow() - usuario.created_at).days
