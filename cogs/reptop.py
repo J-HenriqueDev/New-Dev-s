@@ -20,6 +20,7 @@ class reptop(commands.Cog):
     def __init__(self, bard):
         self.bard = bard
         self.canais = ["570908357032935425","571014988622331905"]
+    
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
