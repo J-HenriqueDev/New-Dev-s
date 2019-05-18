@@ -21,7 +21,7 @@ class eventos(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
           comma = error.args[0].split('"')[1]
-          embed = discord.Embed(title=f"<:incorreto:571040727643979782> | Comando não encontrado", color=0x7289DA, description=f"O comando `{comma}` não existe.")
+          embed = discord.Embed(title=f"{self.bot._emojis['incorreto']} | Comando não encontrado", color=0x7289DA, description=f"O comando `{comma}` não existe.")
           await ctx.send(embed=embed)
         elif isinstance(error, commands.BotMissingPermissions):
             perms = '\n'.join([f"**`{perm.upper()}`**" for perm in error.missing_perms])
