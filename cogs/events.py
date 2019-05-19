@@ -71,7 +71,7 @@ class eventos(commands.Cog):
              await msg.delete()
            else:
              await message.delete()
-             await message.author.ban()
+             await message.author.ban(reason="Divulgando.")
 
         
         if str(message.channel.id) == str(512629173668413460):
