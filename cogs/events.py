@@ -38,8 +38,6 @@ class eventos(commands.Cog):
         elif isinstance(error, commands.DisabledCommand):
             await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
         
-        else:
-            print(error)
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
