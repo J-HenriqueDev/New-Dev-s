@@ -25,7 +25,6 @@ class main(commands.AutoShardedBot):
         self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
         self._emojis = emojis
-        self.dbl_key = secrets.DBL_TOKEN
         self.carregados = 0
         self.falhas = 0
         print("( * ) | Tentando se conectar ao banco de dados...")
