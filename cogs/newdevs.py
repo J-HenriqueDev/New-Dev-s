@@ -104,6 +104,14 @@ class newDevs(commands.Cog):
         membros = len(member.guild.members)
         texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
+
+        if member.guild.id == 570906068277002271 and member.created_at > datetime.datetime(year=2019, month=2, day=1) and not member.bot:
+            cat = member.created_at.replace(tzinfo=pytz.utc).astimezone(tz=pytz.timezone('America/Sao_Paulo')).strftime('`%d/%m/%Y %H:%M`')
+            dias = (datetime.utcnow() - member.created_at).days
+            embed = discord.Embed(color=0x7289DA, description=f'**{member.mention}(`{member.id}`) entrou no servidor, com a conta criada em {cat}({dias} dias).**')
+            embed.set_thumbnail(url=member.avatar_url)
+            await self.bot.get_channel(580095031591829518).send(embed=embed)
+        
         '''
         json ={
              "E0":"<:numero0:580090018505162755>",
