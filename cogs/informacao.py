@@ -257,7 +257,7 @@ class informacao(commands.Cog):
                 aliases = "Nenhuma abreviação."
 
             embed = discord.Embed(colour=0x7289DA)
-            embed.set_author(icon_url=self.bot.user.avatar_url,name=f"Informações do comando {nome}.")
+            embed.set_author(name=f"Informações do comando {nome}.")
             embed.set_thumbnail(url=self.bot.user.avatar_url)
             embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
             embed.add_field(name=f"**Uso**",value=f"`{uso}`",inline=False)
