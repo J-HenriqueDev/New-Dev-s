@@ -32,9 +32,6 @@ class eventos(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             m, s = divmod(error.retry_after, 60)
             return await ctx.send(f"**{ctx.author.name}**, aguarde **`{int(s)}`** segundo(s) para poder usar o comando **`{ctx.invoked_with}`** novamente.", delete_after=45)
-        elif isinstance(error, (commands.BadArgument, commands.BadUnionArgument, commands.MissingRequiredArgument)):
-            uso = ctx.command.usage if ctx.command.usage else "Não especificado."
-            await ctx.send(f"**{ctx.author.name}**, você usou o comando **`{ctx.command.name}`** de forma incorreta!\nUse seguinte o modelo: **`{uso}`**", delete_after=45)
         elif isinstance(error, commands.DisabledCommand):
             await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
         

@@ -109,56 +109,65 @@ class informacao(commands.Cog):
     @commands.guild_only()
     @commands.command(description='Mostra as informações de um usuário.',usage='c.userinfo @TOBIAS',aliases=['uinfo', 'usuario'])
     async def userinfo(self, ctx, *, user: discord.Member = None):
-           if user is None:
-               usuario = ctx.author
-               titulo = "Olá {}, esse é o seu perfil e aqui estão suas informações.".format(ctx.author.name)
-           else:
-              usuario = user
-              titulo = "Olá {}, este é o perfil de {} e nele contém umas informações.".format(ctx.author.name, usuario.name)
+          if user is None:
+              usuario = ctx.author
+              titulo = "Olá {}, esse é o seu perfil e aqui estão suas informações.".format(ctx.author.name)
+          else:
+            usuario = user
+            titulo = "Olá {}, este é o perfil de {} e nele contém umas informações.".format(ctx.author.name, usuario.name)
 
-           if usuario.display_name == usuario.name:
-               apelido = "Não defindo"
-           else:
-              apelido = usuario.display_name
-           if usuario.avatar_url_as()  == "":
-           	  img = "https://i.imgur.com/To9mDVT.png"
-           else:
-             img = usuario.avatar_url_as()
-           try:
-             jogo = usuario.activity.name
-           except:
-               jogo = "No momento nada."
-           if usuario.id in [y.id for y in ctx.guild.members if not y.bot]:
-              bot = "Não"
-           else:
-             bot = "Sim"
-           svs = ', '.join([c.name for c in self.bot.guilds if usuario in c.members])
-           entrou_servidor = str(usuario.joined_at.strftime("%d/%m/20%y ás %H:%M:%S"))
-           conta_criada = str(usuario.created_at.strftime("%d/%m/20%y"))
-           conta_dias = (datetime.utcnow() - usuario.created_at).days
-           cargos = len([r.name for r in usuario.roles if r.name != "@everyone"])
-           if not svs: svs = 'Nenhum servidor em comum.'
-           on = "Disponível"
-           off = "Offline"
-           dnd = "Não Pertubar"
-           afk = "Ausente"
-           stat = str(usuario.status).replace("online",on).replace("offline",off).replace("dnd",dnd).replace("idle",afk)
-           cargos2 = len([y.id for y in ctx.guild.roles])
-           embed = discord.Embed(description=titulo,colour=0x7289DA)
-           embed.set_author(name=f"Informação de perfil", icon_url=ctx.author.avatar_url_as())
-           embed.add_field(name=f"{self.bot._emojis['tag']} Tag", value = "``"+str(usuario.name)+"#"+str(usuario.discriminator)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['ip']} Id", value = "``"+str(usuario.id)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['nome']} Apelido", value = "``"+str(apelido)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['notas']} Data de criação da conta", value =f"``{conta_criada}`` ({conta_dias} dias)", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['entrou']} Entrou aqui em", value = "``"+str(entrou_servidor)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['toprole']} Maior cargo", value = "``"+str(usuario.top_role)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['roles']} Cargos", value = "``"+str(cargos)+"/"+str(cargos2)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['bots']} Bot", value = "``"+str(bot)+"``", inline=True)
-           embed.add_field(name=f"{self.bot._emojis['status']} Status", value = "``"+str(stat)+"``", inline=True)
-           embed.add_field(name=f"<:jogando:565979683829710848> servidores",value=f"```{svs}```")
-           embed.set_thumbnail(url=img)
-           embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
-           await ctx.send(embed = embed)
+          if usuario.display_name == usuario.name:
+              apelido = "Não defindo"
+          else:
+            apelido = usuario.display_name
+          if usuario.avatar_url_as()  == "":
+           	img = "https://i.imgur.com/To9mDVT.png"
+          else:
+            img = usuario.avatar_url_as()
+          try:
+            jogo = usuario.activity.name
+          except:
+              jogo = "No momento nada."
+          if usuario.id in [y.id for y in ctx.guild.members if not y.bot]:
+            bot = "Não"
+          else:
+            bot = "Sim"
+          svs = ', '.join([c.name for c in self.bot.guilds if usuario in c.members])
+          entrou_servidor = str(usuario.joined_at.strftime("%d/%m/20%y ás %H:%M:%S"))
+          conta_criada = str(usuario.created_at.strftime("%d/%m/20%y"))
+          conta_dias = (datetime.utcnow() - usuario.created_at).days
+          cargos = len([r.name for r in usuario.roles if r.name != "@everyone"])
+          if not svs: svs = 'Nenhum servidor em comum.'
+          on = "Disponível"
+          off = "Offline"
+          dnd = "Não Pertubar"
+          afk = "Ausente"
+          stat = str(usuario.status).replace("online",on).replace("offline",off).replace("dnd",dnd).replace("idle",afk)
+          cargos2 = len([y.id for y in ctx.guild.roles])
+          embed = discord.Embed(description=titulo,colour=0x7289DA)
+          embed.set_author(name=f"Informação de perfil", icon_url=ctx.author.avatar_url_as())
+          embed.add_field(name=f"{self.bot._emojis['tag']} Tag", value = "``"+str(usuario.name)+"#"+str(usuario.discriminator)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['ip']} Id", value = "``"+str(usuario.id)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['nome']} Apelido", value = "``"+str(apelido)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['notas']} Data de criação da conta", value =f"``{conta_criada}`` ({conta_dias} dias)", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['entrou']} Entrou aqui em", value = "``"+str(entrou_servidor)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['toprole']} Maior cargo", value = "``"+str(usuario.top_role)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['roles']} Cargos", value = "``"+str(cargos)+"/"+str(cargos2)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['bots']} Bot", value = "``"+str(bot)+"``", inline=True)
+          embed.add_field(name=f"{self.bot._emojis['status']} Status", value = "``"+str(stat)+"``", inline=True)
+          embed.add_field(name=f"<:jogando:565979683829710848> servidores",value=f"```{svs}```")
+          embed.set_thumbnail(url=img)
+          embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
+          await ctx.send(embed = embed)
+    
+    @userinfo.error
+    async def userinfo_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+          comma = error.args[0].split('"')[1]
+          embed = discord.Embed(title=f"{self.bot._emojis['incorreto']} | Membro não encontrado!", color=0x7289DA, description=f"O membro `{comma}` não está nesse servidor.")
+          await ctx.send(embed=embed)
+          return
+
 
     @commands.guild_only()
     @commands.command(description='Mostra as informações de um canal.',usage='c.channelinfo #canal',aliases=['canalinfo', 'cinfo'])
