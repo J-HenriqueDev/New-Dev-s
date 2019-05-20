@@ -116,7 +116,7 @@ class newDevs(commands.Cog):
              "E8":"<:numero8:580088325000527942>",
              "E9":"<:numero9:580088325491261453>"
              }
-        text = str(len(member.guild.members))
+        text = len(member.guild.members)
         for n in range(0, 10):
             text = text.replace(str(n), "E"+str(n))
         for n in range(0, 10):
