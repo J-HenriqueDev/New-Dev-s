@@ -258,16 +258,12 @@ class informacao(commands.Cog):
 
             embed = discord.Embed(colour=0x7289DA)
             embed.set_author(icon_url=self.bot.user.avatar_url,name=f"Informações do comando {nome}.")
-            embed.set_thumbnail(url=self.bot.user.avatar_url
-            embed.set_footer(icon_url=ctx.author.avatar_url,text=ctx.author.name
-            embed.add_field(name=f"**Descrição**",value=f"`{desc}`",inline=False
-            embed.add_field(name=f"**Uso**",value=f"`{uso}`",inline=False
-            embed.add_field(name=f"**Abreviações**",
-                value=aliases,
-                inline=False
-            )
-
-            return await ctx.send(embed=em)
+            embed.set_thumbnail(url=self.bot.user.avatar_url)
+            embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
+            embed.add_field(name=f"**Uso**",value=f"`{uso}`",inline=False)
+            embed.add_field(name=f"**Abreviações**",value=aliases,inline=False)
+            embed.add_field(name=f"**Descrição**",value=f"`{desc}`",inline=False)
+            return await ctx.send(embed=embed)
     
 
         em = discord.Embed(colour=0x7289DA, description="Olá {}, aqui contém todos os comandos do {}.".format(ctx.author.name, self.bot.user.name))
