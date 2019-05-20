@@ -101,8 +101,27 @@ class newDevs(commands.Cog):
         await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#571029261448773688> para pegar, e leia as <#571018188540739588> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
         
         canal = discord.utils.get(member.guild.channels, id=570908352000032798)
-        membros = len(member.guild.members)
-        texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
+        #membros = len(member.guild.members)
+        #texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
+        #await canal.edit(topic=texto)
+        json ={
+             "E0":"<:numero0:580090018505162755>",
+             "E1":"<:numero1:580088324946133015>",
+             "E2":"<:numero2:580088325101191198>",
+             "E3":"<:numero3:580088325595987968>",
+             "E4":"<:numero4:580088324782424078>",
+             "E5":"<:numero5:580088325004853268>",
+             "E6":"<:numero6:580088324971167774>",
+             "E7":"<:numero7:580088325054922772>",
+             "E8":"<:numero8:580088325000527942>",
+             "E9":"<:numero9:580088325491261453>"
+             }
+        text = str(len(member.guild.members))
+        for n in range(0, 10):
+            text = text.replace(str(n), "E"+str(n))
+        for n in range(0, 10):
+            text = text.replace("E"+str(n), json["E"+str(n)])                                                  
+        texto = "<:newDevs:573629564627058709> **| Membros** : {}".format(text)
         await canal.edit(topic=texto)
 
   
