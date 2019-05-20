@@ -71,7 +71,7 @@ class newDevs(commands.Cog):
     
     @commands.Cog.listener()  
     async def on_member_join(self, member):
-       if member.guild.id == 570906068277002271:
+       if member.guild.id == 570906068277002271 and not member.bot:
         url = requests.get(member.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((245, 245));
