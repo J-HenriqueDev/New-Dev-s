@@ -256,26 +256,13 @@ class informacao(commands.Cog):
             else:
                 aliases = "Nenhuma abreviação."
 
-            em = discord.Embed(
-                colour=0x7289DA
-            ).set_author(
-                icon_url=self.bot.user.avatar_url,
-                name=f"Informações do comando " + nome
-            ).set_thumbnail(
-                url=self.bot.user.avatar_url
-            ).set_footer(
-                icon_url=ctx.author.avatar_url,
-                text=ctx.author.name
-            ).add_field(
-                name=f"**Descrição**",
-                value=f"`{desc}`",
-                inline=False
-            ).add_field(
-                name=f"**Uso**",
-                value=f"`{uso}`",
-                inline=False
-            ).add_field(
-                name=f"**Abreviações**",
+            embed = discord.Embed(colour=0x7289DA)
+            embed.set_author(icon_url=self.bot.user.avatar_url,name=f"Informações do comando {nome}.")
+            embed.set_thumbnail(url=self.bot.user.avatar_url
+            embed.set_footer(icon_url=ctx.author.avatar_url,text=ctx.author.name
+            embed.add_field(name=f"**Descrição**",value=f"`{desc}`",inline=False
+            embed.add_field(name=f"**Uso**",value=f"`{uso}`",inline=False
+            embed.add_field(name=f"**Abreviações**",
                 value=aliases,
                 inline=False
             )
