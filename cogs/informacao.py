@@ -151,13 +151,13 @@ class informacao(commands.Cog):
           embed.add_field(name=f"{self.bot._emojis['tag']} Tag", value = "``"+str(usuario.name)+"#"+str(usuario.discriminator)+"``")
           embed.add_field(name=f"{self.bot._emojis['ip']} Id", value = "``"+str(usuario.id)+"``")
           embed.add_field(name=f"{self.bot._emojis['nome']} Apelido", value = "``"+str(apelido)+"``")
-          embed.add_field(name=f"{self.bot._emojis['notas']} Data de criação da conta", value =f"``{conta_criada}`` ({conta_dias} dias)")
+          embed.add_field(name=f"{self.bot._emojis['notas']} Criação da conta", value =f"``{conta_criada}`` ({conta_dias} dias)")
           embed.add_field(name=f"{self.bot._emojis['entrou']} Entrou aqui em", value = "``"+str(entrou_servidor)+"``")
           embed.add_field(name=f"{self.bot._emojis['toprole']} Maior cargo", value = "``"+str(usuario.top_role)+"``")
           embed.add_field(name=f"{self.bot._emojis['roles']} Cargos", value = "``"+str(cargos)+"/"+str(cargos2)+"``")
           embed.add_field(name=f"{self.bot._emojis['bots']} Bot", value = "``"+str(bot)+"``")
           embed.add_field(name=f"{self.bot._emojis['status']} Status", value = "``"+str(stat)+"``")
-          embed.add_field(name=f"<:jogando:565979683829710848> servidores",value=f"```{svs}```")
+          embed.add_field(name=f"{self.bot._emojis['discord']} Servidores em comun",value=f"`{svs}`")
           embed.set_thumbnail(url=img)
           embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
           await ctx.send(embed = embed)
@@ -169,7 +169,6 @@ class informacao(commands.Cog):
           embed = discord.Embed(title=f"{self.bot._emojis['incorreto']} | Membro não encontrado!", color=0x7289DA, description=f"O membro `{comma}` não está nesse servidor.")
           await ctx.send(embed=embed)
           return
-
 
     @commands.guild_only()
     @commands.command(description='Mostra as informações de um canal.',usage='c.channelinfo #canal',aliases=['canalinfo', 'cinfo'])
