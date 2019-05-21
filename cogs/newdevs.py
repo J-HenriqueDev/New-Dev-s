@@ -72,6 +72,12 @@ class newDevs(commands.Cog):
     @commands.Cog.listener()  
     async def on_member_join(self, member):
        if member.guild.id == 570906068277002271 and not member.bot:
+        cat = member.created_at.replace(tzinfo=pytz.utc).astimezone(tz=pytz.timezone('America/Sao_Paulo')).strftime('`%d/%m/%Y`')
+        dias = (datetime.utcnow() - member.created_at).days
+        embed = discord.Embed(color=0x7289DA, description=f'**{member.mention}(`{member.id}`) entrou no servidor, com a conta criada em {cat}({dias} dias).**')
+        embed.set_thumbnail(url=member.avatar_url)
+        embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
+        await self.bot.get_channel(580095031591829518).send(embed=embed)
         url = requests.get(member.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((245, 245));
@@ -105,13 +111,6 @@ class newDevs(commands.Cog):
         texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
 
-        if member.guild.id == 570906068277002271 and not member.bot:
-            cat = member.created_at.replace(tzinfo=pytz.utc).astimezone(tz=pytz.timezone('America/Sao_Paulo')).strftime('`%d/%m/%Y`')
-            dias = (datetime.utcnow() - member.created_at).days
-            embed = discord.Embed(color=0x7289DA, description=f'**{member.mention}(`{member.id}`) entrou no servidor, com a conta criada em {cat}({dias} dias).**')
-            embed.set_thumbnail(url=member.avatar_url)
-            embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
-            await self.bot.get_channel(580095031591829518).send(embed=embed)
         
         '''
         json ={
