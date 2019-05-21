@@ -189,7 +189,7 @@ class helper(commands.Cog):
                                 await msg.add_reaction(reaction)
                            
                            def check8(reaction, user):
-                              return user.id != 572097258380853249 and reaction.message.id == msg.id
+                              return user.id != 577607272860090373 and reaction.message.id == msg.id
 
 
                            reaction, author = await self.bard.wait_for('reaction_add', check=check8)
