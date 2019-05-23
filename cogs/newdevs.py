@@ -18,11 +18,11 @@ class newDevs(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         guild = self.bot.get_guild(570906068277002271)
-        channel = discord.utils.get(guild.channels, id=571029261448773688)
+        channel = discord.utils.get(guild.channels, id=581216249170624512)
 
         if channel is None:
             return
-        if not payload.channel_id == 571029261448773688:
+        if not payload.channel_id == 581216249170624512:
             return
         if payload.channel_id == None:
             return
@@ -44,8 +44,8 @@ class newDevs(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload):
         guild = self.bot.get_guild(payload.guild_id)
-        channel = discord.utils.get(guild.channels, id=571029261448773688)
-        if not payload.channel_id == 571029261448773688:
+        channel = discord.utils.get(guild.channels, id=581216249170624512)
+        if not payload.channel_id == 581216249170624512:
             return
         if payload.user_id in self.cooldown:
             return
