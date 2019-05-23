@@ -24,6 +24,7 @@ class reptop(commands.Cog):
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command()
     async def fix_tophelper(self, ctx):
         mongo = MongoClient(self.bard.database)

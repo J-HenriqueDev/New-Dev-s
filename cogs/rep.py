@@ -54,6 +54,7 @@ class rep(commands.Cog):
              await ctx.send(embed=embed)
 
 
+    @commands.bot_has_permissions(embed_links=True)
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
     @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep @</New Helper>')

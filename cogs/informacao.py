@@ -26,6 +26,7 @@ class informacao(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command(description='Mostra o meu ping',usage='c.ping')
     async def ping(self, ctx):
         embed = discord.Embed(title="🏓 Pong!",
@@ -36,7 +37,7 @@ class informacao(commands.Cog):
         await ctx.send(embed=embed, delete_after=90)
 
 
-
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command(description='envia a sua foto de perfil ou a de um usuário.',usage='c.avatar',aliases=['pic'])
     async def avatar(self, ctx, *, user: discord.Member = None):
         if user is None:
@@ -51,7 +52,7 @@ class informacao(commands.Cog):
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         await ctx.send(embed=embed)
   
-
+    @commands.bot_has_permissions(embed_links=True)
     @commands.guild_only()
     @commands.command(description='Mostra algumas informações sobre mim.',usage='c.botinfo',aliases=['bot'])
     async def botinfo(self,ctx):
@@ -72,6 +73,7 @@ class informacao(commands.Cog):
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         await ctx.send(embed=embed)
     
+    @commands.bot_has_permissions(embed_links=True)
     @commands.guild_only()
     @commands.command(description='Mostra todas as informações do seu servidor.',usage='c.serverinfo',aliases=['sinfo', 'guildinfo'])
     async def serverinfo(self, ctx):
@@ -108,6 +110,7 @@ class informacao(commands.Cog):
           await ctx.send(embed = embed)
 
 
+    @commands.bot_has_permissions(embed_links=True)
     @commands.guild_only()
     @commands.command(description='Mostra as informações de um usuário.',usage='c.userinfo @TOBIAS',aliases=['uinfo', 'usuario'])
     async def userinfo(self, ctx, *, user: discord.Member = None):
@@ -171,6 +174,7 @@ class informacao(commands.Cog):
           return
 
     @commands.guild_only()
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command(description='Mostra as informações de um canal.',usage='c.channelinfo #canal',aliases=['canalinfo', 'cinfo'])
     async def channelinfo(self, ctx, *, num=None):
         if num is None:
@@ -240,6 +244,7 @@ class informacao(commands.Cog):
           await ctx.send(embed=embed)
           return
 
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command(description='Listagem e informações de todos os comandos públicos lançados até o momento',usage='cu.ajuda',aliases=['help'])
     async def ajuda(self, ctx, nome = None):
         if nome:
@@ -275,6 +280,8 @@ class informacao(commands.Cog):
         em.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         await ctx.send(embed=em)
 
+    @commands.bot_has_permissions(embed_links=True)
+    @commands.guild_only()
     @commands.command(description='Mostra as informações de um cargo',usage='c.roleinfo dj',aliases=['rinfo'])
     async def roleinfo(self, ctx, *, role: discord.Role = None):
         if role is None:

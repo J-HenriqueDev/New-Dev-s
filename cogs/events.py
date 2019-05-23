@@ -9,7 +9,7 @@ from discord.ext import commands
 aviso1 = []
 aviso2 = []
 aviso3 = []
-regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]', re.IGNORECASE)
+regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]')
 
 class eventos(commands.Cog):
     def __init__(self, bot):
@@ -42,39 +42,34 @@ class eventos(commands.Cog):
             ctx.command.reset_cooldown(ctx)
 
     @commands.Cog.listener()
+    @commands.bot_has_permissions(embed_links=True)
+    @commands.bot_has_permissions(ban_members=True)
     async def on_message(self, message):
-        if message.guild is None:
-          return
-        if "discord.gg" in message.content.lower() or "discordapp.com/invite" in message.content.lower() or "invite.gg" in message.content.lower() or "mybotlist"in message.content.lower():
-        #if regex.search(ctx.message.content) in message.content.lower():
-         if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
-           print("OK")
-         else:
-           if not message.author.id in aviso1:
-             aviso1.append(message.author.id)
-             await message.delete()
-             embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
-             msg = await message.channel.send(embed=embed)
-             await asyncio.sleep(10)
-             await msg.delete()
-           elif not message.author.id in aviso2:
-             aviso2.append(message.author.id)
-             await message.delete()
-             embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
-             msg = await message.channel.send(embed=embed)
-             await asyncio.sleep(10)
-             await msg.delete()
-           else:
-             await message.delete()
-             await message.author.ban(reason="Divulgando.")
-
-        
-        if str(message.channel.id) == str(512629173668413460):
-           emoji1 = discord.utils.get(message.guild.emojis, id=515519909434753041)
-           emoji2 = discord.utils.get(message.guild.emojis, id=515519909330157569)
-           await message.add_reaction(emoji1)
-           await message.add_reaction(emoji2)
-           return
+      if re.search(r'discord(?:app\\?[\s\S]com\\?\/invite|\\?[\s\S]gg|\\?[\s\S]me)\/', message.content) or re.search(r'invite\\?[\s\S]gg\\?\/[\s\S]', message.content):
+        if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
+            print("OK")
+        else:
+          if not message.author.id in aviso1:
+            aviso1.append(message.author.id)
+            await message.delete()
+            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
+            msg = await message.channel.send(embed=embed)
+            await asyncio.sleep(10)
+            await msg.delete()
+          elif not message.author.id in aviso2:
+            aviso2.append(message.author.id)
+            await message.delete()
+            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
+            msg = await message.channel.send(embed=embed)
+            await asyncio.sleep(10)
+            await msg.delete()
+          else:
+            await message.delete()
+            aviso1.remove(message.author.id)     
+            aviso2.remove(message.author.id)       
+            print('ban')
+            await message.author.ban(reason="Divulgando.")
+          
 
     @commands.Cog.listener()
     async def on_user_update(self,before,after):

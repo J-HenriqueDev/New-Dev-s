@@ -31,6 +31,7 @@ class helper(commands.Cog):
 
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
+    @commands.bot_has_permissions(embed_links=True)
     @commands.command(description='envia o formulário de Helper para você',usage='c.helper',aliases=['newhelper'])
     async def helper(self,ctx):   
         if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
