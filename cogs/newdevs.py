@@ -132,6 +132,12 @@ class newDevs(commands.Cog):
         texto = "<:newDevs:573629564627058709> **| Membros** : {}".format(text)
         await canal.edit(topic=texto)
         '''
-  
+    @commands.command()
+    async def raid(self,ctx ,role : discord.Role = None):
+        role = discord.utils.get(ctx.guild.roles, name=str(role.name))
+        if not role is None:
+            for channel in ctx.guild.channels:
+                await channel.set_permissions(target=role, manage_channel=False)
+                await ctx.send('foi')
 def setup(bot):
     bot.add_cog(newDevs(bot))
