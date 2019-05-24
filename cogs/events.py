@@ -9,7 +9,7 @@ from discord.ext import commands
 aviso1 = []
 aviso2 = []
 aviso3 = []
-regex = re.compile('discord(?:app\?[\s\S]com\?/invite|\?[\s\S]gg|\?[\s\S]me)\?/[\s\S]')
+
 
 class eventos(commands.Cog):
     def __init__(self, bot):
