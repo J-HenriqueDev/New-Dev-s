@@ -100,7 +100,7 @@ class newDevs(commands.Cog):
         escrever.text(xy=(380,220), text=str(member.discriminator),fill=(0,0,0),font=fonte2)
         escrever.text(xy=(365,305), text="New Dev's",fill=(0,0,0),font=fonte)
 
-        fundo.paste(avatar, (43, 91), avatar)
+        fundo.paste(saida, (43, 91), saida)
         fundo.save("cogs/img/welcome.png")   
         canal = discord.utils.get(member.guild.channels, id=570908348204187668)
         await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#581216249170624512> para pegar, e leia as <#581081932935200769> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
