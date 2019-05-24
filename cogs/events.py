@@ -42,8 +42,6 @@ class eventos(commands.Cog):
             ctx.command.reset_cooldown(ctx)
 
     @commands.Cog.listener()
-    @commands.bot_has_permissions(embed_links=True)
-    @commands.bot_has_permissions(ban_members=True)
     async def on_message(self, message):
       if re.search(r'discord(?:app\\?[\s\S]com\\?\/invite|\\?[\s\S]gg|\\?[\s\S]me)\/', message.content) or re.search(r'invite\\?[\s\S]gg\\?\/[\s\S]', message.content):
         if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
