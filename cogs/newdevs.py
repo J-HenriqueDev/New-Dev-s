@@ -104,7 +104,7 @@ class newDevs(commands.Cog):
         fundo.paste(avatar, (40, 87), avatar)
         fundo.save("cogs/img/welcome.png")   
         canal = discord.utils.get(member.guild.channels, id=570908348204187668)
-        await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#571029261448773688> para pegar, e leia as <#571018188540739588> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
+        await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#581216249170624512> para pegar, e leia as <#581081932935200769> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
         
         canal = discord.utils.get(member.guild.channels, id=570908352000032798)
         membros = len(member.guild.members)
