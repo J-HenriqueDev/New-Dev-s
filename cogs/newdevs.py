@@ -80,7 +80,7 @@ class newDevs(commands.Cog):
         await self.bot.get_channel(580095031591829518).send(embed=embed)
         url = requests.get(member.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
-        avatar = avatar.resize((230, 230));
+        avatar = avatar.resize((220, 220));
         bigsize = (avatar.size[0] * 2,  avatar.size[1] * 2)
         mask = Image.new('L', bigsize, 0)
         draw = ImageDraw.Draw(mask)
@@ -90,7 +90,6 @@ class newDevs(commands.Cog):
 
         saida = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
         saida.putalpha(mask)
-        saida.save('cogs/img/avatar.png')
 
         fundo = Image.open('cogs/img/bemvindo.png')
         fonte = ImageFont.truetype('cogs/img/arial.ttf',42)
@@ -101,7 +100,7 @@ class newDevs(commands.Cog):
         escrever.text(xy=(380,220), text=str(member.discriminator),fill=(0,0,0),font=fonte2)
         escrever.text(xy=(365,305), text="New Dev's",fill=(0,0,0),font=fonte)
 
-        fundo.paste(avatar, (40, 87), avatar)
+        fundo.paste(avatar, (43, 91), avatar)
         fundo.save("cogs/img/welcome.png")   
         canal = discord.utils.get(member.guild.channels, id=570908348204187668)
         await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#581216249170624512> para pegar, e leia as <#581081932935200769> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
