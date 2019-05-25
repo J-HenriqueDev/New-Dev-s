@@ -117,11 +117,9 @@ class eventos(commands.Cog):
             print("[estagiario] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"estagiario": True}
             db.insert_one(serv) #new
-            await canal.send(f'{after.mention} novo estágiario,inserindo ele na database.')
           else:
               print("[moderador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': True}})
-              await canal.send(f'{after.mention} novo estágiario,atualizando ele na database.')
 
         elif moderador in after.roles and moderador not in before.roles: 
           users = db.find_one({"_id": str(after.id)})
@@ -129,11 +127,9 @@ class eventos(commands.Cog):
             print("[moderador] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"moderador": True}
             db.insert_one(serv) #new
-            await canal.send(f'{after.mention} novo moderador,inserindo ele na database.')
           else:
               print("[moderador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'moderador': True}})
-              await canal.send(f'{after.mention} novo moderador,atualizando ele na database.')
 
         elif administrador in after.roles and administrador not in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -141,11 +137,9 @@ class eventos(commands.Cog):
             print("[administrador] : inserido")
             serv ={"_id": str(after.id),"nome": str(after.name),"id": str(after.id),"administrador": True}
             db.insert_one(serv) #new
-            await canal.send(f'{after.mention} novo administrador,inserindo ele na database.')
           else:
               print("[administrador] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'administrador': True}})
-              await canal.send(f'{after.mention} novo administrador,atualizando ele na database.')
 
         elif Founder in after.roles and Founder not in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -153,11 +147,10 @@ class eventos(commands.Cog):
             print("[Founder] : inserido")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"Founder": True}
             db.insert_one(serv) #new
-            await canal.send(f'{after.mention} novo founder,inserindo ele na database.')
           else:
               print("[Founder] : updatado")
               db.update_one({'_id': str(after.id)}, {'$set': {'Founder': True}})
-              await canal.send(f'{after.mention} novo founder,atualizando ele na database.')
+        
 
             
         elif estagiario not in after.roles and estagiario in before.roles:
@@ -166,23 +159,21 @@ class eventos(commands.Cog):
             print("[estagiario] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"estagiario": False}
             db.insert_one(serv) #new
-            await canal.send(f'o estagiario {after.mention} foi demotado,removendo ele da db')
+           
           else:
               print("[estagiario] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'estagiario': False}})
-              await canal.send(f'o estagiario{after.mention} foi demotado,removendo ele da db')
-
+              
         elif moderador not in after.roles and moderador in before.roles:
           users = db.find_one({"_id": str(after.id)})
           if not users:
             print("[moderador] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"moderador": False}
             db.insert_one(serv) #new
-            await canal.send(f'o mod {after.mention} foi demotado,removendo ele da db')
+           
           else:
               print("[moderador] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'moderador': False}})
-              await canal.send(f'o mod {after.mention} foi demotado,removendo ele da db')
 
         elif administrador not in after.roles and administrador in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -190,11 +181,10 @@ class eventos(commands.Cog):
             print("[administrador] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"administrador": False}
             db.insert_one(serv)
-            await canal.send(f'o adm {after.mention} foi demotado,removendo ele da db')#new
           else:
               print("[administrador] : updatado demote")
               db.update_one({'_id': str(after.id)}, {'$set': {'administrador': False}})
-              await canal.send(f'o adm {after.mention} foi demotado,removendo ele da db')
+          
 
         elif Founder not in after.roles and Founder in before.roles:
           users = db.find_one({"_id": str(after.id)})
@@ -202,11 +192,10 @@ class eventos(commands.Cog):
             print("[Founder] : inserido demote")
             serv ={"_id": str(after.id),"nome": str(after),"id": str(after.id),"Founder": False}
             db.insert_one(serv) #new
-            await canal.send(f'o founder {after.mention} foi demotado,removendo ele da db')
+            
           else:
               print("[Founder] : updatado demote ")
               db.update_one({'_id': str(after.id)}, {'$set': {'Founder': False}})
-              await canal.send(f' o founder {after.mention} foi demotado,removendo ele da db')
 
         
 
