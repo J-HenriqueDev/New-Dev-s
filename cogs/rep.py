@@ -76,7 +76,7 @@ class rep(commands.Cog):
                 await asyncio.sleep(20)
                 await msg.delete()              
                 return
-             if not str("</New Helper>") in [r.name for r in user.roles if r.name != "@everyone"]:
+             if not str("</NewHelper>") in [r.name for r in user.roles if r.name != "@everyone"]:
                 embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o usuário {user.mention} não é um **</NewHelper>** registrado.", color=0x7289DA)
                 msg = await ctx.send(embed=embed)
                 await asyncio.sleep(20)
