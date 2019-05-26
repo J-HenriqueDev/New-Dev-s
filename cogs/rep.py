@@ -132,7 +132,7 @@ class rep(commands.Cog):
       usage='c.delrep'
     )
     async def _resetarreps(self, ctx):
-       if not ctx.author.id in self.bard.staff:
+       if not ctx.author.id in self.bard.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
                 delete_after=15)
