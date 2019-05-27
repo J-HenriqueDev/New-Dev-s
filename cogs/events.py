@@ -69,7 +69,7 @@ class eventos(commands.Cog):
             print('ban')
             await message.author.ban(reason="Divulgando.")
           
-
+    '''
     @commands.Cog.listener()
     async def on_user_update(self,before,after):
       if before.avatar_url != after.avatar_url:
@@ -100,7 +100,7 @@ class eventos(commands.Cog):
             return
         else:
             await canal.send(file=discord.File('cogs/img/updates.png'))
-
+    '''
     @Cog.listener()
     async def on_guild_join(self,guild):
       if len(await guild.invites()) > 0:
