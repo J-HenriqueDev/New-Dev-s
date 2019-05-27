@@ -5,7 +5,6 @@ from io import BytesIO
 import requests
 import asyncio
 from pymongo import MongoClient
-from discord.ext.commands import command, Cog
 from discord.ext import commands
 aviso1 = []
 aviso2 = []
@@ -69,39 +68,7 @@ class eventos(commands.Cog):
             print('ban')
             await message.author.ban(reason="Divulgando.")
           
-    '''
     @commands.Cog.listener()
-    async def on_user_update(self,before,after):
-      if before.avatar_url != after.avatar_url:
-        url = requests.get(before.avatar_url_as(format="png"))
-        avatar = Image.open(BytesIO(url.content))
-        avatar = avatar.convert('RGBA')
-        avatar = avatar.resize((245, 245),Image.NEAREST);
-        avatar.save('cogs/img/before.png')
-        
-        aurl = requests.get(after.avatar_url_as(format="png"))
-        after = Image.open(BytesIO(aurl.content))
-        after = after.convert('RGBA')
-        after = after.resize((245, 245),Image.NEAREST);
-        after.save('cogs/img/after.png')
-
-        fundo = Image.open('cogs/img/update.png')
-        fonte = ImageFont.truetype('cogs/img/arial.ttf',42)
-
-        escrever = ImageDraw.Draw(fundo)
-        escrever.text(xy=(400, 135), text=f'{before.name}#{before.discriminator}', fill=(245, 255, 250), font=fonte)
-        
-
-        fundo.paste(avatar, (45, 100), avatar)
-        fundo.paste(after, (950, 100), after)
-        fundo.save('cogs/img/updates.png')
-        canal = self.bot.get_channel(571016071209811972)
-        if canal is None:
-            return
-        else:
-            await canal.send(file=discord.File('cogs/img/updates.png'))
-    '''
-    @Cog.listener()
     async def on_guild_join(self,guild):
       if len(await guild.invites()) > 0:
                     for x in await guild.invites():
@@ -119,7 +86,7 @@ class eventos(commands.Cog):
       embed.add_field(name=f'{self.bot._emojis["tipo"]} INVITE',value=invite)
       await canal.send(embed=embed)
     
-    @Cog.listener()
+    @commands.Cog.listener()
     async def on_guild_remove(self,guild):
       if len(await guild.invites()) > 0:
                     for x in await guild.invites():
