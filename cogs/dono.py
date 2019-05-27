@@ -134,21 +134,13 @@ class dono(commands.Cog):
             except Exception as e:
                 await ctx.send(f"{ctx.message.author.mention}**Erro ao gerar/enviar convite\n```javascript\n{e}\n```**")
 
-    @commands.command()
-    async def leaveserver(self, ctx, guildid: str):
-      if not ctx.author.id in self.bot.dono:
-            await ctx.send(
-                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
-                delete_after=15)
-            return
-      guild = self.bot.get_guild(guildid)
-      if guild:
-        await self.bot.leave_guild(guild)
-        msg = 'Ok, saindo da guild `{}`.'.format(guild.name)
-      else:
-        msg = f'hey **{ctx.author.name}** não encontrei nenhuma guild com esse ID!'
-      await ctx.send(msg)
-      
+    @commands.command(name="leave", hidden=True)
+    async def cmd_leaveguild(self, ctx, id: int=0):
+        guild = await self.bot.get_guild(id)
+        print(guild)
+        await ctx.send(f'sai da guild {guild}')
+        await self.bot.get_guild(id).leave()
+
 
     @commands.command()
     async def reiniciar(self,ctx):

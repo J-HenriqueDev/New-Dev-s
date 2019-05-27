@@ -5,6 +5,7 @@ from io import BytesIO
 import requests
 import asyncio
 from pymongo import MongoClient
+from discord.ext.commands import command, Cog
 from discord.ext import commands
 aviso1 = []
 aviso2 = []
@@ -99,6 +100,43 @@ class eventos(commands.Cog):
             return
         else:
             await canal.send(file=discord.File('cogs/img/updates.png'))
+
+    @Cog.listener()
+    async def on_guild_join(self,guild):
+      if len(await guild.invites()) > 0:
+                    for x in await guild.invites():
+                        if x.max_age == 0:
+                            invite = x.url
+      else:
+          for c in guild.channels:
+            inv = await discord.abc.GuildChannel.create_invite(c)
+            invite = inv.url
+      canal = self.bot.get_user(558396463873392640)
+      embed = discord.Embed(color=0x36393F)
+      embed.add_field(name=f"{self.bot._emojis['nome']} NOME",value=guild.name)
+      embed.add_field(name=f'{self.bot._emojis["ip"]} ID',value=guild.id)
+      embed.add_field(name=f'{self.bot._emojis["dono"]} DONO',value=f'{guild.owner}\n({guild.owner_id})')
+      embed.add_field(name=f'{self.bot._emojis["tipo"]} INVITE',value=invite)
+      await canal.send(embed=embed)
+    
+    @Cog.listener()
+    async def on_guild_remove(self,guild):
+      if len(await guild.invites()) > 0:
+                    for x in await guild.invites():
+                        if x.max_age == 0:
+                            invite = x.url
+      else:
+          for c in guild.channels:
+            inv = await discord.abc.GuildChannel.create_invite(c)
+            invite = inv.url
+      canal = self.bot.get_user(558396463873392640)
+      embed = discord.Embed(color=0x36393F)
+      embed.add_field(name=f"{self.bot._emojis['nome']} NOME",value=guild.name)
+      embed.add_field(name=f'{self.bot._emojis["ip"]} ID',value=guild.id)
+      embed.add_field(name=f'{self.bot._emojis["dono"]} DONO',value=f'{guild.owner}\n({guild.owner_id})')
+      embed.add_field(name=f'{self.bot._emojis["tipo"]} INVITE',value=invite)
+      await canal.send(guild.id)
+      await canal.send(embed=embed)
     
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
