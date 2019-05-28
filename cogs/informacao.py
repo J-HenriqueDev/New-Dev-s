@@ -57,9 +57,10 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra algumas informações sobre mim.',usage='c.botinfo',aliases=['bot'])
     async def botinfo(self,ctx):
         mem = botstatus.get_memory()
+        dono = self.bot.get_user(558396463873392640)
         embed = discord.Embed(description="Olá {}, este é o perfil do {} e nele contém algumas informações.".format(ctx.author.name, self.bot.user.name),colour=0x7289DA)
         embed.set_author(name="Informações do {}".format(self.bot.user.name), icon_url=ctx.author.avatar_url_as())
-        embed.add_field(name=f"{self.bot._emojis['dono']} Criador", value = '``Luke_Skywalker#0841``')
+        embed.add_field(name=f"{self.bot._emojis['dono']} Criador", value = f'``{dono}``')
         embed.add_field(name=f"{self.bot._emojis['tag']} Tag", value = '``'+str(self.bot.user)+'``')
         embed.add_field(name=f"{self.bot._emojis['ip']} Id", value = '``'+str(self.bot.user.id)+'``')
         embed.add_field(name=f"{self.bot._emojis['api']} Api", value = '``Discord.py '+str(discord.__version__)+'``')
