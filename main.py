@@ -83,7 +83,9 @@ class main(commands.AutoShardedBot):
            super().run(secrets.TOKEN,reconnect=True)
        except Exception as e:
            print(f"Erro ao logar o bot: {e}")
-
+    
+    def desligar(self):
+        await self.logout()
 
 if __name__ == '__main__':
     bot = main()
