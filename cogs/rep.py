@@ -116,7 +116,7 @@ class rep(commands.Cog):
              users = bard['users']
              usuario = bard.users.find_one({'_id': str(usuario.id)})
              if usuario is None:
-                embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7289DA)
+                embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** ponto de reputação ao usuário {user.mention}.", color=0x7289DA)
                 await ctx.send(embed=embed)
                 rep = int(usuario["reputação"])+int(1)
                 bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
@@ -141,7 +141,7 @@ class rep(commands.Cog):
        bard = mongo['bard']
        users = bard['users']
        bard.users.update_many({}, {"$set": {"reputação": 0}})
-       await ctx.send(f"<:correto:571040855918379008> | **{ctx.author.name}**, você resetou os reps de todo mundo.")
+       await ctx.send(f"<:correto:571040855918379008> | **{ctx.author.name}**, a reputação dos NewHelpers foram resetadas.")
 
 
     @commands.command()
