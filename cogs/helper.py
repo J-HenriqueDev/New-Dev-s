@@ -40,12 +40,12 @@ class helper(commands.Cog):
         dias_servidor = (datetime.utcnow() - ctx.author.joined_at).days
         if dias_servidor < 5:
             embed = discord.Embed(colour=0x7289DA)
-            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, para você se tornar um `</New Helper>` você precisa ter mais de 5 dias no servidor.", color=0x7289DA)
+            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, para você se tornar um `</NewHelper>` você precisa ter mais de 5 dias no servidor.", color=0x7289DA)
             return await ctx.send(embed=embed)
         server = self.bard.get_guild(570906068277002271)
-        newhelper = discord.utils.get(server.roles, name="</New Helper>")
+        newhelper = discord.utils.get(server.roles, name="</NewHelper>")
         if newhelper in ctx.author.roles:
-            return await ctx.send(f'{ctx.author.mention} você já têm o cargo **</New Helper>**.',delete_after=30)
+            return await ctx.send(f'{ctx.author.mention} você já têm o cargo **</NewHelper>**.',delete_after=30)
 
         if ctx.author.id in self.forms:
             return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, já tem um formulário em aberto no seu DM.", delete_after=30)
@@ -217,7 +217,7 @@ class helper(commands.Cog):
                                  serv ={"_id": str(ctx.author.id),"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","foi_devhelper":"Não","vezes_reportado":"0","reputação":int(0),"level":"0","exp":"0","aceito_por":str(author.id),"historico":"Sem punições","bots":["SD"]}
                                  bard.users.insert_one(serv).inserted_id
                                  server = self.bard.get_guild(570906068277002271)
-                                 cargo = discord.utils.get(server.roles, name="</New Helper>")
+                                 cargo = discord.utils.get(server.roles, name="</NewHelper>")
                                  await ctx.author.add_roles(cargo)
                                  if lang1.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")
@@ -258,9 +258,9 @@ class helper(commands.Cog):
                                  print("[Helper] : updatado")
                                  bard.users.update_many({"_id": str(ctx.author.id)}, {'$set': {"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","foi_devhelper":"Não","vezes_reportado":"0","reputação":int(0),"level":"0","exp":"0","aceito_por":str(author.id),"historico":"Sem punições","bots":["Nenhum bot"]}})
                                  server = self.bard.get_guild(570906068277002271)
-                                 cargo = discord.utils.get(server.roles, name="</New Helper>")
+                                 cargo = discord.utils.get(server.roles, name="</NewHelper>")
                                  await ctx.author.add_roles(cargo)
-                                 cargo = discord.utils.get(server.roles, name="</New Helper>")
+                                 cargo = discord.utils.get(server.roles, name="</NewHelper>")
                                  await ctx.author.add_roles(cargo)
                                  if lang1.content.lower() in python:
                                    cargo = discord.utils.get(server.roles, name="</NewHelper Python>")

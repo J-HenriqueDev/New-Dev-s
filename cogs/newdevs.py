@@ -68,6 +68,8 @@ class newDevs(commands.Cog):
         membros = len(member.guild.members)
         texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
+
+       
     
     @commands.Cog.listener()  
     async def on_member_join(self, member):

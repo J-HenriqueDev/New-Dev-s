@@ -204,6 +204,18 @@ class eventos(commands.Cog):
 
         
 
-     
+    @commands.Cog.listener()  
+    async def on_member_remove(self, member):
+       if member.guild.id == 570906068277002271:
+        mongo = MongoClient(self.bot.database)
+        bard = mongo['bard']
+        users = bard['users']
+        print(f'membro id = {member.id}')
+        user = self.bot.get_user(member.id)
+        usuario = bard.users.find_one({'_id': str(member.id)})
+        if usuario:
+            bard.users.delete_one({'_id': str(member.id)})
+            print(f'o membro {user}({member.id}) que estava no TOPHELPER foi removido.') 
+
 def setup(bot):
   bot.add_cog(eventos(bot))
