@@ -21,6 +21,7 @@ class main(commands.AutoShardedBot):
         self.remove_command('help')
         self.staff = secrets.STAFF
         self.dono = secrets.DONO
+        self.cor = 0x7289DA
         self.database = secrets.DATAB
         self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
