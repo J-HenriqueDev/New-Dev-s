@@ -20,40 +20,6 @@ class rep(commands.Cog):
         self.bard = bard
         self.canais = ["570908357032935425","571014988622331905"]
     
-    @commands.cooldown(1,10,commands.BucketType.user)
-    @commands.guild_only()
-    @commands.command(description='Adiciona um ponto de reputação para um NewHelper',usage='c.rep @newhelper',aliases=['reputaco','reputação'])
-    async def cooldown(self, ctx):
-             if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
-               await ctx.message.add_reaction(":incorreto:571040727643979782")
-               return
-
-             if ctx.author.id in timetime:
-                w = json.loads(timetime[ctx.author.id])
-                if time.time() < w:
-                   w = int(w) - int(time.time())
-                   minute = 60
-                   hour = minute * 60
-                   day = hour * 24
-                   days =  int(w / day)
-                   hours = int((w % day) / hour)
-                   minutes = int((w % hour) / minute)
-                   seconds = int(w % minute)
-                   string = ""
-                   if days > 0:
-                      string += str(days) + " " + (days == 1 and "dia" or "dias" ) + ", "
-                   if len(string) > 0 or hours > 0:
-                      string += str(hours) + " " + (hours == 1 and "hora" or "horas" ) + ", "
-                   if len(string) > 0 or minutes > 0:
-                      string += str(minutes) + " " + (minutes == 1 and "minuto" or "minutos" ) + ", "
-                   string += str(seconds) + " " + (seconds == 1 and "segundo" or "segundos" )
-                   embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, você precisa esperar **{str(string)}** para da uma nova reputação ao usuário.", color=0x7289DA)
-                   await ctx.send(embed=embed)
-                   return
-             embed=discord.Embed(description=f"<:timer:565975875988750336> **|** Olá **{ctx.author.name}**, seu tempo está zerado.", color=0x7289DA)
-             await ctx.send(embed=embed)
-
-
     @commands.bot_has_permissions(embed_links=True)
     @commands.cooldown(1,10,commands.BucketType.user)
     @commands.guild_only()
