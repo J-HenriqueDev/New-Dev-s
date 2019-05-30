@@ -317,23 +317,22 @@ class informacao(commands.Cog):
     @commands.guild_only()
     @commands.command(aliases=["einfo", "infoemoji", "emoji", "emojinfo"])
     async def emojiinfo(self, ctx, *, emoji: discord.Emoji):
-        embed = discord.Embed(color=self.bot.cor, timestamp=datetime.datetime.utcnow())
-        embed.set_author(name=f"Informações do emoji:", icon_url=emoji.url)
-        embed.add_field(name=f"{self.bot._emojis['nome']} Nome:", value=f"``{emoji.name}``",inline=False)
-        coisa = f"{emoji.animated}"
+        emoji_embed = discord.Embed()
+        emoji_embed.add_field(name="Nome",value=emoji.name)
+        emoji_embed.add_field(name="Servidor", value=emoji.guild)
+        emoji_embed.add_field(name="Id", value=emoji.id)
+        
         if emoji.animated:
-            # if emoji.animated == 'True':
-            embed.add_field(name=f"{self.bot._emojis['star']} Emoji Animado:", value=f"``Sim``", inline=False)
-            # elif emoji.animated == 'False':
-            #     embed.add_field(name="<:m_star:572234473605824532> Emoji Normal:", value=f"``Sim``", inline=False)
+          emoji_embed.add_field(name=" Emoji Animado:", value=f"``Sim``")
+      
         else:
-            embed.add_field(name=f"{self.bot._emojis['star']} Emoji Normal:", value=f"``Sim``", inline=False)
-        embed.add_field(name=f"{self.bot._emojis['ip']} ID", value=f"``{emoji.id}``", inline=False)
-        embed.add_field(name=f"{self.bot._emojis['url']} Link:", value=f"[``Clique aqui``]({emoji.url})", inline=False)
-        embed.add_field(name=f"{self.bot._emojis['notas']} Adicionado em:", value=f"``{emoji.created_at.__format__('%d/%m/%Y às %H:%M')}``", inline=False)
-        embed.set_thumbnail(url=emoji.url)
-        embed.set_footer(text=f'{self.bot.user.name}© 2019', icon_url=ctx.me.avatar_url) 
-        await ctx.send(embed=embed)
+          emoji_embed.add_field(name=" Emoji Normal:", value=f"``Sim``")
+
+        emoji_embed.add_field(name="Criado em", value=emoji.created_at.strftime('%d.%m.%Y %H:%M:%S %Z'))
+        emoji_embed.add_field(name="Uso", value=f"`<a:{emoji.name}:{emoji.id}>`")
+        emoji_embed.set_footer(text=f"{self.bot.user.name}", icon_url=self.bot.user.avatar_url)
+        emoji_embed.set_thumbnail(url=emoji.url)
+        await ctx.send(embed=emoji_embed)
 
 def setup(bot):
     bot.add_cog(informacao(bot))
