@@ -80,6 +80,9 @@ class newDevs(commands.Cog):
         embed.set_thumbnail(url=member.avatar_url)
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         await self.bot.get_channel(580095031591829518).send(embed=embed)
+        
+        ###################################################################
+        
         url = requests.get(member.avatar_url_as(format="png"))
         avatar = Image.open(BytesIO(url.content))
         avatar = avatar.resize((220, 220));
