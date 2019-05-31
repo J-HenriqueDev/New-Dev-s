@@ -110,10 +110,32 @@ class newDevs(commands.Cog):
         canal = discord.utils.get(member.guild.channels, id=581544881206329354)
         await canal.send(f"Olá {member.mention}, seja bem vindo ao **New Dev's**, caso queria algum **CARGO** use o <#581216249170624512> para pegar, e leia as <#581081932935200769> para ficar por dentro do servidor.", file=discord.File('cogs/img/welcome.png'))
         
+        ####################################################
+
         canal = discord.utils.get(member.guild.channels, id=570908352000032798)
         membros = len(member.guild.members)
         texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
+
+
+        #####################################################
+
+        mongo = MongoClient(self.bot.database)
+        bard = mongo['bard']
+        bot = bard['users']
+        bot = bard.bot.find_one({"_id": str(member.id)})
+        if bot is None:
+            print(f"[Evento] helper {member} entrou!")
+        else:
+            if bot["linguagem"] == "python":
+                cargo = discord.utils.get(member.guild.roles, name="</NewHelper Python>")
+                await member.add_roles(cargo)
+            elif bot["linguagem"] == "javascript":
+                cargo = discord.utils.get(member.guild.roles, name="</NewHelper Javascript>")
+                await member.add_roles(cargo)
+            else:
+                cargo = discord.utils.get(member.guild.roles, name="</Mutado>")
+                await member.add_roles(cargo)
 
         
         '''
