@@ -235,6 +235,7 @@ class eventos(commands.Cog):
           await member.add_roles(cargo1)
           print('funcionou')
       elif bot["linguagem"] == "javascript":
+          cargo = discord.utils.get(member.guild.roles, name="</NewHelper Javascript>")
           cargo1 = discord.utils.get(member.guild.roles, name="</NewHelper>")
           await member.add_roles(cargo)
           await member.add_roles(cargo1)
