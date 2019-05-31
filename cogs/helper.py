@@ -214,7 +214,7 @@ class helper(commands.Cog):
                               users = bard.users.find_one({"_id": str(ctx.author.id)})
                               if users is None:
                                  print("[Helper] : inserido")
-                                 serv ={"_id": str(ctx.author.id),"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","":"Não","linguagem": str(lang1.content) ,"reputação":int(0),"linguagem2": str(lang2.content),"aceito_por":str(author.id)}
+                                 serv ={"_id": str(ctx.author.id),"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","linguagem": str(lang1.content) ,"reputação":int(0),"linguagem2": str(lang2.content),"aceito_por":str(author.id)}
                                  bard.users.insert_one(serv).inserted_id
                                  server = self.bard.get_guild(570906068277002271)
                                  cargo = discord.utils.get(server.roles, name="</NewHelper>")
@@ -257,7 +257,7 @@ class helper(commands.Cog):
                               else:
                                  print("[Helper] : updatado")
                                  #bard.users.update_many({"_id": str(ctx.author.id)}, {'$set': {"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","foi_devhelper":"Não","vezes_reportado":"0","reputação":int(0),"level":"0","exp":"0","aceito_por":str(author.id)}})
-                                 bard.users.update_many({"_id": str(ctx.author.id)}, {'$set': {"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","":"Não","linguagem": str(lang1.content) ,"reputação":int(0),"linguagem2": str(lang2.content),"aceito_por":str(author.id)}})
+                                 bard.users.update_many({"_id": str(ctx.author.id)}, {'$set': {"nome": str(nome.content),"id": str(ctx.author.id),"foi_mute":"Não","vezes_mute":"0","linguagem": str(lang1.content) ,"reputação":int(0),"linguagem2": str(lang2.content),"aceito_por":str(author.id)}})
                                  server = self.bard.get_guild(570906068277002271)
                                  cargo = discord.utils.get(server.roles, name="</NewHelper>")
                                  await ctx.author.add_roles(cargo)

@@ -1,4 +1,5 @@
 import discord
+import asyncio
 import re
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageColor
 from io import BytesIO
@@ -207,6 +208,7 @@ class eventos(commands.Cog):
     @commands.Cog.listener()  
     async def on_member_remove(self, member):
        if member.guild.id == 570906068277002271:
+        await asyncio.sleep(50)
         mongo = MongoClient(self.bot.database)
         bard = mongo['bard']
         users = bard['users']
@@ -216,6 +218,29 @@ class eventos(commands.Cog):
         if usuario:
             bard.users.delete_one({'_id': str(member.id)})
             print(f'o membro {user}({member.id}) que estava no TOPHELPER foi removido.') 
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+      mongo = MongoClient(self.bot.database)
+      bard = mongo['bard']
+      users = bard['users']
+      bot = bard.users.find_one({"_id": str(member.id)})
+      print(bot["linguagem"])
+      if bot is None:
+        pass
+      elif bot["linguagem"] == "python":
+          cargo = discord.utils.get(member.guild.roles, name="</NewHelper Python>")
+          await member.add_roles(cargo)
+          print('funcionou')
+      elif bot["linguagem"] == "python" or bot["linguagem"] == "javascript":
+          cargo = discord.utils.get(member.guild.roles, name="</NewHelper>")
+          await member.add_roles(cargo)
+          print('funcionou')
+      elif bot["linguagem"] == "javascript":
+          cargo = discord.utils.get(member.guild.roles, name="</NewHelper Javascript>")
+          await member.add_roles(cargo)
+          print('funcionou')
+      
 
 def setup(bot):
   bot.add_cog(eventos(bot))

@@ -120,22 +120,7 @@ class newDevs(commands.Cog):
 
         #####################################################
 
-        mongo = MongoClient(self.bot.database)
-        bard = mongo['bard']
-        bot = bard['users']
-        bot = bard.bot.find_one({"_id": str(member.id)})
-        if bot is None:
-            print(f"[Evento] helper {member} entrou!")
-        else:
-            if bot["linguagem"] == "python":
-                cargo = discord.utils.get(member.guild.roles, name="</NewHelper Python>")
-                await member.add_roles(cargo)
-            elif bot["linguagem"] == "javascript":
-                cargo = discord.utils.get(member.guild.roles, name="</NewHelper Javascript>")
-                await member.add_roles(cargo)
-            else:
-                cargo = discord.utils.get(member.guild.roles, name="</Mutado>")
-                await member.add_roles(cargo)
+        
 
         
         '''
