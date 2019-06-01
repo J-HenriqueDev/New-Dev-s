@@ -38,10 +38,10 @@ class helper(commands.Cog):
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         dias_servidor = (datetime.utcnow() - ctx.author.joined_at).days
-        if dias_servidor < 5:
-            embed = discord.Embed(colour=0x7289DA)
-            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, para você se tornar um `</NewHelper>` você precisa ter mais de 5 dias no servidor.", color=0x7289DA)
-            return await ctx.send(embed=embed)
+        #if dias_servidor < 5:
+            #embed = discord.Embed(colour=0x7289DA)
+            #embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, para você se tornar um `</NewHelper>` você precisa ter mais de 5 dias no servidor.", color=0x7289DA)
+            #return await ctx.send(embed=embed)
         server = self.bard.get_guild(570906068277002271)
         newhelper = discord.utils.get(server.roles, name="</NewHelper>")
         if newhelper in ctx.author.roles:
