@@ -1,6 +1,8 @@
 import discord
 import asyncio
 import re
+from datetime import datetime
+import pytz
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageColor
 from io import BytesIO
 import requests
@@ -259,6 +261,25 @@ class eventos(commands.Cog):
       total_users = str(self.bot.get_guild(570906068277002271).member_count)
             
       await id_channel_total.edit(name=f'Total Users: {total_users}')
+
+    @commands.Cog.listener()
+    async def on_member_ban(self , member, guild):
+      if member.guild.id == 570906068277002271:
+        moderator = "Indisponivel"
+        for x in await guild.audit_logs(limit=1).flatten():
+          if x.action == discord.AuditLogAction.ban:
+            moderator = x.user
+
+        embed = discord.Embed(color=0x7289DA)
+        embed.set_author(name=f"MEMBRO BANIDO")
+        embed.add_field(name=f"O membro {member.name} foi banido do servidor", value=None)
+        embed.add_field(name=f"Moderador:",value=moderator)
+        embed.add_field(name="Data:", value=datetime.now(pytz.timezone('America/Sao_Paulo')))
+        embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
+
+        
+                
+
 
       
 
