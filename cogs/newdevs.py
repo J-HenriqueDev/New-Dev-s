@@ -114,7 +114,7 @@ class newDevs(commands.Cog):
 
         canal = discord.utils.get(member.guild.channels, id=570908352000032798)
         membros = len(member.guild.members)
-        texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", "0⃣").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
+        texto = "<:newDevs:573629564627058709> | **Membros** : "+str(membros).replace("0", ":zero:").replace("1", "1⃣").replace("2", "2⃣").replace("3", "3⃣").replace("4", "4⃣").replace("5", "5⃣").replace("6", "6⃣").replace("7", "7⃣").replace("8", "8⃣").replace("9", "9⃣")
         await canal.edit(topic=texto)
 
 
@@ -123,18 +123,18 @@ class newDevs(commands.Cog):
         
 
         
-        '''
+        """
         json ={
              "E0":"<:numero0:580090018505162755>",
-             "E1":"<:numero1:580088324946133015>",
-             "E2":"<:numero2:580088325101191198>",
-             "E3":"<:numero3:580088325595987968>",
-             "E4":"<:numero4:580088324782424078>",
-             "E5":"<:numero5:580088325004853268>",
-             "E6":"<:numero6:580088324971167774>",
-             "E7":"<:numero7:580088325054922772>",
-             "E8":"<:numero8:580088325000527942>",
-             "E9":"<:numero9:580088325491261453>"
+             "E1":"<:numero1:580088325000527942>",
+             "E2":"<:numero2:580088325491261453>",
+             "E3":"<:numero3:580088324946133015>",
+             "E4":"<:numero4:580088325101191198> ",
+             "E5":"<:numero5:580088325595987968> ",
+             "E6":"<:numero6:580088324782424078>",
+             "E7":"<:numero7:580088325004853268>",
+             "E8":"<:numero8:580088324971167774>",
+             "E9":"<:numero9:580088325054922772>"
              }
         text = str(len(member.guild.members))
         for n in range(0, 10):
@@ -143,7 +143,8 @@ class newDevs(commands.Cog):
             text = text.replace("E"+str(n), json["E"+str(n)])                                                  
         texto = "<:newDevs:573629564627058709> **| Membros** : {}".format(text)
         await canal.edit(topic=texto)
-        '''
+        """
+       
     @commands.command()
     async def raid(self,ctx ,role : discord.Role = None):
         role = discord.utils.get(ctx.guild.roles, name=str(role.name))

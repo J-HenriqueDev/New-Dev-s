@@ -219,6 +219,7 @@ class eventos(commands.Cog):
             bard.users.delete_one({'_id': str(member.id)})
             print(f'o membro {user}({member.id}) que estava no TOPHELPER foi removido.') 
 
+    """
     @commands.Cog.listener()
     async def on_member_join(self, member):
       cargo1 = discord.utils.get(member.guild.roles, name="</NewHelper>")
@@ -241,6 +242,7 @@ class eventos(commands.Cog):
           await member.add_roles(cargo)
           await member.add_roles(cargo1)
           print('funcionou')
+          """
       
 
 def setup(bot):
