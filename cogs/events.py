@@ -271,7 +271,7 @@ class eventos(commands.Cog):
           if x.action == discord.AuditLogAction.ban:
             moderator = x.user
 
-        embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo'))))
+        embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_author(name=f"MEMBRO BANIDO")
         embed.add_field(name=f"O membro {member.name} foi banido do servidor", value=None)
         embed.add_field(name=f"Moderador:",value=moderator)
