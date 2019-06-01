@@ -27,17 +27,18 @@ class eventos(commands.Cog):
           embed = discord.Embed(title=f"{self.bot._emojis['incorreto']} | Comando não encontrado", color=0x7289DA, description=f"O comando `{comma}` não existe.")
           await ctx.send(embed=embed)
         elif isinstance(error, commands.BotMissingPermissions):
-            perms = '\n'.join([f"**`{perm.upper()}`**" for perm in error.missing_perms])
-            await ctx.send(f"**{ctx.author.name}**, eu preciso das seguintes permissões para poder executar o comando **`{ctx.invoked_with}`** nesse servidor:\n\n{perms}", delete_after=30)
-            print("sem perm")
+          perms = '\n'.join([f"**`{perm.upper()}`**" for perm in error.missing_perms])
+          await ctx.send(f"**{ctx.author.name}**, eu preciso das seguintes permissões para poder executar o comando **`{ctx.invoked_with}`** nesse servidor:\n\n{perms}", delete_after=30)
+          print("sem perm")
         elif isinstance(error, discord.ext.commands.errors.CheckFailure):
-            print("erro ao checar")
+          print("erro ao checar")
         if isinstance(error, commands.CommandOnCooldown):
-            m, s = divmod(error.retry_after, 60)
-            return await ctx.send(f"**{ctx.author.name}**, aguarde **`{int(s)}`** segundo(s) para poder usar o comando **`{ctx.invoked_with}`** novamente.", delete_after=45)
+          m, s = divmod(error.retry_after, 60)
+          return await ctx.send(f"**{ctx.author.name}**, aguarde **`{int(s)}`** segundo(s) para poder usar o comando **`{ctx.invoked_with}`** novamente.", delete_after=45)
         elif isinstance(error, commands.DisabledCommand):
-            await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
-        
+          await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
+        else:
+          raise error
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
