@@ -211,7 +211,7 @@ class eventos(commands.Cog):
     @commands.Cog.listener()  
     async def on_member_remove(self, member):
        if member.guild.id == 570906068277002271:
-        await asyncio.sleep(50)
+        await asyncio.sleep(3600)
         mongo = MongoClient(self.bot.database)
         bard = mongo['bard']
         users = bard['users']
