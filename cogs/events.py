@@ -266,11 +266,9 @@ class eventos(commands.Cog):
     @commands.Cog.listener()
     async def on_member_ban(self , guild, member):
       if member.guild.id == 570906068277002271:
-        moderator = "Indisponivel"
-        for x in await guild.audit_logs(limit=1).flatten():
-          if x.action == discord.AuditLogAction.ban:
-            moderator = x.user
-
+        moderator = 'Não encontrado.'
+        async for entry in guild.audit_logs(action=discord.AuditLogAction.ban, limit=1):
+            moderator = entry.user
         embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_author(name=f"MEMBRO BANIDO")
         embed.add_field(name=f"O membro {member.name} foi banido do servidor", value=None)
