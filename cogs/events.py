@@ -279,7 +279,7 @@ class eventos(commands.Cog):
         logs_role = guild.get_role(584458239467454464)
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
-        await guild.get_channel(571047885509230614).send(embed=embed)
+        
 
 
       
