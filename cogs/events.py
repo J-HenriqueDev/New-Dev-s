@@ -274,7 +274,7 @@ class eventos(commands.Cog):
         embed.set_author(name=f"MEMBRO BANIDO")
         embed.add_field(name=f"O membro {member.name} foi banido do servidor", value=None)
         embed.add_field(name=f"Moderador:",value=moderator)
-        embed.set_timestamp(datetime.now(pytz.timezone('America/Sao_Paulo')))
+        embed.timestamp(datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
         logs_role = guild.get_role(584458239467454464)
