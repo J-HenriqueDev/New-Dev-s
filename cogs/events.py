@@ -218,6 +218,13 @@ class eventos(commands.Cog):
         if usuario:
             bard.users.delete_one({'_id': str(member.id)})
             print(f'o membro {user}({member.id}) que estava no TOPHELPER foi removido.') 
+        
+        id_channel_total = 584433427734986758
+        id_channel_total = self.bot.get_channel(id_channel_total)
+
+        total_users = str(self.bot.get_guild(570906068277002271).member_count)
+            
+        await id_channel_total.edit(name=f'Total Users: {total_users}')
 
     """
     @commands.Cog.listener()
@@ -243,6 +250,16 @@ class eventos(commands.Cog):
           await member.add_roles(cargo1)
           print('funcionou')
           """
+      
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+      id_channel_total = 584433427734986758
+      id_channel_total = self.bot.get_channel(id_channel_total)
+
+      total_users = str(self.bot.get_guild(570906068277002271).member_count)
+            
+      await id_channel_total.edit(name=f'Total Users: {total_users}')
+
       
 
 def setup(bot):
