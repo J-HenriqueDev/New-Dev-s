@@ -221,6 +221,7 @@ class eventos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
+      cargo1 = discord.utils.get(member.guild.roles, name="</NewHelper>")
       mongo = MongoClient(self.bot.database)
       bard = mongo['bard']
       users = bard['users']
@@ -230,13 +231,13 @@ class eventos(commands.Cog):
         pass
       elif bot["linguagem"] == "python":
           cargo = discord.utils.get(member.guild.roles, name="</NewHelper Python>")
-          cargo1 = discord.utils.get(member.guild.roles, name="</NewHelper>")
+          
           await member.add_roles(cargo)
           await member.add_roles(cargo1)
           print('funcionou')
       elif bot["linguagem"] == "javascript":
           cargo = discord.utils.get(member.guild.roles, name="</NewHelper Javascript>")
-          cargo1 = discord.utils.get(member.guild.roles, name="</NewHelper>")
+          
           await member.add_roles(cargo)
           await member.add_roles(cargo1)
           print('funcionou')
