@@ -277,8 +277,8 @@ class eventos(commands.Cog):
         embed.add_field(name="Data:", value=datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
 
-        msg = [await c.send(embed=embed) for c in ctx.guild.get_role(570908340742520832).members]
-                
+        #msg = [await c.send(embed=embed) for c in ctx.guild.get_role(570908340742520832).members
+        await guild.get_channel(571047885509230614).send(embed=embed)
 
 
       
