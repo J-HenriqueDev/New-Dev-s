@@ -263,7 +263,7 @@ class eventos(commands.Cog):
       await id_channel_total.edit(name=f'Total Users: {total_users}')
 
     @commands.Cog.listener()
-    async def on_member_ban(self , member, guild):
+    async def on_member_ban(self , guild, member):
       if member.guild.id == 570906068277002271:
         moderator = "Indisponivel"
         for x in await guild.audit_logs(limit=1).flatten():
