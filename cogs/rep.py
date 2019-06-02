@@ -140,5 +140,18 @@ class rep(commands.Cog):
         
          await ctx.send(embed=embed)
 
+   @commands.command()
+   async def setreps(self, ctx , user: discord.Member = None, quantidade : str = None):
+      if user is None:
+         return await ctx.send('sem user')
+      if quantidade is None:
+         return await ctx.send('sem numero de rep')
+      mongo = MongoClient(self.bard.database)
+      bard = mongo['bard']
+      users = bard['users']
+      users = bard.users.find_one({"_id": str(ctx.author.id)})
+      
+      bard.users.update({"_id": str(user.id)}, {"$set": {"reputação": quantidade}})
+
 def setup(bard):
     bard.add_cog(rep(bard))
