@@ -268,7 +268,7 @@ class eventos(commands.Cog):
       if member.guild.id == 570906068277002271:
         moderator = 'Não encontrado.'
         reason = "Não informada."
-        async for entry in guild.audit_logs(action=discord.AuditLogAction.ban, limit=1):
+        async for entry in guild.audit_logs(action=discord.AuditLogAction.ban):
             moderator = entry.user
             reason = entry.reason
         embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
