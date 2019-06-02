@@ -98,6 +98,7 @@ class rep(commands.Cog):
          comma = error.args[0].split('"')[1]
          embed = discord.Embed(title=f"{self.bard._emojis['incorreto']} | MEMBRO INVÁLIDO!", color=0x7289DA, description=f"O membro `{comma}` não foi encontrado.")
          await ctx.send(embed=embed)
+         ctx.command.reset_cooldown(ctx)
          return
        
 

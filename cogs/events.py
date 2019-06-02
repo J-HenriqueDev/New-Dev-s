@@ -42,7 +42,7 @@ class eventos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
-        if ctx.author.id in self.bot.staff and ctx.command.is_on_cooldown(ctx):
+        if ctx.author.id in self.bot.dono and ctx.command.is_on_cooldown(ctx):
             ctx.command.reset_cooldown(ctx)
 
     @commands.Cog.listener()
