@@ -96,7 +96,7 @@ class rep(commands.Cog):
    async def rep_error(self, ctx, error):
       if isinstance(error, commands.BadArgument):
          comma = error.args[0].split('"')[1]
-         embed = discord.Embed(title=f"{self.bard._emojis['incorreto']} | Membro não encontrado!", color=0x7289DA, description=f"O membro `{comma}` não está nesse servidor.")
+         embed = discord.Embed(title=f"{self.bard._emojis['incorreto']} | MEMBRO INVÁLIDO!", color=0x7289DA, description=f"O membro `{comma}` não foi encontrado.")
          await ctx.send(embed=embed)
          return
        
