@@ -140,18 +140,33 @@ class rep(commands.Cog):
         
          await ctx.send(embed=embed)
 
-   @commands.command()
+   @commands.command(aliases=["set","setar","setarreps","setareps"],description="Seta a Quantidade de reps de um usuário.",use="c.setreps @user [número de reps]")
    async def setreps(self, ctx , user: discord.Member = None, quantidade : str = None):
+      if not ctx.author.id in self.bard.dono:
+            await ctx.send(
+                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
+                delete_after=15)
+            return
       if user is None:
-         return await ctx.send('sem user')
+         return await ctx.send(f":facepalm: | **{ctx.author.name}** você não especificou um usuário.")
       if quantidade is None:
-         return await ctx.send('sem numero de rep')
+         return await ctx.send(f"<:incorreto:571040727643979782> |**{ctx.author.name}** você não especificou a quantidade de reps que deseja setar para {user.name}.")
       mongo = MongoClient(self.bard.database)
       bard = mongo['bard']
       users = bard['users']
       users = bard.users.find_one({"_id": str(ctx.author.id)})
-      
+      if users is None:
+         return await ctx.send(f':facepalm: | **{ctx.author.name}** o usuário `{user.name}` não está registrado na database.')
       bard.users.update({"_id": str(user.id)}, {"$set": {"reputação": quantidade}})
+      await ctx.send(f'<:correto:571040855918379008>**{ctx.author.name}** você definiu a quantidade de reps do usuário `{user.name}` para `{quantidade}.`')
+
+   @setreps.error
+   async def setreps_error(self, ctx, error):
+      if isinstance(error, commands.BadArgument):
+         comma = error.args[0].split('"')[1]
+         embed = discord.Embed(title=f"{self.bard._emojis['incorreto']} | MEMBRO INVÁLIDO!", color=0x7289DA, description=f"O membro `{comma}` não foi encontrado.")
+         await ctx.send(embed=embed)
+         return
 
 def setup(bard):
     bard.add_cog(rep(bard))
