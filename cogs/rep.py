@@ -156,9 +156,11 @@ class rep(commands.Cog):
       users = bard['users']
       users = bard.users.find_one({"_id": str(ctx.author.id)})
       if users is None:
-         return await ctx.send(f':facepalm: | **{ctx.author.name}** o usuário `{user.name}` não está registrado na database.')
-      bard.users.update({"_id": str(user.id)}, {"$set": {"reputação": quantidade}})
-      await ctx.send(f'<:correto:571040855918379008>**{ctx.author.name}** você definiu a quantidade de reps do usuário `{user.name}` para `{quantidade}.`')
+         bard.users.update({"_id": str(user.id)}, {"$set": {"reputação": quantidade}})
+         await ctx.send(f'<:correto:571040855918379008>**{ctx.author.name}** você definiu a quantidade de reps do usuário `{user.name}` para `{quantidade}.`')
+      else:
+          await ctx.send(f':facepalm: | **{ctx.author.name}** o usuário `{user.name}` não está registrado na database.')
+ 
 
    @setreps.error
    async def setreps_error(self, ctx, error):
