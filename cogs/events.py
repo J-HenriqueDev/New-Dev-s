@@ -266,7 +266,7 @@ class eventos(commands.Cog):
     @commands.Cog.listener()
     async def on_member_ban(self , guild, member):
       if member.guild.id == 570906068277002271:
-        await asyncio.sleep(5)
+        await asyncio.sleep(4)
         moderator = 'Não encontrado.'
         reason = "Não informada."
         async for entry in guild.audit_logs(action=discord.AuditLogAction.ban ,limit=1):
