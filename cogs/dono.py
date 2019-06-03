@@ -1,25 +1,26 @@
-import discord
 from discord.ext import commands
-import random
-import time
-import asyncio
-import json
-import sys
-import inspect
-import textwrap
-import traceback
-from io import StringIO
 from contextlib import redirect_stdout
+from io import StringIO
 
+import traceback
+import textwrap
+import asyncio
+import inspect
+import discord
+import random
 
-class dono(commands.Cog):
+import utils
+
+import json
+import time
+import sys
+
+class Dono(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
-
-
     @commands.command()
+    @utils.is_owner()
     async def reload(self, ctx, *, cog: str = None):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -50,6 +51,7 @@ class dono(commands.Cog):
             print(f"RELOAD USADO POR : {ctx.author}")
 
     @commands.command()
+    @utils.is_owner()
     async def game(self, ctx, *, status: str = ''):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -68,6 +70,7 @@ class dono(commands.Cog):
     @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.guild_only()
     @commands.command()
+    @utils.is_owner()
     async def debug(self, ctx, *, args=None):
         
         if not ctx.author.id in self.bot.dono:
@@ -104,13 +107,10 @@ class dono(commands.Cog):
             await ctx.send(embed=embed)
             print(f"DEGUG USADO POR : {ctx.author}")
             return
-
-
-
-    
-
-    @commands.command()
+        
     @commands.guild_only()
+    @commands.command()
+    @utils.is_owner()
     async def invite(self, ctx, *, id: int):
             print(f"INVITE USADO POR : {ctx.author}")
             if not ctx.author.id in self.bot.dono:
@@ -135,6 +135,7 @@ class dono(commands.Cog):
                 await ctx.send(f"{ctx.message.author.mention}**Erro ao gerar/enviar convite\n```javascript\n{e}\n```**")
 
     @commands.command(name="leave", hidden=True)
+    @utils.is_owner()
     async def cmd_leaveguild(self, ctx, id: int=0):
         guild = await self.bot.get_guild(id)
         print(guild)
@@ -143,6 +144,7 @@ class dono(commands.Cog):
 
 
     @commands.command()
+    @utils.is_owner()
     async def reiniciar(self,ctx):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -168,6 +170,7 @@ class dono(commands.Cog):
         description='desativa um comando do bot',
         usage='c.desativarcomando <Nome do Comando>'
     )
+    @utils.is_owner()
     async def _desativarcomando(self, ctx, *, nome=None):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -189,6 +192,7 @@ class dono(commands.Cog):
             await ctx.send(f"<:ligado:571038226861522957> **{ctx.author.name}**, você ativou o comando **`{comando.name}`**.")
 
     @commands.command(hidden=True)
+    @utils.is_owner()
     async def exec(self, ctx, *, body: str):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -244,4 +248,4 @@ class dono(commands.Cog):
             else:
                 await ctx.send(f'```py\n{value}{ret}\n```')
 def setup(bot):
-    bot.add_cog(dono(bot))
+    bot.add_cog(Dono(bot))
