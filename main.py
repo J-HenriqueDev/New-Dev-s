@@ -50,7 +50,6 @@ class main(commands.AutoShardedBot):
 
 
     async def on_ready(self):
-    
         log_ready = self.get_channel(568040355933716500)
         await log_ready.send(f"**{self.user.name}** online | `{self.carregados}` Modulos Funcionando corretamente e `{self.falhas}` falhas detectadas.")
         print(f"[OK] - {self.user.name} ({self.user.id}) - (Status - Online)")
