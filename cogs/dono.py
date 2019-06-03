@@ -25,6 +25,7 @@ class Owner(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, better.DeveloperError):
             return await ctx.send(repr(error))
+
         raise error
 
     @commands.command(aliases=["bd", "rd", "rdebug"], description="debug feito por Razy#1311.", use="c.rdebug 1+1")
