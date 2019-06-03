@@ -12,8 +12,7 @@ developers = {
 
 def is_developer():
     async def predicate(ctx):
-        try: return ctx.author.id in list(developers.values())
-        except: raise MissingPermissions('você não é um desenvolvedor.')
+        return ctx.author.id in list(developers.values())
     return commands.check(predicate)
 
 
