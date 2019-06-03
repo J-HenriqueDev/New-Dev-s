@@ -14,10 +14,10 @@ from pymongo import MongoClient
 
 class main(commands.AutoShardedBot):
     def __init__(self):
-        super().__init__(command_prefix='c.',
+        super().__init__(command_prefix=["c.","C."],
                          case_insensitive=True,
                          pm_help=None,
-                         description="crypto bot")
+                         description="New Devs Bot.")
         self.remove_command('help')
         self.staff = secrets.STAFF
         self.dono = secrets.DONO
