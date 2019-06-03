@@ -2,6 +2,8 @@ from discord.ext import commands
 from contextlib import redirect_stdout
 from io import StringIO
 
+from . import better
+
 import traceback
 import textwrap
 import asyncio
@@ -9,18 +11,57 @@ import inspect
 import discord
 import random
 
-import utils
+import types
 
 import json
 import time
 import sys
+
+class Owner(commands.Cog):
+    def __init__(self, bot):
+        self.bot=bot
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, better.DeveloperError):
+            return await ctx.send(repr(error))
+        raise error
+
+    @commands.command(aliases=["bd", "rd", "rdebug"], description="debug feito por Razy#1311.", use="c.rdebug 1+1")
+    @better.is_developer()
+    async def better_debug(self, ctx, *, string: str=None):
+        string = string or repr('hello world')
+
+        try: result = eval(string)
+        except Exception as e:result = e
+            
+        if type(result) is types.CoroutineType:
+            result = await utils.try_await(result)
+        if type(result) in (map, filter, types.GeneratorType):
+            result = tuple(result)
+
+        embed = discord.Embed(title=str(type(result)), color=ctx.author.top_role.color)
+        
+        embed.add_field(name='Resultado:', value=better.markdown(repr(result)))
+        embed.set_footer(text=better.__copyright__, icon_url=ctx.author.avatar_url)
+        return await ctx.send(embed=embed)
+    
+    @commands.command(aliases=['rld'])
+    @better.is_developer()
+    async def reload_one(self, ctx, *, cog: str=None):
+        if not cog: return await ctx.send('Informe um cog válido.', delete_after=3.0)
+        try:
+            self.bot.reload_extension(f"cogs.{cog}")
+            return await ctx.send(f'O Cog "{cog}" foi carregado com sucesso!!', delete_after=3.0)
+        except Exception as e:
+            raise better.DeveloperError(f'O Cog "{cog}" não pode ser carregado. '+str(e))
+        return self
 
 class Dono(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
-    @utils.is_owner()
     async def reload(self, ctx, *, cog: str = None):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -35,8 +76,7 @@ class Dono(commands.Cog):
             await ctx.send(f"{ctx.author.mention} **Módulo  invalido. Módulos disponiveis abaixo**\n```python\n{cog_list}\n```", delete_after=15)
             return
         try:
-            self.bot.unload_extension(f"cogs.{cog}")
-            self.bot.load_extension(f"cogs.{cog}")
+            self.bot.reload_extension(f"cogs.{cog}")
             embed = discord.Embed(
                 colour=0x7289DA,
                 description=(f"**[Sucesso] O Modulo `{cog}` foi recarregado corretamente!**"))
@@ -51,7 +91,6 @@ class Dono(commands.Cog):
             print(f"RELOAD USADO POR : {ctx.author}")
 
     @commands.command()
-    @utils.is_owner()
     async def game(self, ctx, *, status: str = ''):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -67,12 +106,10 @@ class Dono(commands.Cog):
         await ctx.send(f" **Status alterado com sucesso.**\n`Novo Status`\n*{status}*")
         print(f"GAME USADO POR : {ctx.author}")
 
-    @commands.cooldown(1, 1, commands.BucketType.user)
+
     @commands.guild_only()
     @commands.command()
-    @utils.is_owner()
     async def debug(self, ctx, *, args=None):
-        
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
                 f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
@@ -108,34 +145,8 @@ class Dono(commands.Cog):
             print(f"DEGUG USADO POR : {ctx.author}")
             return
         
-    @commands.guild_only()
-    @commands.command()
-    @utils.is_owner()
-    async def invite(self, ctx, *, id: int):
-            print(f"INVITE USADO POR : {ctx.author}")
-            if not ctx.author.id in self.bot.dono:
-               await ctx.send(
-                f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",
-                delete_after=15)
-               return
-            server = self.bot.get_guild(id)
-            if server == None:
-                await ctx.send(f"**Server nao encontrado.**")
-                return
-            try:
-                for c in server.channels:
-                    inv = await discord.abc.GuildChannel.create_invite(c)
-                    break
-            except Exception as e:
-                await ctx.send(e)
-                return
-            try:
-                await ctx.message.author.send(inv.url)
-            except Exception as e:
-                await ctx.send(f"{ctx.message.author.mention}**Erro ao gerar/enviar convite\n```javascript\n{e}\n```**")
 
     @commands.command(name="leave", hidden=True)
-    @utils.is_owner()
     async def cmd_leaveguild(self, ctx, id: int=0):
         guild = await self.bot.get_guild(id)
         print(guild)
@@ -144,7 +155,6 @@ class Dono(commands.Cog):
 
 
     @commands.command()
-    @utils.is_owner()
     async def reiniciar(self,ctx):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -170,7 +180,6 @@ class Dono(commands.Cog):
         description='desativa um comando do bot',
         usage='c.desativarcomando <Nome do Comando>'
     )
-    @utils.is_owner()
     async def _desativarcomando(self, ctx, *, nome=None):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -192,7 +201,6 @@ class Dono(commands.Cog):
             await ctx.send(f"<:ligado:571038226861522957> **{ctx.author.name}**, você ativou o comando **`{comando.name}`**.")
 
     @commands.command(hidden=True)
-    @utils.is_owner()
     async def exec(self, ctx, *, body: str):
         if not ctx.author.id in self.bot.dono:
             await ctx.send(
@@ -249,3 +257,4 @@ class Dono(commands.Cog):
                 await ctx.send(f'```py\n{value}{ret}\n```')
 def setup(bot):
     bot.add_cog(Dono(bot))
+    bot.add_cog(Owner(bot))
