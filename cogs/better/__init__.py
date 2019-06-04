@@ -2,7 +2,7 @@ from discord.ext import commands
 from .errors import *
 from .markup import *
 
-__copyright__ = "NewDev's (c) 2019"
+__copyright__ = "NewDev's © 2019"
 
 developers = {
     'Yuka Tuka': 499321522578522112,
