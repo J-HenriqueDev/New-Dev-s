@@ -23,11 +23,12 @@ class Owner(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        embed=discord.Embed(title="Ocorreu uma falha!!", description=str(type(error)), color=ctx.author.top_role.color)
+        #embed=discord.Embed(title="Ocorreu uma falha!!", description=str(type(error)), color=ctx.author.top_role.color)
         if isinstance(error, better.DeveloperError):
-            embed.description = "você precisa ser um desenvolvedor para executar este comando."
-            embed.add_field(name='Erro do desenvolvedor', value=str(error))
-            return await ctx.send(embed=embed, delete_after=5.0)
+            return await ctx.send(f"<:errado:567782857863593995>{ctx.author.mention} você não é um administrador para utilizar esse comando.",delete_after=15)
+            #embed.description = "você precisa ser um desenvolvedor para executar este comando."
+            #embed.add_field(name='Erro do desenvolvedor', value=str(error))
+            #return await ctx.send(embed=embed, delete_after=5.0)
 
         raise error
 
