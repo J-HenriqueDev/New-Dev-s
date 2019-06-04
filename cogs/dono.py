@@ -46,7 +46,7 @@ class Owner(commands.Cog):
 
         embed = discord.Embed(title=f"{better.emojics['python']}{type(result)}".title(), color=ctx.author.top_role.color)
         
-        embed.add_field(name='Resultado:', value=better.markdown(repr(result), lang='python'))
+        embed.add_field(name='Resultado:', value=better.markdown(better.limit(repr(result), 500), lang='python'))
         embed.set_footer(text=better.__copyright__, icon_url=ctx.author.avatar_url)
         return await ctx.send(embed=embed)
     
