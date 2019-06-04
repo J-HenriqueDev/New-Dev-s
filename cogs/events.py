@@ -266,7 +266,7 @@ class eventos(commands.Cog):
     @commands.Cog.listener()
     async def on_member_ban(self , guild, member):
       if member.guild.id == 570906068277002271:
-        await asyncio.sleep(4)
+        await asyncio.sleep(3)
         moderator = 'Não encontrado.'
         reason = "Não informada."
         async for entry in guild.audit_logs(action=discord.AuditLogAction.ban ,limit=1):
@@ -274,9 +274,26 @@ class eventos(commands.Cog):
             reason = entry.reason
         embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_author(name=f"MEMBRO BANIDO", icon_url="https://cdn.discordapp.com/icons/570906068277002271/5ef5db18aa7bb258c0de3a0563c7d3f0.png?size=1024")
-        embed.add_field(name=f"Usuário Banido:", value=f"`{member.name}`")
-        embed.add_field(name=f"Moderador:",value=f"`{moderator}`")
+        embed.add_field(name=f"Usuário:", value=f"`{member.name}`")
+        embed.add_field(name=f"Autor:",value=f"`{moderator}`")
         embed.add_field(name="Motivo:",value=f"``{reason}``")
+        embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
+        embed.set_thumbnail(url=member.avatar_url_as(format='png'))
+        logs_role = guild.get_role(584458239467454464)
+
+        msg = [await member.send(embed=embed) for member in logs_role.members]
+
+    @commands.Cog.listener()
+    async def on_member_unban(self , guild, member):
+      if member.guild.id == 570906068277002271:
+        await asyncio.sleep(3)
+        moderator = 'Não encontrado.'
+        async for entry in guild.audit_logs(action=discord.AuditLogAction.ban ,limit=1):
+            moderator = entry.user
+        embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
+        embed.set_author(name=f"MEMBRO DESBANIDO", icon_url="https://cdn.discordapp.com/icons/570906068277002271/5ef5db18aa7bb258c0de3a0563c7d3f0.png?size=1024")
+        embed.add_field(name=f"Usuário:", value=f"`{member.name}`")
+        embed.add_field(name=f"Autor:",value=f"`{moderator}`")
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
         logs_role = guild.get_role(584458239467454464)
