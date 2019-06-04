@@ -14,7 +14,7 @@ from pymongo import MongoClient
 
 class main(commands.AutoShardedBot):
     def __init__(self):
-        super().__init__(command_prefix='c.',
+        super().__init__(command_prefix=['c.','C.'],
                          case_insensitive=True,
                          pm_help=None,
                          description="crypto bot")
