@@ -1,1 +1,1 @@
-limit=lambda string, max=32: string[:max]+('...' if len(string) > max else '')
+limit=lambda string, max=32: string

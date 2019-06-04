@@ -13,7 +13,7 @@ developers = {
 }
 
 emojics = {
-    'python': '<:python:576143949102841876>'
+    'python': '<:python:576143949102841876>',
     'tag': '<:tag:576143950482767892>' 
 }
 
