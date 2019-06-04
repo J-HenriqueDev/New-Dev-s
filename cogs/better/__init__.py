@@ -1,6 +1,8 @@
 from discord.ext import commands
 from .errors import *
 from .markup import *
+from .text import *
+import requests
 
 __copyright__ = "NewDev's © 2019"
 
@@ -10,9 +12,16 @@ developers = {
     'Razy': 456108986756759563
 }
 
+emojics = {
+    'python': '<:python:576143949102841876>',
+    'tag': '<:tag:576143950482767892>' 
+}
+
 def is_developer():
     async def predicate(ctx):
-        return ctx.author.id in list(developers.values())
+        if not ctx.author.id in list(developers.values()):
+            raise DeveloperError('você não é um desenvolvedor.')
+        return True
     return commands.check(predicate)
 
 
@@ -22,3 +31,6 @@ async def try_await(coro, onerror=lambda e, coro: coro):
     except Exception as e:
         return onerror(e, coro)
     return coro
+
+def download_image(url):
+    return requests.get(url).content

@@ -1,4 +1,6 @@
 from discord.ext import commands
 import discord
 
-DeveloperError = discord.errors.DiscordException
+class DeveloperError(commands.CommandError):
+    def __init__(self, message=None, *args):
+        super().__init__(message, *args)
