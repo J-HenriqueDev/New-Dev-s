@@ -285,7 +285,6 @@ class eventos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_unban(self , guild, member):
-      if member.guild.id == 570906068277002271:
         await asyncio.sleep(3)
         moderator = 'Não encontrado.'
         async for entry in guild.audit_logs(action=discord.AuditLogAction.unban ,limit=1):
@@ -300,7 +299,8 @@ class eventos(commands.Cog):
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
         
-
+        if msg is None or logs_role is None:
+          return
 
       
 
