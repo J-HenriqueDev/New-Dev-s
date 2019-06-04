@@ -27,7 +27,7 @@ class Owner(commands.Cog):
         if isinstance(error, better.DeveloperError):
             embed.description = "você precisa ser um desenvolvedor para executar este comando."
             embed.add_field(name='Erro do desenvolvedor', value=str(error))
-            return await ctx.send(embed=embed, delete_after=3.0)
+            return await ctx.send(embed=embed, delete_after=3)
 
         raise error
 
