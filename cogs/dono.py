@@ -27,11 +27,11 @@ class Owner(commands.Cog):
         if isinstance(error, better.DeveloperError):
             embed.description = "você precisa ser um desenvolvedor para executar este comando."
             embed.add_field(name='Erro do desenvolvedor', value=str(error))
-            return await ctx.send(embed=embed, delete_after=3)
+            return await ctx.send(embed=embed, delete_after=5.0)
 
         raise error
 
-    @commands.command(aliases=["bd", "rd", "rdebug"], description="debug feito por Razy#1311.", use="c.rdebug 1+1")
+    @commands.command(aliases=["bd", "rd", "rdebug", "await"], description="debug feito por Razy#1311.", use="c.rdebug 1+1")
     @better.is_developer()
     async def better_debug(self, ctx, *, string: str=None):
         string = string or repr('hello world')
