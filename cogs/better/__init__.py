@@ -2,6 +2,7 @@ from discord.ext import commands
 from .errors import *
 from .markup import *
 from .text import *
+import requests
 
 __copyright__ = "NewDev's (c) 2019"
 
@@ -27,3 +28,6 @@ async def try_await(coro, onerror=lambda e, coro: coro):
     except Exception as e:
         return onerror(e, coro)
     return coro
+
+def download_image(url):
+    return requests.get(url).content

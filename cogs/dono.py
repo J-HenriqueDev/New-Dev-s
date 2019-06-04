@@ -26,7 +26,7 @@ class Owner(commands.Cog):
         embed=discord.Embed(title="Ocorreu uma falha!!", description=str(type(error)), color=ctx.author.top_role.color)
         if isinstance(error, better.DeveloperError):
             embed.add_field(name='Erro do desenvolvedor', value=str(error))
-            return await ctx.send(embed=embed)
+            return await ctx.send(embed=embed, delete_aftter=3.0)
 
         raise error
 
@@ -60,6 +60,16 @@ class Owner(commands.Cog):
         except Exception as e:
             raise better.DeveloperError(f'O Cog "{cog}" não pode ser carregado. '+str(e))
         return self
+    
+    @commands.command()
+    @better.is_developer()
+    async def status(self, ctx, *, status: str=None):
+        status = status or random.choice(['Radiação gama!!', 'Ondas pelo ar'])
+        return await self.bot.change_presence(
+            activity=discord.Streaming(name=status.title()+" no NewDev's", url="https://www.twitch.tv/henrique_98"),
+            status=discord.ActivityType.streaming
+        )
+
 
 class Dono(commands.Cog):
     def __init__(self, bot):
