@@ -288,7 +288,7 @@ class eventos(commands.Cog):
       if member.guild.id == 570906068277002271:
         await asyncio.sleep(3)
         moderator = 'Não encontrado.'
-        async for entry in guild.audit_logs(action=discord.AuditLogAction.ban ,limit=1):
+        async for entry in guild.audit_logs(action=discord.AuditLogAction.unban ,limit=1):
             moderator = entry.user
         embed = discord.Embed(color=0x7289DA,timestamp=datetime.now(pytz.timezone('America/Sao_Paulo')))
         embed.set_author(name=f"MEMBRO DESBANIDO", icon_url="https://cdn.discordapp.com/icons/570906068277002271/5ef5db18aa7bb258c0de3a0563c7d3f0.png?size=1024")

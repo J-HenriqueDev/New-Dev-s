@@ -17,7 +17,7 @@ class main(commands.AutoShardedBot):
         super().__init__(command_prefix=['c.','C.'],
                          case_insensitive=True,
                          pm_help=None,
-                         description="crypto bot")
+                         description="New Dev's bot")
         self.remove_command('help')
         self.staff = secrets.STAFF
         self.dono = secrets.DONO
