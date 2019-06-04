@@ -40,7 +40,8 @@ class Owner(commands.Cog):
         except Exception as e:result = e
             
         if type(result) is types.CoroutineType:
-            result = await better.try_await(result)
+            try: result = await result
+            except Exception as e: result = e
         if type(result) in (map, filter, types.GeneratorType):
             result = tuple(result)
 
