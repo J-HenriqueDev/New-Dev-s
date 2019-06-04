@@ -31,7 +31,7 @@ class Owner(commands.Cog):
 
         raise error
 
-    @commands.command(aliases=["bd", "rd", "rdebug", "await"], description="debug feito por Razy#1311.", use="c.rdebug 1+1")
+    @commands.command(aliases=["deb", "db", "run"])
     @better.is_developer()
     async def better_debug(self, ctx, *, string: str=None):
         string = string or repr('hello world')
