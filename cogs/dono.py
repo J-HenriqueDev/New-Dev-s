@@ -23,8 +23,10 @@ class Owner(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        embed=discord.Embed(title="Ocorreu uma falha!!", description=str(type(error)), color=ctx.author.top_role.color)
         if isinstance(error, better.DeveloperError):
-            return await ctx.send(repr(error))
+            embed.add_field(name='Erro do desenvolvedor', value=str(error))
+            return await ctx.send(embed=embed)
 
         raise error
 
@@ -37,22 +39,23 @@ class Owner(commands.Cog):
         except Exception as e:result = e
             
         if type(result) is types.CoroutineType:
-            result = await utils.try_await(result)
+            result = await better.try_await(result)
         if type(result) in (map, filter, types.GeneratorType):
             result = tuple(result)
 
-        embed = discord.Embed(title=str(type(result)), color=ctx.author.top_role.color)
+        embed = discord.Embed(title=f"{better.emojics['python']}{type(result)}".title(), color=ctx.author.top_role.color)
         
-        embed.add_field(name='Resultado:', value=better.markdown(repr(result)))
+        embed.add_field(name='Resultado:', value=better.markdown(repr(result), lang='python'))
         embed.set_footer(text=better.__copyright__, icon_url=ctx.author.avatar_url)
         return await ctx.send(embed=embed)
     
     @commands.command(aliases=['rld'])
     @better.is_developer()
-    async def reload_one(self, ctx, *, cog: str=None):
+    async def recarregar(self, ctx, *, cog: str=None):
         if not cog: return await ctx.send('Informe um cog válido.', delete_after=3.0)
         try:
-            self.bot.reload_extension(f"cogs.{cog}")
+            self.bot.unload_extension(f"cogs.{cog}")
+            self.bot.load_extension(f"cogs.{cog}")
             return await ctx.send(f'O Cog "{cog}" foi carregado com sucesso!!', delete_after=3.0)
         except Exception as e:
             raise better.DeveloperError(f'O Cog "{cog}" não pode ser carregado. '+str(e))
