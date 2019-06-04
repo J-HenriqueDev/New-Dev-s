@@ -25,8 +25,9 @@ class Owner(commands.Cog):
     async def on_command_error(self, ctx, error):
         embed=discord.Embed(title="Ocorreu uma falha!!", description=str(type(error)), color=ctx.author.top_role.color)
         if isinstance(error, better.DeveloperError):
+            embed.description = "você precisa ser um desenvolvedor para executar este comando."
             embed.add_field(name='Erro do desenvolvedor', value=str(error))
-            return await ctx.send(embed=embed, delete_aftter=3.0)
+            return await ctx.send(embed=embed, delete_after=3.0)
 
         raise error
 
@@ -65,7 +66,7 @@ class Owner(commands.Cog):
     @better.is_developer()
     async def status(self, ctx, *, status: str=None):
         status = status or random.choice(['Radiação gama!!', 'Ondas pelo ar'])
-        return await self.bot.change_presence(
+        await self.bot.change_presence(
             activity=discord.Streaming(name=status.title()+" no NewDev's", url="https://www.twitch.tv/henrique_98"),
             status=discord.ActivityType.streaming
         )

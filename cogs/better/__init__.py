@@ -14,11 +14,14 @@ developers = {
 
 emojics = {
     'python': '<:python:576143949102841876>'
+    'tag': '<:tag:576143950482767892>' 
 }
 
 def is_developer():
     async def predicate(ctx):
-        return ctx.author.id in list(developers.values())
+        if not ctx.author.id in list(developers.values()):
+            raise DeveloperError('você não é um desenvolvedor.')
+        return True
     return commands.check(predicate)
 
 
