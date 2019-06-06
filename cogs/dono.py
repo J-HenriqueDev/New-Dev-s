@@ -30,7 +30,6 @@ class Owner(commands.Cog):
             #embed.add_field(name='Erro do desenvolvedor', value=str(error))
             #return await ctx.send(embed=embed, delete_after=5.0)
 
-        raise error
 
     @commands.command(aliases=["deb", "db", "run"])
     @better.is_developer()

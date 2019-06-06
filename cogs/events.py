@@ -37,8 +37,7 @@ class eventos(commands.Cog):
           return await ctx.send(f"**{ctx.author.name}**, aguarde **`{int(s)}`** segundo(s) para poder usar o comando **`{ctx.invoked_with}`** novamente.", delete_after=45)
         elif isinstance(error, commands.DisabledCommand):
           await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
-        else:
-          raise error
+      
 
     @commands.Cog.listener()
     async def on_command(self, ctx):
