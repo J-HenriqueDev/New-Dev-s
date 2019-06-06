@@ -73,7 +73,7 @@ class Comandos(commands.Cog):
 
         em = discord.Embed(
             colour=0xFFFF00,
-            description=f"[`👍` - {cmd['vPositivos']} voto(s) Positivos\n`👎` - {cmd['vNegativos']} voto(s) Negativos]\n```py\n{cmd['code']}```"
+            description=f"```py\n{cmd['code']}```"
         ).set_footer(
             text=f"Comando enviado por: {autor}",
             icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url
@@ -103,7 +103,7 @@ class Comandos(commands.Cog):
 
         em = discord.Embed(
             colour=0xFFFF00,
-            description=f"[`👍` - {cmd['vPositivos']} voto(s) Positivos\n`👎` - {cmd['vNegativos']} voto(s) Negativos]\n```js\n{cmd['code']}```"
+            description=f"```js\n{cmd['code']}```"
         ).set_footer(
             text=f"Comando enviado por: {autor}",
             icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url
@@ -160,9 +160,7 @@ class Comandos(commands.Cog):
             return self.users.remove(ctx.author.id)
 
         nome = nome.lower()
-        #       < < < ------------------------------------- > > >
-
-        #       < < < ------------------------------------- > > >
+    
         embed=discord.Embed(description=f"{self.lab._emojis['api']} **|** Agora diga-me a linguagem que o **comando** foi feito\n{self.lab._emojis['api']} Linguagens : [**PYTHON | JAVASCRIPT**]\n{self.lab._emojis['timer']} **|** **2 minutos**", color=0x7289DA)
         msg_lang = await ctx.author.send(embed=embed)
         
