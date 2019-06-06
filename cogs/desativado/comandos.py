@@ -46,10 +46,8 @@ class Comandos(commands.Cog):
         em = discord.Embed(
             colour=linguagem['cor'],
             description=" | ".join([f"**`{c['nome']}`**" for c in self.lab.db.cmds.find({"linguagem": linguagem['nome'].lower(), "pendente": False}).sort("vPositivos", DESCENDING)])
-        ).set_thumbnail(
-            url=linguagem['logo']
         ).set_footer(
-            text=f"Comandos em " + linguagem['nome'],
+            text=self.lab.user.name+" © 2019",
             icon_url=ctx.guild.icon_url
         )
 
