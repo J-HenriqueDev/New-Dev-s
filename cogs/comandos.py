@@ -241,7 +241,7 @@ class comandos(commands.Cog):
         logs = self.lab.get_channel(582984537546424331)
         aprovar_comandos = self.lab.get_channel(571087828482523146)
         #pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
-        here = await aprovar_comandos.send('@here')
+        here = await aprovar_comandos.send('@here',delete_after=45)
         pendente_msg = await aprovar_comandos.send(embed=embed)
 
         await logs.send(f"{self.lab._emojis['discord']} {ctx.author.mention} enviou o comando **`{nome}`** na linguagem  **{linguagem['nome']}** para verificação.")
