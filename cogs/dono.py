@@ -141,7 +141,7 @@ class Dono(commands.Cog):
         args = args.strip('` ')
         python = '```py\n{}\n```'
         result = None
-        env = {'bot': self.bot, 'ctx': ctx, 'unload': unload_extension}
+        env = {'bot': self.bot, 'ctx': ctx}
         env.update(globals())
         try:
             result = eval(args, env)
