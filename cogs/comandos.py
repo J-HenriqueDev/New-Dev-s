@@ -1,5 +1,4 @@
 import discord
-
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from discord.ext import commands
 from asyncio import TimeoutError as Esgotado
@@ -7,7 +6,7 @@ from datetime import datetime
 
 
 
-class Comandos(commands.Cog):
+class comandos(commands.Cog):
     def __init__(self, lab):
         self.lab = lab
         self.users = []
@@ -62,9 +61,10 @@ class Comandos(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.bot_has_permissions(embed_links=True)
     async def _comandopy(self, ctx, *, nome):
+        print(nome)
         cmd = self.lab.db.cmds.find_one({"linguagem": "python", "nome": nome.lower(), "pendente": False})
         if cmd is None:
-            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, não foi possível encontrar um comando em `Python` com o nome enviado.")
+            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, não foi possível encontrar um comando em `Python` com o nome ``{nome}``.")
 
         try:
             autor = await self.lab.fetch_user(int(cmd['autor']))
@@ -73,11 +73,11 @@ class Comandos(commands.Cog):
 
         em = discord.Embed(
             colour=0xFFFF00,
-            description=f"```py\n{cmd['code']}```"
-        ).set_footer(
+            description=f"```py\n{cmd['code']}```")
+        em.set_footer(
             text=f"Comando enviado por: {autor}",
-            icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url
-        )
+            icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url)
+        
 
         await ctx.send(embed=em)
 
@@ -148,7 +148,7 @@ class Comandos(commands.Cog):
                 break
 
             if tentativas == 3:
-                await ctx.author.send(f"{self.lab._emojis['incorreto']} **{ctx.author.name}**, você errou e atingiu o máximo de tentativas permitidas. `(3)`", delete_after=20)
+                await ctx.author.send(f"{self.lab._emojis['incorreto']} **{ctx.author.name}**, você atingiu o limite de 3 tentativas e por isso a ação foi cancelada.", delete_after=20)
                 break
             elif len(resposta.content) > limite:
                 tentativas += 1
@@ -198,7 +198,9 @@ class Comandos(commands.Cog):
             return await ctx.author.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, já temos um comando chamado **`{nome}`** para a linguagem **`{linguagem['nome']}`**.")
 
         #       < < < ------------------------------------- > > >
-        msg_code = await ctx.author.send(f"{self.lab._emojis['api']} | **Forneça o `código` do comando que você deseja enviar `(SEM CODEBLOCK)`** `(5 minutos)`", delete_after=300)
+        texto = f"{self.lab._emojis['api']} **|** Agora cole-o **comando** ou escreva ele. (limite 2000 caracteres)\n{self.lab._emojis['timer']} **|** **2 minutos**"
+        embed=discord.Embed(description=texto, color=0x7289DA)
+        msg_code = await ctx.author.send(embed=embed)
         
         def check(m):
             return m.author == ctx.author and m.guild is None
@@ -210,14 +212,15 @@ class Comandos(commands.Cog):
             try:
                 resposta = await self.lab.wait_for("message", check=check, timeout=300)
             except Esgotado:
-                await ctx.author.send(f"{self.lab._emojis['seta']} | **{ctx.author.name}**, você demorou muito para especificar a linguagem!", delete_after=30)
+                await ctx.author.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, você demorou muito para especificar a linguagem!", delete_after=30)
                 break
 
             if tentativas == 3:
-                await ctx.author.send(f"{self.lab._emojis['incorreto']} **{ctx.author.name}**, você errou e atingiu o máximo de tentativas permitidas. `(3)`", delete_after=20)
+                await ctx.author.send(f"{self.lab._emojis['incorreto']} **{ctx.author.name}**, você atingiu o limite de 3 tentativas e por isso a ação foi cancelada.", delete_after=20)
                 break
             elif len(resposta.content) > limite:
                 tentativas += 1
+                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o **código** do comando que você inseriu passou do limite de 2000 caracteres.\n\n{self.lab._emojis['seta']} | **Tentativa: `{tentativas}/3`**", color=0x7289DA)
                 await ctx.author.send(f"{self.lab._emojis['seta']} Seu código ultrapassa o limite de **`{limite}`** caracteres permitidos.\n**Tentativa: `{tentativas}/3`**", delete_after=15)
             else:
                 code = resposta.content
@@ -226,22 +229,19 @@ class Comandos(commands.Cog):
             return self.users.remove(ctx.author.id)
         #       < < < ------------------------------------- > > >
 
-        em = discord.Embed(
-            colour=linguagem['cor'],
-            description=f"```{linguagem['nome'].lower()}\n{code}\n```",
-            timestamp=datetime.utcnow()
-        ).set_footer(
-            text=f"ID do Membro: {ctx.author.id}",
-            icon_url=ctx.author.avatar_url
-        ).set_author(
-            name=f"Comando \"{nome}\" em {linguagem['nome']} enviado por {ctx.author}",
-            icon_url=linguagem['logo']
-        )
+        embed=discord.Embed(description=f"```{linguagem['nome'].lower()}\n{code}\n```", color=0x7289DA,timestamp=datetime.utcnow())
+        embed.set_author(name="SOLICITAÇÃO ADICIONAR COMANDO", icon_url=ctx.author.avatar_url_as())
+        embed.add_field(name=f"{self.lab._emojis['nome']} Nome", value = "``"+str(nome)+"``", inline=True)
+        embed.add_field(name=f"{self.lab._emojis['api']} Linguagem ", value = "``"+str(linguagem['nome'])+"``", inline=True)
+        embed.add_field(name=f"{self.lab._emojis['mention']} Enviado por", value = "``"+str(ctx.author)+"`` ("+str(ctx.author.mention)+")", inline=True)
+        embed.set_footer(text=self.lab.user.name+" © 2019", icon_url=self.lab.user.avatar_url_as())
+        
+    
         
         logs = self.lab.get_channel(582984537546424331)
         aprovar_comandos = self.lab.get_channel(586240050338070528)
-        pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
-
+        #pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
+        pendente_msg = await aprovar_comandos.send(embed=embed)
 
         await logs.send(f"{self.lab._emojis['discord']} {ctx.author.mention} enviou o comando **`{nome}`** na linguagem  **{linguagem['nome']}** para verificação.")
         for e in reactions:
@@ -290,10 +290,11 @@ class Comandos(commands.Cog):
                 except:
                     pass
         elif str(payload.emoji) == self.lab._emojis['incorreto']:
-            enviador = self.lab.fetch_user(comando['autor']).name
-            print(enviador)
+            enviador = await self.lab.fetch_user(comando['autor'])
             try:
-                pergunta = await staffer.send(f"{self.lab._emojis['api']} | **INFORME O MOTIVO DE ESTAR RECUSANDO O COMANDO `{comando['nome']}` em `{comando['linguagem'].title()}`**. **`(5 minutos)`**")
+                embed = discord.Embed(description=f"{self.lab._emojis['api']} | **INFORME O MOTIVO DE ESTAR RECUSANDO O COMANDO `{comando['nome'].title()}`**.\n\n{self.lab._emojis['timer']} | **`5 minutos`**", color=0x7289DA)
+                embed.set_footer(text=f"Autor: {enviador}.",icon_url=enviador.avatar_url_as(format="png"))
+                pergunta = await staffer.send(embed=embed)
             except:
                 await mensagem.remove_reaction(payload.emoji, staffer)
                 return await canal.send(f"{self.lab._emojis['discord']} {staffer.mention}, **você precisa ativar as DMs para prosseguir**.")
@@ -304,15 +305,19 @@ class Comandos(commands.Cog):
             try:
                 resposta = await self.lab.wait_for("message", check=check, timeout=300)
             except Esgotado:
+
+                embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['incorreto']} | **{staffer.name}**, você demorou demais para fornecer um motivo.")
                 await mensagem.remove_reaction(payload.emoji, staffer)
-                return await staffer.send(f"{self.lab._emojis['incorreto']} | **{staffer.name}**, você demorou demais para fornecer um motivo.")
+                return await staffer.send(embed=embed)
             
-            await staffer.send(f"{self.lab._emojis['correto']} **{staffer.name}**, você recusou o comando **`{comando['nome']}`** em **`{comando['linguagem'].title()}`**")
+            embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['correto']} **{staffer.name}**, você recusou o comando **`{comando['nome']}`.\n\n{self.lab._emojis['tipo']} | **MOTIVO:** ```{resposta.content}```")
+            embed.set_footer(text=self.lab.user.name+" © 2019", icon_url=self.lab.user.avatar_url_as())
+            await staffer.send(embed=embed)
             await logs.send(f"{self.lab._emojis['discord']} **{staffer.name}** rejeitou o comando **`{comando['nome']}`** em **{comando['linguagem'].title()}** enviado por <@{comando['autor']}>.")
 
             if autor:
                 try:
-                    await autor.send(f"{self.lab._emojis['incorreto']} | **{autor.name}**, seu comando **`{comando['nome']}`** em **`{comando['linguagem'].title()}`** foi recusado por **{staffer.name}**.```Motivo: {resposta.content}```")
+                    await autor.send(f"{self.lab._emojis['incorreto']} | **{autor.name}**, seu comando **`{comando['nome']}`** foi recusado por **{staffer.name}**.```Motivo: {resposta.content}```")
                 except:
                     pass
             
@@ -320,4 +325,4 @@ class Comandos(commands.Cog):
             await mensagem.delete()
 
 def setup(lab):
-    lab.add_cog(Comandos(lab))
+    lab.add_cog(comandos(lab))
