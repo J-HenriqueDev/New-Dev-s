@@ -239,7 +239,7 @@ class comandos(commands.Cog):
     
         
         logs = self.lab.get_channel(582984537546424331)
-        aprovar_comandos = self.lab.get_channel(586240050338070528)
+        aprovar_comandos = self.lab.get_channel(571087828482523146)
         #pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
         pendente_msg = await aprovar_comandos.send(embed=embed)
 
@@ -267,14 +267,14 @@ class comandos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        if payload.channel_id != 586240050338070528 or payload.user_id == self.lab.user.id:
+        if payload.channel_id != 571087828482523146 or payload.user_id == self.lab.user.id:
             return
 
         comando = self.lab.db.cmds.find_one({"pendente": True, "pendente_msg": payload.message_id})
         if not comando:
             return
 
-        logs = self.lab.get_channel(585225517788299274)
+        logs = self.lab.get_channel(571087828482523146)
         canal = self.lab.get_channel(payload.channel_id)
         mensagem = await canal.fetch_message(payload.message_id)
         staffer = mensagem.guild.get_member(payload.user_id)
