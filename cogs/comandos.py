@@ -275,7 +275,7 @@ class comandos(commands.Cog):
         if not comando:
             return
 
-        logs = self.lab.get_channel(571087828482523146)
+        logs = self.lab.get_channel(582984537546424331)
         canal = self.lab.get_channel(payload.channel_id)
         mensagem = await canal.fetch_message(payload.message_id)
         staffer = mensagem.guild.get_member(payload.user_id)
