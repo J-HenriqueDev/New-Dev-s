@@ -14,7 +14,7 @@ from pymongo import MongoClient
 
 class main(commands.AutoShardedBot):
     def __init__(self):
-        super().__init__(command_prefix=["c.","C."],
+        super().__init__(command_prefix=secrets.PREFIXO,
                          case_insensitive=True,
                          pm_help=None,
                          description="New Dev's bot")
@@ -26,7 +26,7 @@ class main(commands.AutoShardedBot):
         self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
         self._emojis = emojis
-        self.carregados = 0
+        self.carregados = 1
         self.falhas = 0
         print("( * ) | Tentando se conectar ao banco de dados...")
         try:

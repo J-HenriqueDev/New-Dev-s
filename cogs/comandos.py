@@ -15,12 +15,14 @@ class comandos(commands.Cog):
                 "aliases": ["python", "py", "discord.py"],
                 "nome": "Python",
                 "cor": 0x007AFF,
+                "author": "COMANDOS NA LINGUAGEM PYTHON:",
                 "logo": "https://imgur.com/LD60DLf.png"
             },
             "js": {
                 "aliases": ["javascript", "js", "discord.js", "node", "node.js"],
                 "nome": "JavaScript",
                 "cor": 0xFF4500,
+                "author": "COMANDOS NA LINGUAGEM JAVASCRIPT:",
                 "logo": "https://imgur.com/T0RjAz1.png"
             }
         }
@@ -43,11 +45,12 @@ class comandos(commands.Cog):
         linguagem = linguagens['py'] if linguagem in linguagens['py']['aliases'] else linguagens['js']
 
         em = discord.Embed(
-            colour=linguagem['cor'],
-            description=" | ".join([f"**`{c['nome']}`**" for c in self.lab.db.cmds.find({"linguagem": linguagem['nome'].lower(), "pendente": False}).sort("vPositivos", DESCENDING)])
-        ).set_footer(
+            colour=self.lab.cor,
+            description=" , ".join([f"**`{c['nome']}`**" for c in self.lab.db.cmds.find({"linguagem": linguagem['nome'].lower(), "pendente": False}).sort("vPositivos", DESCENDING)]))
+        em.set_author(name=linguagem['author'],icon_url=linguagem['logo'])
+        em.set_footer(
             text=self.lab.user.name+" © 2019",
-            icon_url=ctx.guild.icon_url
+            icon_url=self.lab.user.avatar_url_as()
         )
 
         await ctx.send(embed=em)
@@ -61,23 +64,28 @@ class comandos(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.bot_has_permissions(embed_links=True)
     async def _comandopy(self, ctx, *, nome):
-        print(nome)
         cmd = self.lab.db.cmds.find_one({"linguagem": "python", "nome": nome.lower(), "pendente": False})
         if cmd is None:
             return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, não foi possível encontrar um comando em `Python` com o nome ``{nome}``.")
+        
 
         try:
             autor = await self.lab.fetch_user(int(cmd['autor']))
         except:
             autor = "Não encontrado"
 
+        data = cmd['data'].strftime("%d/%m/20%y - %H:%M:%S")
+
         em = discord.Embed(
-            colour=0xFFFF00,
-            description=f"```py\n{cmd['code']}```")
+            colour=self.lab.cor,
+            description=f"\n**NOME DO COMANDO:** ``{nome.lower()}``\n**AUTOR:** `{autor}`\n**DATA DE ENVIO:** `{data}`\n```py\n{cmd['code']}```")
+        #em.set_footer(
+            #text=f"👍 {cmd['vPositivos']} votos e {cmd['vNegativos']} votos Negativos",)
+        #em.set_thumbnail(url="https://imgur.com/LD60DLf.png")
         em.set_footer(
-            text=f"Comando enviado por: {autor}",
-            icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url)
-        
+            text=self.lab.user.name+" © 2019",
+            icon_url=self.lab.user.avatar_url_as()
+        )
 
         await ctx.send(embed=em)
 
@@ -101,12 +109,14 @@ class comandos(commands.Cog):
         except:
             autor = "Não encontrado"
 
+        data = cmd['data'].strftime("%d/%m/20%y - %H:%M:%S")
+
         em = discord.Embed(
-            colour=0xFFFF00,
-            description=f"```js\n{cmd['code']}```"
-        ).set_footer(
-            text=f"Comando enviado por: {autor}",
-            icon_url=ctx.guild.icon_url if type(autor) is str else autor.avatar_url
+            colour=self.lab.cor,
+            description=f"\n**NOME DO COMANDO:** ``{nome.lower()}``\n**AUTOR:** `{autor}`\n**DATA DE ENVIO:** `{data}`\n```js\n{cmd['code']}```")
+        em.set_footer(
+            text=self.lab.user.name+" © 2019",
+            icon_url=self.lab.user.avatar_url_as()
         )
 
         await ctx.send(embed=em)
@@ -164,7 +174,7 @@ class comandos(commands.Cog):
         embed=discord.Embed(description=f"{self.lab._emojis['api']} **|** Agora diga-me a linguagem que o **comando** foi feito\n{self.lab._emojis['api']} Linguagens : [**PYTHON | JAVASCRIPT**]\n{self.lab._emojis['timer']} **|** **2 minutos**", color=0x7289DA)
         msg_lang = await ctx.author.send(embed=embed)
         
-        def check(m):
+        def check_author1(m):
             return m.author == ctx.author and m.guild is None
 
         linguagem = None
@@ -172,7 +182,7 @@ class comandos(commands.Cog):
         tentativas = 0
         while linguagem is None:
             try:
-                resposta = await self.lab.wait_for("message", check=check, timeout=120)
+                resposta = await self.lab.wait_for("message", check=check_author1, timeout=120)
             except Esgotado:
                 await ctx.author.send(f" | **{ctx.author.name}**, você demorou muito para especificar a linguagem!", delete_after=30)
                 break
@@ -202,7 +212,7 @@ class comandos(commands.Cog):
         embed=discord.Embed(description=texto, color=0x7289DA)
         msg_code = await ctx.author.send(embed=embed)
         
-        def check(m):
+        def check_author(m):
             return m.author == ctx.author and m.guild is None
 
         code = None
@@ -210,7 +220,7 @@ class comandos(commands.Cog):
         tentativas = 0
         while code is None:
             try:
-                resposta = await self.lab.wait_for("message", check=check, timeout=300)
+                resposta = await self.lab.wait_for("message", check=check_author, timeout=300)
             except Esgotado:
                 await ctx.author.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, você demorou muito para especificar a linguagem!", delete_after=30)
                 break
@@ -314,11 +324,14 @@ class comandos(commands.Cog):
             embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['correto']} **{staffer.name}**, você recusou o comando **`{comando['nome']}`.\n\n{self.lab._emojis['tipo']} | **MOTIVO:** ```{resposta.content}```")
             embed.set_footer(text=self.lab.user.name+" © 2019", icon_url=self.lab.user.avatar_url_as())
             await staffer.send(embed=embed)
-            await logs.send(f"{self.lab._emojis['discord']} **{staffer.name}** rejeitou o comando **`{comando['nome']}`** em **{comando['linguagem'].title()}** enviado por <@{comando['autor']}>.")
+            await logs.send(f"{self.lab._emojis['discord']} **{staffer.name}** rejeitou o comando **`{comando['nome']}`** enviado por <@{comando['autor']}>.")
 
             if autor:
                 try:
-                    await autor.send(f"{self.lab._emojis['incorreto']} | **{autor.name}**, seu comando **`{comando['nome']}`** foi recusado por **{staffer.name}**.```Motivo: {resposta.content}```")
+                    embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['incorreto']} **{autor.name}**, seu comando **`{comando['nome']}`** foi recusado.\n{self.lab._emojis['mention']} | **STAFFER:** ``{staffer}``\n\n{self.lab._emojis['tipo']} | **MOTIVO:** ```{resposta.content}```")
+                    embed.set_footer(text=self.lab.user.name+" © 2019", icon_url=self.lab.user.avatar_url_as())
+                    #await autor.send(f"{self.lab._emojis['incorreto']} | **{autor.name}**, seu comando **`{comando['nome']}`** foi recusado por **{staffer.name}**.```Motivo: {resposta.content}```")
+                    await autor.send(embed=embed)
                 except:
                     pass
             
