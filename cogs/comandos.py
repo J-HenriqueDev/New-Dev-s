@@ -19,7 +19,7 @@ class comandos(commands.Cog):
                 "logo": "https://imgur.com/LD60DLf.png"
             },
             "js": {
-                "aliases": ["javascript", "js", "discord.js", "node", "node.js"],
+                "aliases": ["javascript", "js", "discord.js", "node", "node.j"],
                 "nome": "JavaScript",
                 "cor": 0xFF4500,
                 "author": "COMANDOS NA LINGUAGEM JAVASCRIPT:",
