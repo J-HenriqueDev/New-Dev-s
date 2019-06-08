@@ -308,7 +308,7 @@ class comandos(commands.Cog):
 
             if autor:
                 try:
-                    await autor.send(f"{self.lab._emojis['correto']} | **{autor.name}**, seu comando chamado **`{comando['nome']}`** foi aceito por **{staffer.name}**.")
+                    await autor.send(f"{self.lab._emojis['correto']} | **{autor.name}**, seu comando **`{comando['nome']}`** foi aceito por **{staffer.name}**.")
                 except:
                     pass
         elif str(payload.emoji) == self.lab._emojis['incorreto']:
