@@ -35,7 +35,7 @@ class comandos(commands.Cog):
         usage='c.comandos [py|js]'
     )
     async def _comandos(self, ctx, linguagem):
-        if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
+        if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         linguagens = self.linguagens
@@ -67,7 +67,7 @@ class comandos(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.bot_has_permissions(embed_links=True)
     async def _comandopy(self, ctx, *, nome):
-        if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
+        if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         cmd = self.lab.db.cmds.find_one({"linguagem": "python", "nome": nome.lower(), "pendente": False})
@@ -104,7 +104,7 @@ class comandos(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     @commands.bot_has_permissions(embed_links=True)
     async def _comandojs(self, ctx, *, nome = None):
-        if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
+        if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         if nome is None:
@@ -138,7 +138,7 @@ class comandos(commands.Cog):
     )
     @commands.cooldown(1, 12, commands.BucketType.user)
     async def _enviarcomando(self, ctx):
-        if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
+        if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
         reactions = [":incorreto:571040727643979782", ':correto:571040855918379008']
