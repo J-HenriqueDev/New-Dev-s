@@ -132,7 +132,7 @@ class comandos(commands.Cog):
 
     @commands.command(
         name='enviarcomando',
-        aliases=['enviarcmd', 'adicionarcomando', 'addcomando'],
+        aliases=['enviarcmd', 'adicionarcomando', 'addcomando','addcmd'],
         description='Envia um código de comando para aprovação',
         usage='c.enviarcomando'
     )
