@@ -133,7 +133,7 @@ class Dono(commands.Cog):
             return
         if args is None:
             embed = discord.Embed(description="**|** Olá {}, você não inseriu uma variável".format(ctx.author.mention),
-                                  color=0x7BCDE8)
+                                  color=self.bot.cor)
             await ctx.send(embed=embed)
             return
 
@@ -151,6 +151,7 @@ class Dono(commands.Cog):
             embed.add_field(name="Entrada", value='```py\n{}```'.format(args), inline=True)
             embed.add_field(name="Saida", value=python.format(result), inline=True)
             embed.set_footer(text=self.bot.user.name + " © 2019", icon_url=self.bot.user.avatar_url_as())
+            print(f"DEGUG USADO POR : {ctx.author}")
             await ctx.send(embed=embed)
         except Exception as e:
             embed = discord.Embed(colour=0x7BCDE8)
