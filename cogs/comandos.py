@@ -270,6 +270,7 @@ class comandos(commands.Cog):
             await pendente_msg.add_reaction(e)
 
         self.lab.db.cmds.insert_one({
+            "_id": ctx.author.id,
             "linguagem": linguagem['nome'].lower(),
             "nome": nome,
             "code": code,
