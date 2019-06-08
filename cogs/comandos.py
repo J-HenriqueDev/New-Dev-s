@@ -303,7 +303,7 @@ class comandos(commands.Cog):
         autor = mensagem.guild.get_member(comando['autor'])
         if str(payload.emoji) == self.lab._emojis['correto']:
             self.lab.db.cmds.update_one(comando, {"$set": {"pendente": False, "aprovado_por": payload.user_id}})
-            await logs.send(f"{self.lab._emojis['discord']} O comando **`{comando['nome']}`** na linguagem **{comando['linguagem'].title()}** enviado por <@{comando['autor']}> foi aprovado por **{staffer.name}**.")
+            await logs.send(f"{self.lab._emojis['discord']} O comando **`{comando['nome']}`** enviado por <@{comando['autor']}> foi aprovado por **{staffer.name}**.")
             await mensagem.delete()
 
             if autor:
