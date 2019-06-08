@@ -332,7 +332,7 @@ class comandos(commands.Cog):
                 await mensagem.remove_reaction(payload.emoji, staffer)
                 return await staffer.send(embed=embed)
             
-            embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['correto']} **{staffer.name}**, você recusou o comando **`{comando['nome']}`.\n\n{self.lab._emojis['tipo']} | **MOTIVO:** ```{resposta.content}```")
+            embed=discord.Embed(colour=0x7289DA, description=f"{self.lab._emojis['correto']} **{staffer.name}**, você recusou o comando `{comando['nome']}`.\n\n{self.lab._emojis['tipo']} | **MOTIVO:** ```{resposta.content}```")
             embed.set_footer(text=self.lab.user.name+" © 2019", icon_url=self.lab.user.avatar_url_as())
             await staffer.send(embed=embed)
             await logs.send(f"{self.lab._emojis['discord']} **{staffer.name}** rejeitou o comando **`{comando['nome']}`** enviado por <@{comando['autor']}>.")
