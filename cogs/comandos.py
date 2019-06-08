@@ -131,7 +131,7 @@ class comandos(commands.Cog):
     async def _enviarcomando(self, ctx):
         reactions = [":incorreto:571040727643979782", ':correto:571040855918379008']
         if ctx.author.id in self.users:
-            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, ainda existe um formulário sendo executado no seu privado.")
+            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, já tem um formulário em aberto no seu DM.", delete_after=30)
 
         try:
             nome = discord.Embed(description=f"<:newDevs:573629564627058709> **|** Então você quer adicionar um **Comando** no NewDevs?\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu **comando** em nosso sistema.\n\n{self.lab._emojis['nome']} **|** Diga-nos o nome do **comando**: \n{self.lab._emojis['timer']} **|** **2 minutos**", color=0x7289DA)
@@ -251,8 +251,7 @@ class comandos(commands.Cog):
         logs = self.lab.get_channel(582984537546424331)
         aprovar_comandos = self.lab.get_channel(571087828482523146)
         #pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
-        here = await aprovar_comandos.send('@here',delete_after=45)
-        pendente_msg = await aprovar_comandos.send(embed=embed)
+        pendente_msg = await aprovar_comandos.send(embed=embed, content="@here")
 
         await logs.send(f"{self.lab._emojis['discord']} {ctx.author.mention} enviou o comando **`{nome}`** na linguagem  **{linguagem['nome']}** para verificação.")
         for e in reactions:

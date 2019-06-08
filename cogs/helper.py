@@ -183,7 +183,7 @@ class helper(commands.Cog):
                            server = self.bard.get_guild(570906068277002271)
                            #canal solicitação
                            channel = discord.utils.get(server.channels, id=571087828482523146)
-                           msg = await channel.send(embed=embed, content="<@&571015748517101578>")
+                           msg = await channel.send(embed=embed, content="<@here>")
                            user = ctx.message.author
                            if user == ctx.message.author:
                             for reaction in reactions:
