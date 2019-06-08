@@ -147,14 +147,14 @@ class Dono(commands.Cog):
             result = eval(args, env)
             if inspect.isawaitable(result):
                 result = await result
-            embed = discord.Embed(colour=0x7BCDE8)
+            embed = discord.Embed(colour=self.bot.cor)
             embed.add_field(name="Entrada", value='```py\n{}```'.format(args), inline=True)
             embed.add_field(name="Saida", value=python.format(result), inline=True)
             embed.set_footer(text=self.bot.user.name + " © 2019", icon_url=self.bot.user.avatar_url_as())
             print(f"DEGUG USADO POR : {ctx.author}")
             await ctx.send(embed=embed)
         except Exception as e:
-            embed = discord.Embed(colour=0x7BCDE8)
+            embed = discord.Embed(colour=self.bot.cor)
             embed.add_field(name="Entrada", value='```py\n{}```'.format(args), inline=True)
             embed.add_field(name="Saida", value=python.format(type(e).__name__ + ': ' + str(e)), inline=True)
             embed.set_footer(text=self.bot.user.name + " © 2019", icon_url=self.bot.user.avatar_url_as())
