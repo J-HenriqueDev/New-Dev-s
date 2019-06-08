@@ -265,7 +265,7 @@ class comandos(commands.Cog):
         #pendente_msg = await aprovar_comandos.send(embed=em, content="**NOVO COMANDO AGUARDANDO POR APROVAÇÃO!**")
         pendente_msg = await aprovar_comandos.send(embed=embed, content="@here")
 
-        await logs.send(f"{self.lab._emojis['discord']} {ctx.author.mention} enviou o comando **`{nome}`** na linguagem  **{linguagem['nome']}** para verificação.")
+        await logs.send(f"{self.lab._emojis['discord']} {ctx.author.mention} enviou o comando **`{nome}`** para verificação.")
         for e in reactions:
             await pendente_msg.add_reaction(e)
 
