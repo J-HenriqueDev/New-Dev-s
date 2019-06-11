@@ -107,11 +107,10 @@ class comandos(commands.Cog):
         if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
            await ctx.message.add_reaction(":incorreto:571040727643979782")
            return
-        if nome is None:
-            return await ctx.send("Digite um comando.")
         cmd = self.lab.db.cmds.find_one({"linguagem": "javascript", "nome": nome.lower(), "pendente": False})
         if cmd is None:
-            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, não foi possível encontrar um comando em `JavaScript` com o nome enviado.")
+            return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, não foi possível encontrar um comando em `Python` com o nome ``{nome}``.")
+        
 
         try:
             autor = await self.lab.fetch_user(int(cmd['autor']))
@@ -122,7 +121,10 @@ class comandos(commands.Cog):
 
         em = discord.Embed(
             colour=self.lab.cor,
-            description=f"\n**NOME DO COMANDO:** ``{nome.lower()}``\n**AUTOR:** `{autor}`\n**DATA DE ENVIO:** `{data}`\n```js\n{cmd['code']}```")
+            description=f"\n**NOME DO COMANDO:** ``{nome.lower()}``\n**AUTOR:** `{autor}`\n**DATA DE ENVIO:** `{data}`\n```py\n{cmd['code']}```")
+        #em.set_footer(
+            #text=f"👍 {cmd['vPositivos']} votos e {cmd['vNegativos']} votos Negativos",)
+        #em.set_thumbnail(url="https://imgur.com/LD60DLf.png")
         em.set_footer(
             text=self.lab.user.name+" © 2019",
             icon_url=self.lab.user.avatar_url_as()
