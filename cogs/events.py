@@ -278,7 +278,7 @@ class eventos(commands.Cog):
         embed.add_field(name="Motivo:",value=f"``{reason}``")
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
-        logs_role = guild.get_role(584458239467454464)
+        logs_role = guild.get_role(591397421792231470)
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
 
@@ -294,7 +294,7 @@ class eventos(commands.Cog):
         embed.add_field(name=f"Autor:",value=f"`{moderator}`")
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
-        logs_role = guild.get_role(584458239467454464)
+        logs_role = guild.get_role(591397421792231470)
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
         
