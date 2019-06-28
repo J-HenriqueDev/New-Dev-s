@@ -8,8 +8,7 @@ __copyright__ = "NewDev's © 2019"
 
 developers = {
     'Yuka Tuka': 499321522578522112,
-    'Obi Wan': 558396463873392640,
-    'Razy': 456108986756759563
+    'Obi Wan': 558396463873392640
 }
 
 emojics = {

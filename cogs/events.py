@@ -46,7 +46,7 @@ class eventos(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-      if re.search(r'discord(?:app\\?[\s\S]com\\?\/invite|\\?[\s\S]gg|\\?[\s\S]me)\/', message.content) or re.search(r'invite\\?[\s\S]gg\\?\/[\s\S]', message.content):
+      if re.search(r'discord(?:app\\?[\s\S]com\\?\/invite|\\?[\s\S]gg|\\?[\s\S]me)\/', message.content) or re.search(r'invite\\?[\s\S]gg\\?\/[\s\S]', message.content) or "privatepage" in message.content.lower() or "naked" in message.content.lower():
         if str("</Link>") in [r.name for r in message.author.roles if r.name != "@everyone"]:
             print("OK")
         else:
@@ -278,7 +278,7 @@ class eventos(commands.Cog):
         embed.add_field(name="Motivo:",value=f"``{reason}``")
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
-        logs_role = guild.get_role(584458239467454464)
+        logs_role = guild.get_role(591397421792231470)
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
 
@@ -294,7 +294,7 @@ class eventos(commands.Cog):
         embed.add_field(name=f"Autor:",value=f"`{moderator}`")
         embed.set_footer(text=self.bot.user.name+" © 2019", icon_url=self.bot.user.avatar_url_as())
         embed.set_thumbnail(url=member.avatar_url_as(format='png'))
-        logs_role = guild.get_role(584458239467454464)
+        logs_role = guild.get_role(591397421792231470)
 
         msg = [await member.send(embed=embed) for member in logs_role.members]
         
