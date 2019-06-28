@@ -26,10 +26,10 @@ class rep(commands.Cog):
    @commands.command(description='Dê um ponto de reputação para quando um </New Helper> lhe ajudar.',usage='c.rep @</New Helper>')
    async def rep(self, ctx, *, user: discord.Member = None):
          if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
          if user is None:
-            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, mencione o usuário que você gostaria de dá a reputação.", color=0x7289DA)
+            embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá **{ctx.author.name}**, mencione o usuário que você gostaria de dá a reputação.", color=0x7289DA)
             msg = await ctx.send(embed=embed)
             await asyncio.sleep(20)
             await msg.delete()              
@@ -37,19 +37,19 @@ class rep(commands.Cog):
          else:
             usuario = user
             if usuario.bot is True:
-               embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação ao um **BOT**.", color=0x7289DA)
+               embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá **{ctx.author.name}**, não é possível dá reputação ao um **BOT**.", color=0x7289DA)
                msg = await ctx.send(embed=embed)
                await asyncio.sleep(20)
                await msg.delete()              
                return
             if not str("</NewHelper>") in [r.name for r in user.roles if r.name != "@everyone"]:
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o usuário {user.mention} não é um **</NewHelper>** registrado.", color=0x7289DA)
+                embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá **{ctx.author.name}**, o usuário {user.mention} não é um **</NewHelper>** registrado.", color=0x7289DA)
                 msg = await ctx.send(embed=embed)
                 await asyncio.sleep(20)
                 await msg.delete()              
                 return
             if ctx.author.id == user.id:
-               embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, não é possível dá reputação a si mesmo.", color=0x7289DA)
+               embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá **{ctx.author.name}**, não é possível dá reputação a si mesmo.", color=0x7289DA)
                msg = await ctx.send(embed=embed)
                await asyncio.sleep(20)
                await msg.delete()              
@@ -82,12 +82,12 @@ class rep(commands.Cog):
             users = bard['users']
             usuario = bard.users.find_one({'_id': str(usuario.id)})
             if usuario is None:
-               embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** ponto de reputação ao usuário {user.mention}.", color=0x7289DA)
+               embed=discord.Embed(description=f"<:correto:594222662717538330> **|** Olá **{ctx.author.name}**, você deu **1** ponto de reputação ao usuário {user.mention}.", color=0x7289DA)
                await ctx.send(embed=embed)
                rep = int(usuario["reputação"])+int(1)
                bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
             else:
-               embed=discord.Embed(description=f"<:correto:571040855918379008> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7289DA)
+               embed=discord.Embed(description=f"<:correto:594222662717538330> **|** Olá **{ctx.author.name}**, você deu **1** de reputação ao usuário {user.mention}.", color=0x7289DA)
                await ctx.send(embed=embed)
                rep = int(usuario["reputação"])+int(1)
                bard.users.update_one({'_id': str(user.id)}, {'$set': {'reputação':int(rep)}})
@@ -117,7 +117,7 @@ class rep(commands.Cog):
        bard = mongo['bard']
        users = bard['users']
        bard.users.update_many({}, {"$set": {"reputação": 0}})
-       await ctx.send(f"<:correto:571040855918379008> | **{ctx.author.name}**, a reputação dos NewHelpers foram resetadas.")
+       await ctx.send(f"<:correto:594222662717538330> | **{ctx.author.name}**, a reputação dos NewHelpers foram resetadas.")
 
 
    @commands.command()
@@ -150,14 +150,14 @@ class rep(commands.Cog):
       if user is None:
          return await ctx.send(f":facepalm: | **{ctx.author.name}** você não especificou um usuário.")
       if quantidade is None:
-         return await ctx.send(f"<:incorreto:571040727643979782> |**{ctx.author.name}** você não especificou a quantidade de reps que deseja setar para {user.name}.")
+         return await ctx.send(f"<:incorreto:594222819064283161> |**{ctx.author.name}** você não especificou a quantidade de reps que deseja setar para {user.name}.")
       mongo = MongoClient(self.bard.database)
       bard = mongo['bard']
       users = bard['users']
       users = bard.users.find_one({"_id": str(ctx.author.id)})
       if users is None:
          bard.users.update({"_id": str(user.id)}, {"$set": {"reputação": quantidade}})
-         await ctx.send(f'<:correto:571040855918379008>**{ctx.author.name}** você definiu a quantidade de reps do usuário `{user.name}` para `{quantidade}`.')
+         await ctx.send(f'<:correto:594222662717538330>**{ctx.author.name}** você definiu a quantidade de reps do usuário `{user.name}` para `{quantidade}`.')
       else:
           await ctx.send(f':facepalm: | **{ctx.author.name}** o usuário `{user.name}` não está registrado na database.')
  

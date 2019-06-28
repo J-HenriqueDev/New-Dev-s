@@ -41,7 +41,7 @@ class reptop(commands.Cog):
     @commands.command(description="Mostra o dos melhores NewHelper's do servidor",usage='c.tophelper',aliases=['top'])
     async def tophelper(self, ctx):
         if not str(ctx.channel.id) in self.bard.canais and not str(ctx.message.author.id) in self.bard.staff:
-           await ctx.message.add_reaction(":incorreto:571040727643979782")
+           await ctx.message.add_reaction(":incorreto:594222819064283161")
            return
         mongo = MongoClient(self.bard.database)
         bard = mongo['bard']

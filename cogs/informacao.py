@@ -30,7 +30,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra o meu ping',usage='c.ping')
     async def ping(self, ctx):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-          await ctx.message.add_reaction(":incorreto:571040727643979782")
+          await ctx.message.add_reaction(":incorreto:594222819064283161")
           return
         embed = discord.Embed(title="🏓 Pong!",
                               description=f' No Momento estou com: **{round(self.bot.latency * 1000)}ms**.',
@@ -44,7 +44,7 @@ class informacao(commands.Cog):
     @commands.command(description='envia a sua foto de perfil ou a de um usuário.',usage='c.avatar',aliases=['pic'])
     async def avatar(self, ctx, *, user: discord.Member = None):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-          await ctx.message.add_reaction(":incorreto:571040727643979782")
+          await ctx.message.add_reaction(":incorreto:594222819064283161")
           return
         if user is None:
             usuario = ctx.author.avatar_url
@@ -63,7 +63,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra algumas informações sobre mim.',usage='c.botinfo',aliases=['bot'])
     async def botinfo(self,ctx):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-          await ctx.message.add_reaction(":incorreto:571040727643979782")
+          await ctx.message.add_reaction(":incorreto:594222819064283161")
           return
         mem = botstatus.get_memory()
         dono = self.bot.get_user(558396463873392640)
@@ -88,7 +88,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra todas as informações do seu servidor.',usage='c.serverinfo',aliases=['sinfo', 'guildinfo'])
     async def serverinfo(self, ctx):
           if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
           servidor = ctx.guild
           if servidor.icon_url_as(format="png") == "":
@@ -128,7 +128,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra as informações de um usuário.',usage='c.userinfo @TOBIAS',aliases=['uinfo', 'usuario'])
     async def userinfo(self, ctx, *, user: discord.Member = None):
           if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
           if user is None:
               usuario = ctx.author
@@ -194,7 +194,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra as informações de um canal.',usage='c.channelinfo #canal',aliases=['canalinfo', 'cinfo'])
     async def channelinfo(self, ctx, *, num=None):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
         if num is None:
           num = ctx.channel.id
@@ -267,7 +267,7 @@ class informacao(commands.Cog):
     @commands.command(description='Listagem e informações de todos os comandos públicos lançados até o momento',usage='cu.ajuda',aliases=['help'])
     async def ajuda(self, ctx, nome = None):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
         if nome:
             comando = self.bot.get_command(nome)
@@ -307,7 +307,7 @@ class informacao(commands.Cog):
     @commands.command(description='Mostra as informações de um cargo',usage='c.roleinfo dj',aliases=['rinfo'])
     async def roleinfo(self, ctx, *, role: discord.Role = None):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
         if role is None:
             return await ctx.send(f'**{ctx.author.name}** você não mencionou um cargo.')
@@ -342,7 +342,7 @@ class informacao(commands.Cog):
     @commands.command(aliases=["einfo", "infoemoji", "emoji", "emojinfo"])
     async def emojiinfo(self, ctx, *, emoji: discord.Emoji):
         if not str(ctx.channel.id) in self.bot.canais and not str(ctx.message.author.id) in self.bot.staff:
-            await ctx.message.add_reaction(":incorreto:571040727643979782")
+            await ctx.message.add_reaction(":incorreto:594222819064283161")
             return
         embed = discord.Embed(color=self.bot.cor, timestamp=datetime.datetime.utcnow())
         embed.set_author(name=f"Informações do emoji:", icon_url=emoji.url)

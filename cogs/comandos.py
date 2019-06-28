@@ -36,7 +36,7 @@ class comandos(commands.Cog):
     )
     async def _comandos(self, ctx, linguagem):
         if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
-           await ctx.message.add_reaction(":incorreto:571040727643979782")
+           await ctx.message.add_reaction(":incorreto:594222819064283161")
            return
         linguagens = self.linguagens
         linguagem = linguagem.lower()
@@ -68,7 +68,7 @@ class comandos(commands.Cog):
     @commands.bot_has_permissions(embed_links=True)
     async def _comandopy(self, ctx, *, nome):
         if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
-           await ctx.message.add_reaction(":incorreto:571040727643979782")
+           await ctx.message.add_reaction(":incorreto:594222819064283161")
            return
         cmd = self.lab.db.cmds.find_one({"linguagem": "python", "nome": nome.lower(), "pendente": False})
         if cmd is None:
@@ -105,7 +105,7 @@ class comandos(commands.Cog):
     @commands.bot_has_permissions(embed_links=True)
     async def _comandojs(self, ctx, *, nome = None):
         if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
-           await ctx.message.add_reaction(":incorreto:571040727643979782")
+           await ctx.message.add_reaction(":incorreto:594222819064283161")
            return
         cmd = self.lab.db.cmds.find_one({"linguagem": "javascript", "nome": nome.lower(), "pendente": False})
         if cmd is None:
@@ -141,9 +141,9 @@ class comandos(commands.Cog):
     @commands.cooldown(1, 12, commands.BucketType.user)
     async def _enviarcomando(self, ctx):
         if not str(ctx.channel.id) in self.lab.canais and not str(ctx.message.author.id) in self.lab.staff:
-           await ctx.message.add_reaction(":incorreto:571040727643979782")
+           await ctx.message.add_reaction(":incorreto:594222819064283161")
            return
-        reactions = [":incorreto:571040727643979782", ':correto:571040855918379008']
+        reactions = [":incorreto:594222819064283161", ':correto:594222662717538330']
         if ctx.author.id in self.users:
             return await ctx.send(f"{self.lab._emojis['incorreto']} | **{ctx.author.name}**, já tem um formulário em aberto no seu DM.", delete_after=30)
 
@@ -244,7 +244,7 @@ class comandos(commands.Cog):
                 break
             elif len(resposta.content) > limite:
                 tentativas += 1
-                embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá **{ctx.author.name}**, o **código** do comando que você inseriu passou do limite de 2000 caracteres.\n\n{self.lab._emojis['seta']} | **Tentativa: `{tentativas}/3`**", color=0x7289DA)
+                embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá **{ctx.author.name}**, o **código** do comando que você inseriu passou do limite de 2000 caracteres.\n\n{self.lab._emojis['seta']} | **Tentativa: `{tentativas}/3`**", color=0x7289DA)
                 await ctx.author.send(f"{self.lab._emojis['seta']} Seu código ultrapassa o limite de **`{limite}`** caracteres permitidos.\n**Tentativa: `{tentativas}/3`**", delete_after=15)
             else:
                 code = resposta.content

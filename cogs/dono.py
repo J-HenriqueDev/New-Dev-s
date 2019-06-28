@@ -208,7 +208,7 @@ class Dono(commands.Cog):
        
         comando = self.bot.get_command(nome)
         if not comando:
-            return await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
+            return await ctx.send(f"<:incorreto:594222819064283161> | **{ctx.author.name}**, não encontrei nenhum comando chamado **`{nome}`**.")
 
         if comando.enabled:
             comando.enabled = False

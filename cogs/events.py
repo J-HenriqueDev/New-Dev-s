@@ -36,7 +36,7 @@ class eventos(commands.Cog):
           m, s = divmod(error.retry_after, 60)
           return await ctx.send(f"**{ctx.author.name}**, aguarde **`{int(s)}`** segundo(s) para poder usar o comando **`{ctx.invoked_with}`** novamente.", delete_after=45)
         elif isinstance(error, commands.DisabledCommand):
-          await ctx.send(f"<:incorreto:571040727643979782> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
+          await ctx.send(f"<:incorreto:594222819064283161> | **{ctx.author.name}**, o comando **`{ctx.invoked_with}`** está temporariamente desativado.")
       
 
     @commands.Cog.listener()
@@ -53,14 +53,14 @@ class eventos(commands.Cog):
           if not message.author.id in aviso1:
             aviso1.append(message.author.id)
             await message.delete()
-            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
+            embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **1° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
             msg = await message.channel.send(embed=embed)
             await asyncio.sleep(10)
             await msg.delete()
           elif not message.author.id in aviso2:
             aviso2.append(message.author.id)
             await message.delete()
-            embed=discord.Embed(description=f"<:incorreto:571040727643979782> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
+            embed=discord.Embed(description=f"<:incorreto:594222819064283161> **|** Olá {message.author.mention}, não é permitido **CONVITES** de outros servidores sem a permissão dos **Adminstradores** segundo as regras.\nTendo isso em mente irei avisa-lo esse é seu **2° Strike**.\nNo **3° Strike** você será banido.", color=0x7289DA)
             msg = await message.channel.send(embed=embed)
             await asyncio.sleep(10)
             await msg.delete()
