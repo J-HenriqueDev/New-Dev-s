@@ -22,6 +22,7 @@ class main(commands.AutoShardedBot):
         self.staff = secrets.STAFF
         self.dono = secrets.DONO
         self.cor = 0x7289DA
+        self.thanos = 'https://cdn.discordapp.com/attachments/322084170291478548/571053645911556096/thanos-nude-memes-3.jpg'
         self.database = secrets.DATAB
         self.canais = ["570908357032935425","571014988622331905"]
         self.token = 'blz,talvez outro dia.'
